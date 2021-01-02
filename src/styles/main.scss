@@ -1,0 +1,93 @@
+:root {
+  --color-primary: #76b852;
+  --color-secondary: #1b3b6f;
+
+  --color-background: rgb(248, 248, 248);
+
+  --color-text: #333;
+  --color-text-dark: rgb(0, 0, 0);
+  --color-text-dark-1: rgb(109, 109, 109);
+  --color-text-dark-2: rgb(156, 156, 156);
+
+  --color-transparent-dark: rgba(0, 0, 0, 0.025);
+  --color-transparent-dark-1: rgba(0, 0, 0, 0.05);
+  --color-transparent-dark-2: rgba(0, 0, 0, 0.1);
+
+  --border: 1px solid var(--color-transparent-dark);
+  --shadow: 0 0 1rem var(--color-transparent-dark-2);
+  --radius: 3px;
+  --radius-xlg: 2rem;
+
+  --container-horizontal-padding: 1rem;
+  --icon-size: 2.2rem;
+}
+
+.theme-dark {
+  --color-secondary: #d4d4d4;
+  --color-background: #0e2438;
+
+  --color-text: rgb(248, 248, 248);
+
+  --color-transparent-dark: rgba(255, 255, 255, 0.02);
+  --color-transparent-dark-1: rgba(255, 255, 255, 0.05);
+  --color-transparent-dark-2: rgba(255, 255, 255, 0.1);
+  --shadow: 0 0 1rem var(--color-transparent-dark-2);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  font-size: 1.6rem;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-background);
+}
+
+.container {
+  margin: 6.2rem 0 7rem;
+
+  padding: 0 var(--container-horizontal-padding);
+}
+
+.money {
+  font-family: 'Roboto Mono', monospace;
+  color: var(--color-text-dark);
+}
+
+.text-red {
+  color: red;
+}
+
+.text-green {
+  color: green;
+}
+
+.hide-scrollbar {
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@import './mixins';
+
+@import './components/navigation';
+@import './components/table';
+@import './components/logo';
+@import './components/avatar';
+@import './components/multi-select';

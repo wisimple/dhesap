@@ -1,0 +1,30 @@
+.multi-select-container {
+  padding: 1rem 0;
+}
+
+.multi-select {
+  display: flex;
+  list-style-type: none;
+  overflow-x: scroll;
+  @extend .hide-scrollbar;
+
+  &__item {
+    flex-shrink: 0;
+
+    margin-right: 1rem;
+    & button {
+      border: none;
+      outline: none;
+      padding: 1rem 2rem;
+      border-radius: 20px;
+      border: 2px solid var(--color-secondary);
+      background-color: var(--color-background);
+      color: var(--color-text);
+    }
+  }
+
+  &__item.selected button {
+    background-color: var(--color-secondary);
+    color: var(--color-background);
+  }
+}

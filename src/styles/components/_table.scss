@@ -1,0 +1,37 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+
+  & caption {
+    text-align: left;
+    padding-bottom: 1rem;
+  }
+
+  tr {
+    border-bottom: var(--border);
+  }
+
+  td {
+    @include text-truncate();
+  }
+
+  & td,
+  & th {
+    padding: 1rem 1rem;
+    text-align: right;
+  }
+
+  & td:first-child,
+  & th:first-child {
+    text-align: left;
+  }
+
+  & tr:nth-child(even) {
+    background-color: var(--color-transparent-dark);
+  }
+
+  & tr:hover {
+    background-color: var(--color-transparent-dark-1);
+  }
+}

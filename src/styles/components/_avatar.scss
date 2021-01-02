@@ -1,0 +1,18 @@
+.avatar {
+  $width: 2.5rem;
+  $padding: 2px;
+
+  display: inline-block;
+  background-image: linear-gradient(to right bottom, var(--color-primary), var(--color-secondary));
+  padding: $padding;
+  margin-right: $padding * 2;
+  border-radius: 50%;
+
+  & > img {
+    height: $width;
+    width: $width;
+    vertical-align: middle;
+    border-radius: 50%;
+    border: 1px solid var(--color-background);
+  }
+}
