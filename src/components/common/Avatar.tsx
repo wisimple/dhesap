@@ -1,5 +1,3 @@
-import React from 'react';
-import Business from '@material-ui/icons/Business';
 interface Props {
   imageUrl: string;
 }

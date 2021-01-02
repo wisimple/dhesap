@@ -6,25 +6,31 @@ import BarChart from '@material-ui/icons/BarChart';
 import Add from '@material-ui/icons/Add';
 import { Link, useLocation, useRouteMatch } from 'react-router-dom';
 
+import { motion, AnimatePresence } from 'framer-motion';
+
 const routes = [
   {
     name: 'Summary',
     path: '/summary',
+    plusButtonLink: null,
     icon: <BarChart />,
   },
   {
     name: 'Home',
-    path: '',
+    path: '/home',
+    plusButtonLink: '/me/transactions/create',
     icon: <Home />,
   },
   {
     name: 'Accounts',
     path: '/accounts',
+    plusButtonLink: '/me/accounts/create',
     icon: <SupervisorAccount />,
   },
   {
     name: 'Categories',
     path: '/categories',
+    plusButtonLink: '/me/categories/create',
     icon: <Category />,
   },
 ];
@@ -38,15 +44,29 @@ const NavigationTabs: React.FC = () => {
     document.documentElement.scrollTop = 0;
   };
 
-  console.log(match.path);
+  const buttonLink = routes.find((r) => pathname === '/me/tabs' + r.path)?.plusButtonLink;
+
   return (
     <nav className='nav-fixed nav-fixed--bottom'>
-      <Link to={`${match.url}/transactions/create`} className='nav-main-button'>
-        <Add />
-      </Link>
+      <AnimatePresence>
+        {buttonLink && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}>
+            <Link to={buttonLink || '/sdf'} className='nav-main-button'>
+              <Add />
+            </Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <ul className='nav-tabs'>
         {routes.map((route) => (
-          <li key={route.path} className={'nav-tabs__item ' + (`${match.url}${route.path}` === pathname ? 'active' : '')}>
+          <li
+            key={route.path}
+            className={
+              'nav-tabs__item ' + (`${match.url}${route.path}` === pathname ? 'active' : '')
+            }>
             <Link to={`${match.url}${route.path}`} onClick={onClick}>
               <BarChart /> <span>{route.name}</span>
             </Link>

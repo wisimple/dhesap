@@ -11,7 +11,7 @@ const Accounts = () => {
           </tr>
         </thead>
         <tbody>
-          {Array.from(Array(50).keys()).map((item, i) => (
+          {Array.from(Array(15).keys()).map((item, i) => (
             <tr key={i}>
               <td>
                 <div style={{ display: 'flex', alignItems: 'center' }}>

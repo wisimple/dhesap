@@ -8,8 +8,8 @@ table {
     padding-bottom: 1rem;
   }
 
-  tr {
-    border-bottom: var(--border);
+  thead tr {
+    border-bottom: 1px solid var(--color-transparent-dark-2);
   }
 
   td {

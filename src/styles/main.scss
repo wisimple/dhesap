@@ -84,6 +84,11 @@ body {
   }
 }
 
+.loading-text {
+  display: block;
+  padding: 1rem;
+}
+
 @import './mixins';
 
 @import './components/navigation';
