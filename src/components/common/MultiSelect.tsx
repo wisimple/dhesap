@@ -1,4 +1,4 @@
-import React from 'react';
+import Filter from '@material-ui/icons/FilterList';
 
 const MultiSelect: React.FC = () => {
   return (
@@ -14,22 +14,9 @@ const MultiSelect: React.FC = () => {
           <button>Exprenses</button>
         </li>
         <li className='multi-select__item'>
-          <button>List All</button>
-        </li>
-        <li className='multi-select__item'>
-          <button>Incomes</button>
-        </li>
-        <li className='multi-select__item'>
-          <button>Exprenses</button>
-        </li>
-        <li className='multi-select__item'>
-          <button>List All</button>
-        </li>
-        <li className='multi-select__item'>
-          <button>Incomes</button>
-        </li>
-        <li className='multi-select__item'>
-          <button>Exprenses</button>
+          <button>
+            <Filter /> More Filters
+          </button>
         </li>
       </ul>
     </div>

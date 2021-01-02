@@ -1,4 +1,3 @@
-import React from 'react';
 import Avatar from '../components/common/Avatar';
 
 const Accounts = () => {

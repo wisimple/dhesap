@@ -1,5 +1,6 @@
 import React from 'react';
 import MultiSelect from '../components/common/MultiSelect';
+import Pagination from '../components/common/Pagination';
 
 const Home = () => {
   return (
@@ -23,6 +24,7 @@ const Home = () => {
           ))}
         </tbody>
       </table>
+      <Pagination />
     </>
   );
 };

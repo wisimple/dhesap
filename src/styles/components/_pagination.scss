@@ -1,0 +1,32 @@
+.pagination-container {
+  padding: 2.4rem 1rem;
+}
+
+.pagination {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  align-items: center;
+
+  &__item:not(:last-child) {
+    margin-right: 0.8rem;
+  }
+
+  &__item button {
+    padding: 1rem 1.2rem;
+    outline: none;
+    border: none;
+    border-radius: var(--radius);
+    color: var(--color-secondary);
+    background-color: var(--color-background);
+  }
+
+  &__item.active button {
+    color: var(--color-background);
+    background-color: var(--color-secondary);
+  }
+
+  &__item button svg {
+    font-size: 2rem;
+  }
+}
