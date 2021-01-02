@@ -5,6 +5,7 @@ const Welcome = () => {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', alignItems: 'center', justifyContent: 'space-around' }}>
       <Link to='/signin'>Signin</Link>
       <Link to='/signup'>Signup</Link>
+      <Link to='/me'>Me</Link>
     </div>
   );
 };

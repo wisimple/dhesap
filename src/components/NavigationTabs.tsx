@@ -3,6 +3,7 @@ import Home from '@material-ui/icons/Home';
 import SupervisorAccount from '@material-ui/icons/SupervisorAccount';
 import Category from '@material-ui/icons/Category';
 import BarChart from '@material-ui/icons/BarChart';
+import Add from '@material-ui/icons/Add';
 import { Link, useLocation, useRouteMatch } from 'react-router-dom';
 
 const routes = [
@@ -40,6 +41,9 @@ const NavigationTabs: React.FC = () => {
   console.log(match.path);
   return (
     <nav className='nav-fixed nav-fixed--bottom'>
+      <Link to={`${match.url}/transactions/create`} className='nav-main-button'>
+        <Add />
+      </Link>
       <ul className='nav-tabs'>
         {routes.map((route) => (
           <li key={route.path} className={'nav-tabs__item ' + (`${match.url}${route.path}` === pathname ? 'active' : '')}>

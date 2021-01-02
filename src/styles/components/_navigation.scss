@@ -55,3 +55,28 @@
     }
   }
 }
+
+.nav-main-button {
+  $height: 6rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-background);
+
+  position: absolute;
+  top: -$height * 0.7;
+  left: 50%;
+
+  width: $height;
+  height: $height;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+
+  transform: translateX(-50%);
+
+  & svg {
+    font-size: $height * 0.5;
+    color: var(--color-text);
+  }
+}
