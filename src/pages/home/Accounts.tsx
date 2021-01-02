@@ -1,4 +1,4 @@
-import Avatar from '../components/common/Avatar';
+import Avatar from 'components/common/Avatar';
 
 const Accounts = () => {
   return (
@@ -14,8 +14,10 @@ const Accounts = () => {
           {Array.from(Array(50).keys()).map((item, i) => (
             <tr key={i}>
               <td>
-                <Avatar imageUrl='https://www.w3schools.com/howto/img_avatar.png' />
-                Arif Sami SAHIN
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <Avatar imageUrl='https://www.w3schools.com/howto/img_avatar.png' />
+                  <span>Arif Sami SAHIN</span>
+                </div>
               </td>
               <td className='money text-green'>+300.00$</td>
             </tr>

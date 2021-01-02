@@ -56,8 +56,8 @@ body {
 
 .container {
   margin: 6.2rem 0 7rem;
-
   padding: 0 var(--container-horizontal-padding);
+  overflow: hidden;
 }
 
 .money {

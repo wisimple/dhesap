@@ -4,28 +4,22 @@ import NavigationTabs from './components/NavigationTabs';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NavigationTop from './components/NavigationTop';
 
-const Home = React.lazy(() => import('./pages/Home'));
-const Summary = React.lazy(() => import('./pages/Summary'));
-const Accounts = React.lazy(() => import('./pages/Accounts'));
-const Categories = React.lazy(() => import('./pages/Categories'));
+const Home = React.lazy(() => import('pages/home'));
+const Welcome = React.lazy(() => import('pages/Welcome'));
+const Signin = React.lazy(() => import('pages/Signin'));
+const Signup = React.lazy(() => import('pages/Signup'));
 
 function App() {
   return (
     <Router>
-      <NavigationTop />
-
-      <main className='container'>
-        <Suspense fallback={<h1>loading...</h1>}>
-          <Switch>
-            <Route path='/summary' component={Summary} />
-            <Route path='/accounts' component={Accounts} />
-            <Route path='/categories' component={Categories} />
-            <Route path='/' component={Home} />
-          </Switch>
-        </Suspense>
-      </main>
-
-      <NavigationTabs />
+      <Suspense fallback={<h1>loading...</h1>}>
+        <Switch>
+          <Route path='/home' component={Home} />
+          <Route path='/signin' component={Signin} />
+          <Route path='/signup' component={Signup} />
+          <Route path='/' component={Welcome} />
+        </Switch>
+      </Suspense>
     </Router>
   );
 }
