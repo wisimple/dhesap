@@ -57,9 +57,14 @@ body {
 .container {
   padding: 0 var(--container-horizontal-padding);
   overflow: hidden;
+  min-height: 80vh;
 
   &--with-tabs {
     margin: 6.2rem 0 7rem;
+  }
+
+  &--with-top-tab {
+    margin: 6.2rem 0 1rem;
   }
 }
 
@@ -88,10 +93,11 @@ body {
   }
 }
 
-.button--non-styled {
+.input--non-styled {
   border: none;
   outline: none;
-  background-color: transparent;
+  background-color: inherit;
+  color: inherit;
 }
 
 .loading-text {
@@ -107,3 +113,4 @@ body {
 @import './components/avatar';
 @import './components/multi-select';
 @import './components/pagination';
+@import './components/input';

@@ -13,17 +13,16 @@ const Index = () => {
   const history = useHistory();
 
   return (
-    <div className='container'>
+    <div className='container container--with-top-tab'>
       <NavigationTop
         items={[
           <button
-            className='button--non-styled'
+            className='input--non-styled'
             style={{ display: 'flex', alignItems: 'center' }}
             onClick={() => history.goBack()}>
             <ChevronLeft />
             <span>Back</span>
           </button>,
-          ,
           <Logo />,
         ]}
       />
