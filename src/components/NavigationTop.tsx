@@ -1,17 +1,15 @@
 import React from 'react';
-import Settings from '@material-ui/icons/Settings';
 
-const NavigationTop: React.FC = () => {
-  const toggleTheme = () => {
-    console.log('sdfsf');
-    document.body.classList.toggle('theme-dark');
-  };
+interface Props {
+  items?: React.ReactNode[];
+}
+
+const NavigationTop: React.FC<Props> = ({ items }) => {
   return (
     <nav className='nav-fixed nav-fixed--top'>
-      <span className='logo'>
-        <span className='letter-d'>d</span>hesap
-      </span>
-      <Settings onClick={toggleTheme} />
+      {items?.map((item, i) => (
+        <React.Fragment key={i}>{item}</React.Fragment>
+      ))}
     </nav>
   );
 };

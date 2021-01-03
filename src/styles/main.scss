@@ -55,9 +55,12 @@ body {
 }
 
 .container {
-  margin: 6.2rem 0 7rem;
   padding: 0 var(--container-horizontal-padding);
   overflow: hidden;
+
+  &--with-tabs {
+    margin: 6.2rem 0 7rem;
+  }
 }
 
 .money {
@@ -73,6 +76,7 @@ body {
   color: green;
 }
 
+// Extends
 .hide-scrollbar {
   /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none; /* IE and Edge */
@@ -82,6 +86,12 @@ body {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+.button--non-styled {
+  border: none;
+  outline: none;
+  background-color: transparent;
 }
 
 .loading-text {
