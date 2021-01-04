@@ -2,7 +2,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 import CategoriesCreate from 'pages/me/categories/Create';
 import CategoriesEdit from 'pages/me/categories/Edit';
-import NavigationTop from 'components/NavigationTop';
+import NavigationTop from 'layouts/navs/NavigationTop';
 
 import { useHistory } from 'react-router-dom';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
@@ -14,18 +14,16 @@ const Index = () => {
 
   return (
     <div className='container container--with-top-tab'>
-      <NavigationTop
-        items={[
-          <button
-            className='input--non-styled'
-            style={{ display: 'flex', alignItems: 'center' }}
-            onClick={() => history.goBack()}>
-            <ChevronLeft />
-            <span>Back</span>
-          </button>,
-          <Logo />,
-        ]}
-      />
+      <NavigationTop>
+        <button
+          className='input--non-styled'
+          style={{ display: 'flex', alignItems: 'center' }}
+          onClick={() => history.goBack()}>
+          <ChevronLeft />
+          <span>Back</span>
+        </button>
+        <Logo />
+      </NavigationTop>
       <Switch>
         <Route exact path={url + '/create'} component={CategoriesCreate} />
         <Route exact path={url + '/edit'} component={CategoriesEdit} />

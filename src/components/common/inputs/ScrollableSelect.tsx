@@ -2,33 +2,22 @@ import React, { useEffect, useState } from 'react';
 
 interface Props<T> {
   options: T[];
-  renderItem: (item: T, index: number, selected: boolean) => React.ReactNode;
-  multiple?: boolean;
-  onSelected?: (selectedOptions: SelectedType) => void;
+  renderOptions: (option: T, index: number, isSelected: boolean) => React.ReactNode;
+  onChanged?: ({ index, option }: { index: number; option: T }) => void;
+  defaultSelectedIndex?: number;
 }
-
-type SelectedType = number;
 
 const ScrollableSelect = <T extends any>({
   options,
-  renderItem,
-  multiple = false,
-  onSelected = () => {},
+  renderOptions,
+  onChanged = () => {},
+  defaultSelectedIndex = 0,
 }: Props<T>) => {
-  const [selectIndexes, setselectIndexes] = useState<SelectedType>(0);
+  const [selectedIndex, setselectedIndex] = useState<number>(defaultSelectedIndex);
 
   useEffect(() => {
-    onSelected(0);
-  }, []);
-
-  const handleOnSelect = (i: number) => {
-    let newIt: SelectedType;
-
-    newIt = i;
-
-    setselectIndexes(newIt);
-    onSelected(newIt);
-  };
+    onChanged({ index: selectedIndex, option: options[selectedIndex] });
+  }, [selectedIndex]);
 
   console.log('render');
 
@@ -37,9 +26,9 @@ const ScrollableSelect = <T extends any>({
       {options.map((item, i) => (
         <li
           key={i}
-          className={`scrollable-select__item ${selectIndexes === i ? 'selected' : ''}`}
-          onClick={() => handleOnSelect(i)}>
-          {renderItem(item, i, selectIndexes === i)}
+          className={`scrollable-select__item ${selectedIndex === i ? 'selected' : ''}`}
+          onClick={() => setselectedIndex(i)}>
+          {renderOptions(item, i, selectedIndex === i)}
         </li>
       ))}
     </ul>

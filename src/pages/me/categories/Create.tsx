@@ -1,86 +1,24 @@
 import { useState } from 'react';
+
+import { useHistory } from 'react-router-dom';
+
 import Icon from '@material-ui/core/Icon';
 import ScrollableSelect from 'components/common/inputs/ScrollableSelect';
 import Check from '@material-ui/icons/Check';
-const colors = [
-  'red',
-  'orange',
-  'yellow',
-  'green',
-  'blue',
-  'purple',
-  'brown',
-  'magenta',
-  'tan',
-  'cyan',
-  'olive',
-  'maroon',
-  'navy',
-  'aquamarine',
-  'turquoise',
-  'silver',
-  'lime',
-  'teal',
-  'indigo',
-  'violet',
-  'pink',
-  'black',
-  'white',
-  'grey',
-];
-
-const icons: string[] = [
-  'account_balance_wallet',
-  'book',
-  'build',
-  'card_giftcard',
-  'commute',
-  'credit_card',
-  'face',
-  'favorite',
-  'language',
-  'pets',
-  'shopping_card',
-  'shopping_bag',
-  'star_rate',
-  'theaters',
-  'movie',
-  'work',
-  'library_music',
-  'subscriptions',
-  'videocam',
-  'camera',
-  'audiotrack',
-  'web',
-  'business',
-  'call',
-  'hourglass_bottom',
-  'map',
-  'message',
-  'stay_current_portrait',
-  'phone_iphone',
-  'weekend',
-  'network_wifi',
-  'cloud',
-  'computer',
-  'headset',
-  'watch',
-  'videogame_asset',
-  'tv',
-  'router',
-  'brush',
-  'color_lens',
-  'photo',
-  'receipt_long',
-  'agriculture',
-  'category',
-];
+import { colors, backgroundColors } from 'constants/colors';
+import { icons } from 'constants/icons';
 
 const Create = () => {
-  const [selectedElements, setselectedElements] = useState<number>(0);
+  const [selectedColor, setselectedColor] = useState('');
+  const [selectedBackgroundColor, setselectedBackgroundColor] = useState('');
+  const [selectedIcon, setselectedIcon] = useState('');
+
+  const history = useHistory();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    history.goBack();
   };
 
   return (
@@ -101,12 +39,31 @@ const Create = () => {
         </div>
         <div className='form__group'>
           <ScrollableSelect
-            // multiple
-            onSelected={(i) => setselectedElements(i)}
-            options={colors}
-            renderItem={(item, i, selected) => (
+            onChanged={({ option }) => setselectedIcon(option)}
+            options={icons}
+            renderOptions={(item, i, selected) => (
               <button
-                className='button'
+                type='button'
+                className='button-iconed'
+                style={{
+                  backgroundColor: selected ? selectedBackgroundColor : 'inherit',
+                }}>
+                <Icon style={{ color: selected ? selectedColor : 'black' }}>{item}</Icon>
+              </button>
+            )}
+          />
+          <label htmlFor='icon' className='label label--linear'>
+            Select an icon
+          </label>
+        </div>
+        <div className='form__group'>
+          <ScrollableSelect
+            onChanged={({ option }) => setselectedColor(option)}
+            options={backgroundColors}
+            renderOptions={(item, i, selected) => (
+              <button
+                type='button'
+                className='button-colored'
                 style={{
                   backgroundColor: item,
                 }}>
@@ -115,26 +72,26 @@ const Create = () => {
             )}
           />
           <label htmlFor='color' className='label label--linear'>
-            Select a color
+            Select an icon color
           </label>
         </div>
         <div className='form__group'>
           <ScrollableSelect
-            options={icons}
-            renderItem={(item, i, selected) => (
-              <button className='input--non-styled'>
-                <Icon
-                  style={{
-                    fontSize: '3.5rem',
-                    color: selected ? colors[selectedElements] : 'black',
-                  }}>
-                  {item}
-                </Icon>
+            onChanged={({ option }) => setselectedBackgroundColor(option)}
+            options={colors}
+            renderOptions={(item, i, selected) => (
+              <button
+                type='button'
+                className='button-colored'
+                style={{
+                  backgroundColor: item,
+                }}>
+                {selected && <Check />}
               </button>
             )}
           />
-          <label htmlFor='icon' className='label label--linear'>
-            Select an icon
+          <label htmlFor='bg-color' className='label label--linear'>
+            Select a background color
           </label>
         </div>
 

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-
 interface Props {
   text?: string;
 }

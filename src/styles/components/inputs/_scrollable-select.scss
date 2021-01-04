@@ -5,13 +5,16 @@
   list-style-type: none;
   background-color: var(--color-transparent-dark-1);
   overflow-x: scroll;
-  padding: 0 1rem;
-  height: 8rem;
+  padding: 1rem;
   border-radius: var(--radius);
+  mask-image: linear-gradient(to right, transparent, black 15px, black 95%, transparent);
+
+  padding-left: 2rem;
 
   &__item {
     transition: all 0.2s;
-    min-width: 5rem;
+    display: flex;
+    align-items: center;
   }
 
   &__item.selected {
@@ -19,6 +22,6 @@
   }
 
   &__item:not(:last-child) {
-    margin-right: 1.4rem;
+    margin-right: 1.6rem;
   }
 }

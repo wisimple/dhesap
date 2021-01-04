@@ -1,14 +1,34 @@
 /* 
     BUTTON
 */
-button.button {
+.button {
   @extend .input--non-styled;
   font-size: inherit;
   width: 100%;
   padding: 1rem;
   background-color: var(--color-secondary);
-  color: #fff;
+  color: var(--color-background);
   border-radius: var(--radius);
-  min-height: 5rem;
-  margin: 1rem 0;
+
+  &:active {
+  }
+}
+
+.button-colored {
+  @extend .input--non-styled;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius);
+}
+
+.button-iconed {
+  @extend .input--non-styled;
+  padding: 0.4rem;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 50%;
+
+  & > * {
+    font-size: 2.2rem !important;
+  }
 }

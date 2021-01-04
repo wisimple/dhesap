@@ -2,13 +2,13 @@
     FORM
 */
 $fg-xlg-height: 10rem;
-$i-xlg-fontsize: 3rem;
+$i-xlg-fontsize: 2rem;
 $i-xlg-padding-b: 0.8rem;
 $i-xlg-padding-t: 1.6rem;
 $i-xlg-padding-v: 0.8rem;
 
 $l-xlg-padding-h: 0.6rem;
-$l-fontsize: 1.6rem;
+$l-fontsize: 1.4rem;
 
 .form {
   &__group {
@@ -71,10 +71,9 @@ input.input--xlg {
     color: var(--color-text-dark-2);
   }
 
-  &:placeholder-shown + .label--linear {
+  &:placeholder-shown + .label--as-placeholder {
     transform: translateY(-($i-xlg-fontsize + ($i-xlg-padding-b * 2) + $l-xlg-padding-h));
     opacity: 0;
-
     background-size: 200%;
     background-position-x: -300px;
     font-size: $i-xlg-fontsize;
@@ -83,13 +82,12 @@ input.input--xlg {
 }
 
 .label {
-  // margin: 1rem 0;
+  font-size: $l-fontsize;
 
   &--linear {
     display: block;
     padding: $l-xlg-padding-h $i-xlg-padding-v;
     transition: all 0.2s;
-    // transition: background-position 0.2s, font-size 0.5s, transform 0.2s;
     transform: translateY(0);
     background: linear-gradient(135deg, var(--color-secondary), transparent);
     background-size: 100%;
@@ -97,6 +95,5 @@ input.input--xlg {
     background-position-x: 0%;
     color: var(--color-background);
     border-radius: 0 0 var(--radius) var(--radius);
-    font-size: $l-fontsize;
   }
 }
