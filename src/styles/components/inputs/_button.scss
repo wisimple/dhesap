@@ -1,0 +1,14 @@
+/* 
+    BUTTON
+*/
+button.button {
+  @extend .input--non-styled;
+  font-size: inherit;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--color-secondary);
+  color: #fff;
+  border-radius: var(--radius);
+  min-height: 5rem;
+  margin: 1rem 0;
+}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import CustomSelect from 'components/common/inputs/CustomSelect';
 import Icon from '@material-ui/core/Icon';
+import ScrollableSelect from 'components/common/inputs/ScrollableSelect';
+import Check from '@material-ui/icons/Check';
 const colors = [
   'red',
   'orange',
@@ -76,48 +77,67 @@ const icons: string[] = [
 ];
 
 const Create = () => {
-  const [color, setColor] = useState('red');
-  const [backgroundColor, setbackgroundColor] = useState('black');
+  const [selectedElements, setselectedElements] = useState<number>(0);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <div>
-      <h2>Create a New Category</h2>
-      <form action='#' className='form'>
-        <label htmlFor='name' className='label'>
-          Category Name
-        </label>
-        <input
-          type='text'
-          name='name'
-          id='name'
-          className='input'
-          autoFocus
-          placeholder='Ex: transportation'
-        />
-        <label htmlFor='color' className='label'>
-          Select a color
-        </label>
-        <CustomSelect items={colors} onSelect={(item) => setColor(item)} />
-        <label htmlFor='color' className='label'>
-          Select background color
-        </label>
-        <CustomSelect items={colors} onSelect={(item) => setbackgroundColor(item)} />
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-          {icons.map((icon, i) => (
-            <div
-              key={i}
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: backgroundColor,
-                margin: '1rem',
-                padding: '1rem',
-                borderRadius: '50%',
-              }}>
-              <Icon style={{ fontSize: '3rem', color: color }}>{icon}</Icon>
-            </div>
-          ))}
+      <form onSubmit={handleSubmit} className='form form--xlg'>
+        <div className='form__group form__group--xlg'>
+          <input
+            type='text'
+            name='name'
+            id='name'
+            className='input input--xlg'
+            autoFocus
+            placeholder='Category Name'
+          />
+          <label htmlFor='name' className='label label--linear'>
+            Category Name
+          </label>
         </div>
+        <div className='form__group'>
+          <ScrollableSelect
+            // multiple
+            onSelected={(i) => setselectedElements(i)}
+            options={colors}
+            renderItem={(item, i, selected) => (
+              <button
+                className='button'
+                style={{
+                  backgroundColor: item,
+                }}>
+                {selected && <Check />}
+              </button>
+            )}
+          />
+          <label htmlFor='color' className='label label--linear'>
+            Select a color
+          </label>
+        </div>
+        <div className='form__group'>
+          <ScrollableSelect
+            options={icons}
+            renderItem={(item, i, selected) => (
+              <button className='input--non-styled'>
+                <Icon
+                  style={{
+                    fontSize: '3.5rem',
+                    color: selected ? colors[selectedElements] : 'black',
+                  }}>
+                  {item}
+                </Icon>
+              </button>
+            )}
+          />
+          <label htmlFor='icon' className='label label--linear'>
+            Select an icon
+          </label>
+        </div>
+
         <button className='button'>Save</button>
       </form>
     </div>

@@ -1,0 +1,36 @@
+/* 
+  CUSTOM SELECT
+*/
+ul.input--custom-select {
+  @extend .hide-scrollbar;
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+}
+
+li.input--custom-select__item {
+  @extend .input--non-styled;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 5rem;
+  min-height: 5rem;
+  font-size: 1.6rem;
+  background-color: rgba(224, 14, 14, 0.192);
+
+  padding: 1rem;
+  border-radius: var(--radius);
+
+  color: #fff;
+  &:not(:last-child) {
+    margin-right: 1rem;
+  }
+
+  &.selected {
+    border: 3px solid var(--color-text);
+  }
+
+  & svg {
+    font-size: 2rem;
+  }
+}

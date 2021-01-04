@@ -95,9 +95,12 @@ body {
 
 .input--non-styled {
   border: none;
-  outline: none;
   background-color: inherit;
   color: inherit;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .loading-text {
@@ -113,4 +116,7 @@ body {
 @import './components/avatar';
 @import './components/multi-select';
 @import './components/pagination';
-@import './components/input';
+@import './components/inputs/input';
+@import './components/inputs/button';
+@import './components/inputs/select';
+@import './components/inputs/scrollable-select';
