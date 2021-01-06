@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from 'components/common/Avatar';
-import MultiSelect from 'components/common/MultiSelect';
 import Pagination from 'components/common/Pagination';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import LoadingText from 'components/common/LoadingText';
+import ScrollableSelect from 'components/common/inputs/ScrollableSelect';
 
-const Home = () => {
+const options = ['All', 'Incomes', 'Expenses', 'hello world', 'it has been a long time'];
+
+const Transactions: React.FC = () => {
   const [loading, setloading] = useState(true);
 
   useEffect(() => {
@@ -14,7 +16,16 @@ const Home = () => {
   }, []);
   return (
     <>
-      <MultiSelect />
+      <ScrollableSelect
+        options={options}
+        onChanged={({ index, selectedItem }) => console.log(selectedItem)}
+        renderItem={(item, i, isSelected) => (
+          <button
+            className={`button button--rounded button--sm ${isSelected ? '' : 'button--outline'}`}>
+            {item}
+          </button>
+        )}
+      />
       <table className='table'>
         <thead>
           <tr>
@@ -55,4 +66,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Transactions;

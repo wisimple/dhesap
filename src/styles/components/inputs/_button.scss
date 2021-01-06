@@ -9,8 +9,21 @@
   background-color: var(--color-secondary);
   color: var(--color-background);
   border-radius: var(--radius);
+  border: 1px solid transparent;
+  min-width: 5rem;
 
-  &:active {
+  &--rounded {
+    border-radius: var(--radius-xlg);
+  }
+
+  &--sm {
+    font-size: 1.3rem;
+  }
+
+  &--outline {
+    background-color: inherit;
+    color: var(--color-text);
+    border: 2px solid var(--color-text);
   }
 }
 
@@ -24,11 +37,12 @@
 .button-iconed {
   @extend .input--non-styled;
   padding: 0.4rem;
+  margin-right: 0.6rem;
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
 
   & > * {
-    font-size: 2.2rem !important;
+    font-size: var(--icon-size) !important;
   }
 }

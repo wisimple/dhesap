@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Props<T> {
   options: T[];
-  renderOptions: (option: T, index: number, isSelected: boolean) => React.ReactNode;
-  onChanged?: ({ index, option }: { index: number; option: T }) => void;
+  renderItem: (option: T, index: number, isSelected: boolean) => React.ReactNode;
+  onChanged?: ({ index, selectedItem }: { index: number; selectedItem: T }) => void;
   defaultSelectedIndex?: number;
+  children?: React.ReactNode;
 }
 
 const ScrollableSelect = <T extends any>({
   options,
-  renderOptions,
+  renderItem,
   onChanged = () => {},
   defaultSelectedIndex = 0,
+  children,
 }: Props<T>) => {
   const [selectedIndex, setselectedIndex] = useState<number>(defaultSelectedIndex);
 
   useEffect(() => {
-    onChanged({ index: selectedIndex, option: options[selectedIndex] });
+    onChanged({ index: selectedIndex, selectedItem: options[selectedIndex] });
   }, [selectedIndex]);
 
   console.log('render');
@@ -28,9 +30,11 @@ const ScrollableSelect = <T extends any>({
           key={i}
           className={`scrollable-select__item ${selectedIndex === i ? 'selected' : ''}`}
           onClick={() => setselectedIndex(i)}>
-          {renderOptions(item, i, selectedIndex === i)}
+          {renderItem(item, i, selectedIndex === i)}
         </li>
       ))}
+      {children}
+      <li className='scrollable-select__item ' style={{ width: '0.1rem', height: '1rem' }}></li>
     </ul>
   );
 };

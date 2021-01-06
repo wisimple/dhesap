@@ -1,3 +1,7 @@
+/* 
+    @TODO Icons will be updated
+*/
+
 export const icons = [
   'account_balance_wallet',
   'book',

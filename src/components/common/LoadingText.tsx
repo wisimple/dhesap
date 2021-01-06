@@ -3,7 +3,7 @@ interface Props {
   text?: string;
 }
 
-const LoadingText: React.FC<Props> = ({ text = 'loading...' }) => {
+const LoadingText = ({ text = 'loading...' }: Props) => {
   return (
     <motion.span className='loading-text' initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       {text}

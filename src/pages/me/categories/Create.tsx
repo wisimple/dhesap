@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 import { useHistory } from 'react-router-dom';
 
-import Icon from '@material-ui/core/Icon';
 import ScrollableSelect from 'components/common/inputs/ScrollableSelect';
 import Check from '@material-ui/icons/Check';
 import { colors, backgroundColors } from 'constants/colors';
 import { icons } from 'constants/icons';
+import Icon from 'components/common/Icon';
 
 const Create = () => {
   const [selectedColor, setselectedColor] = useState('');
@@ -39,17 +39,14 @@ const Create = () => {
         </div>
         <div className='form__group'>
           <ScrollableSelect
-            onChanged={({ option }) => setselectedIcon(option)}
+            onChanged={({ selectedItem }) => setselectedIcon(selectedItem)}
             options={icons}
-            renderOptions={(item, i, selected) => (
-              <button
-                type='button'
-                className='button-iconed'
-                style={{
-                  backgroundColor: selected ? selectedBackgroundColor : 'inherit',
-                }}>
-                <Icon style={{ color: selected ? selectedColor : 'black' }}>{item}</Icon>
-              </button>
+            renderItem={(item, i, selected) => (
+              <Icon
+                name={item}
+                color={selectedColor}
+                bgColor={selected ? selectedBackgroundColor : ''}
+              />
             )}
           />
           <label htmlFor='icon' className='label label--linear'>
@@ -58,9 +55,9 @@ const Create = () => {
         </div>
         <div className='form__group'>
           <ScrollableSelect
-            onChanged={({ option }) => setselectedColor(option)}
-            options={backgroundColors}
-            renderOptions={(item, i, selected) => (
+            onChanged={({ selectedItem }) => setselectedColor(selectedItem)}
+            options={colors}
+            renderItem={(item, i, selected) => (
               <button
                 type='button'
                 className='button-colored'
@@ -77,9 +74,9 @@ const Create = () => {
         </div>
         <div className='form__group'>
           <ScrollableSelect
-            onChanged={({ option }) => setselectedBackgroundColor(option)}
-            options={colors}
-            renderOptions={(item, i, selected) => (
+            onChanged={({ selectedItem }) => setselectedBackgroundColor(selectedItem)}
+            options={backgroundColors}
+            renderItem={(item, i, selected) => (
               <button
                 type='button'
                 className='button-colored'

@@ -2,7 +2,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import TabsLayout from 'layouts/TabsLayout';
 
 // Tabs
-import Home from 'pages/me/Home';
+import Home from 'pages/me/Transactions';
 import Summary from 'pages/me/Summary';
 import Accounts from 'pages/me/Accounts';
 import Categories from 'pages/me/Categories';

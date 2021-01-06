@@ -26,7 +26,7 @@ const Index = () => {
       </NavigationTop>
       <Switch>
         <Route exact path={url + '/create'} component={CategoriesCreate} />
-        <Route exact path={url + '/edit'} component={CategoriesEdit} />
+        <Route exact path={url + '/:id/edit'} component={CategoriesEdit} />
       </Switch>
     </div>
   );

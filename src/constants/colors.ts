@@ -14,6 +14,10 @@ export const mainColors = [
   '#1b1c1d',
 ];
 
-export const colors = [...mainColors, 'transparent'];
+export const colors = [...mainColors].reverse();
 
-export const backgroundColors = mainColors.slice().reverse();
+export const backgroundColors = [...mainColors, 'transparent'];
+
+export const generateRandomColor = () => {
+  return mainColors[4];
+};

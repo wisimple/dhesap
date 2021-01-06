@@ -2,7 +2,7 @@ interface Props {
   imageUrl: string;
 }
 
-const Avatar: React.FC<Props> = ({ imageUrl }) => {
+const Avatar = ({ imageUrl }: Props) => {
   return (
     <div className='avatar'>
       <img src={imageUrl} alt='avatar 1' />

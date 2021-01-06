@@ -16,6 +16,7 @@
   --border: 1px solid var(--color-transparent-dark);
   --shadow: 0 0 1rem var(--color-transparent-dark-2);
   --radius: 3px;
+  --radius-lg: 1rem;
   --radius-xlg: 2rem;
 
   --container-horizontal-padding: 1rem;
@@ -103,9 +104,35 @@ body {
   }
 }
 
+.link--non-styled {
+  text-decoration: none;
+  color: inherit;
+}
+
 .loading-text {
   display: block;
   padding: 1rem;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+a {
+  &,
+  &:link,
+  &:visited,
+  &:active,
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+svg {
+  font-size: var(--icon-size) !important;
 }
 
 @import './mixins';
