@@ -1,6 +1,7 @@
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import Icon from 'components/common/Icon';
 import { colors, backgroundColors } from 'constants/colors';
+import { icons } from 'constants/icons';
 import { generateRandomNumber } from 'helpers';
 import { useHistory } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ interface ICategory {
 
 const len = colors.length - 1;
 const bglen = backgroundColors.length;
+const iconLen = icons.length;
 
 let categories: ICategory[] = [];
 
@@ -25,7 +27,7 @@ for (let i = 0; i < 20; i++) {
     _id: i.toString(),
     name: 'Transportation',
     icon: {
-      name: 'home',
+      name: icons[generateRandomNumber({ max: iconLen })],
       color: colors[generateRandomNumber({ max: len })],
       bgColor: backgroundColors[generateRandomNumber({ max: bglen })],
     },

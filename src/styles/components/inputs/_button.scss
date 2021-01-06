@@ -20,10 +20,10 @@
     font-size: 1.3rem;
   }
 
-  &--outline {
+  &--inverted {
     background-color: inherit;
-    color: var(--color-text);
-    border: 2px solid var(--color-text);
+    color: var(--color-secondary);
+    border: 2px solid var(--color-secondary);
   }
 }
 

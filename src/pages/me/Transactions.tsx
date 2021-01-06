@@ -21,7 +21,7 @@ const Transactions: React.FC = () => {
         onChanged={({ index, selectedItem }) => console.log(selectedItem)}
         renderItem={(item, i, isSelected) => (
           <button
-            className={`button button--rounded button--sm ${isSelected ? '' : 'button--outline'}`}>
+            className={`button button--rounded button--sm ${isSelected ? '' : 'button--inverted'}`}>
             {item}
           </button>
         )}

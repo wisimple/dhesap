@@ -8,11 +8,14 @@ $i-xlg-padding-t: 1.6rem;
 $i-xlg-padding-v: 0.8rem;
 
 $l-xlg-padding-h: 0.6rem;
-$l-fontsize: 1.4rem;
+$l-fontsize: 1.3rem;
 
 .form {
   &__group {
+    margin-bottom: 1.5rem;
+
     &--xlg {
+      margin-bottom: 2rem;
       // @TODO why + .8rem
       height: $i-xlg-fontsize + ($i-xlg-padding-t + $i-xlg-padding-b) + $l-fontsize +
         (2 * $l-xlg-padding-h) + 0.8rem;
@@ -21,10 +24,6 @@ $l-fontsize: 1.4rem;
         margin: 0;
       }
     }
-  }
-
-  &--xlg > *:not(:last-child) {
-    margin-bottom: 2rem;
   }
 }
 
@@ -36,48 +35,48 @@ select.input--select {
   @extend .input--non-styled;
   display: block;
   padding: 1.2rem;
-  font-size: inherit;
+  font-size: 1.8rem;
   background-color: var(--color-transparent-dark-1);
   width: 100%;
   border-radius: var(--radius) var(--radius) 0 0;
   transition: all 0.3s;
 
-  border-bottom: 2px solid transparent;
-
-  &:focus {
-    border-bottom: 2px solid var(--color-text-dark-2);
-  }
-
-  &::placeholder {
-    color: var(--color-text-dark-2);
-  }
-}
-
-input.input--xlg {
-  font-size: $i-xlg-fontsize;
-  padding: $i-xlg-padding-t $i-xlg-padding-v $i-xlg-padding-b;
   border-bottom: 2px solid var(--color-text-dark-2);
 
   &:focus {
     border-bottom: 2px solid var(--color-text-dark-1);
   }
 
-  &:focus::placeholder {
-    transition: all 0.4s;
-    color: var(--color-text-dark-1);
-  }
-
   &::placeholder {
     color: var(--color-text-dark-2);
   }
 
-  &:placeholder-shown + .label--as-placeholder {
-    transform: translateY(-($i-xlg-fontsize + ($i-xlg-padding-b * 2) + $l-xlg-padding-h));
-    opacity: 0;
-    background-size: 200%;
-    background-position-x: -300px;
+  &--xlg {
     font-size: $i-xlg-fontsize;
-    color: var(--color-text-dark-2);
+    padding: $i-xlg-padding-t $i-xlg-padding-v $i-xlg-padding-b;
+    border-bottom: 2px solid var(--color-text-dark-2);
+
+    &:focus {
+      border-bottom: 2px solid var(--color-text-dark-1);
+    }
+
+    &:focus::placeholder {
+      transition: all 0.4s;
+      color: var(--color-text-dark-1);
+    }
+
+    &::placeholder {
+      color: var(--color-text-dark-2);
+    }
+
+    &:placeholder-shown + .label--as-placeholder {
+      transform: translateY(-($i-xlg-fontsize + ($i-xlg-padding-b * 2) + $l-xlg-padding-h));
+      opacity: 0;
+      background-size: 200%;
+      background-position-x: -300px;
+      font-size: $i-xlg-fontsize;
+      color: var(--color-text-dark-2);
+    }
   }
 }
 
