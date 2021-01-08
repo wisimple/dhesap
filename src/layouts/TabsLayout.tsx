@@ -14,6 +14,7 @@ const TabsLayout: React.FC = ({ children }) => {
           <Settings />
         </Link>
       </NavigationTop>
+
       <main className='container container--with-tabs'>{children}</main>
       <NavigationTabs />
     </>

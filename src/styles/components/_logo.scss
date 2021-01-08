@@ -3,8 +3,8 @@
   font-weight: bolder;
 
   display: inline-block;
-  color: var(--color-secondary);
-  & .letter-d {
-    color: var(--color-primary);
+
+  & {
+    @extend .text-gradient;
   }
 }

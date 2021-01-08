@@ -74,7 +74,9 @@ const Create = () => {
         </div>
         <div className='form__group'>
           <ScrollableSelect
-            onChanged={({ selectedItem }) => setselectedBackgroundColor(selectedItem)}
+            onChanged={({ selectedItem }) =>
+              setselectedBackgroundColor(selectedItem)
+            }
             options={backgroundColors}
             renderItem={(item, i, selected) => (
               <button

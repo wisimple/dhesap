@@ -27,10 +27,14 @@ function Index() {
       <Route path={url + '/tabs'}>
         <TabsLayout>
           <Switch>
-            <Route exact path={url + '/tabs/home'} component={Home} />
+            <Route exact path={url + '/tabs/transactions'} component={Home} />
             <Route exact path={url + '/tabs/accounts'} component={Accounts} />
             <Route exact path={url + '/tabs/summary'} component={Summary} />
-            <Route exact path={url + '/tabs/categories'} component={Categories} />
+            <Route
+              exact
+              path={url + '/tabs/categories'}
+              component={Categories}
+            />
           </Switch>
         </TabsLayout>
       </Route>

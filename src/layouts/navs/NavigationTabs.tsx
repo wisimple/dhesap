@@ -15,8 +15,8 @@ const routes = [
     iconComponent: <BarChart />,
   },
   {
-    name: 'Home',
-    path: '/home',
+    name: 'Transactions',
+    path: '/transactions',
     plusButtonRedirectUrl: '/me/transactions/create',
     iconComponent: <Home />,
   },
@@ -43,8 +43,9 @@ const NavigationTabs: React.FC = () => {
     document.documentElement.scrollTop = 0;
   };
 
-  const plusButtonRedicrectUrl = routes.find((r) => pathname === '/me/tabs' + r.path)
-    ?.plusButtonRedirectUrl;
+  const plusButtonRedicrectUrl = routes.find(
+    (r) => pathname === '/me/tabs' + r.path
+  )?.plusButtonRedirectUrl;
 
   return (
     <nav className='nav-fixed nav-fixed--bottom'>
@@ -54,7 +55,9 @@ const NavigationTabs: React.FC = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}>
-            <Link to={plusButtonRedicrectUrl || '/'} className='nav-main-button'>
+            <Link
+              to={plusButtonRedicrectUrl || '/'}
+              className='nav-main-button'>
               <Add />
             </Link>
           </motion.div>
@@ -64,7 +67,9 @@ const NavigationTabs: React.FC = () => {
         {routes.map((route) => (
           <li
             key={route.path}
-            className={`nav-tabs__item ${url + route.path === pathname ? 'active' : ''}`}>
+            className={`nav-tabs__item ${
+              url + route.path === pathname ? 'active' : ''
+            }`}>
             <Link to={url + route.path} onClick={onClick}>
               {route.iconComponent} <span>{route.name}</span>
             </Link>

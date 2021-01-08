@@ -12,7 +12,7 @@ const Welcome = () => {
       }}>
       <Link to='/signin'>Signin</Link>
       <Link to='/signup'>Signup</Link>
-      <Link to='/me/tabs/home'>Me</Link>
+      <Link to='/me/tabs/transactions'>Me</Link>
     </div>
   );
 };
