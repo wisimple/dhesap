@@ -7,7 +7,7 @@ $i-xlg-padding-b: 0.8rem;
 $i-xlg-padding-t: 1.6rem;
 $i-xlg-padding-v: 0.8rem;
 
-$l-xlg-padding-h: 0.6rem;
+$l-xlg-padding-v: 0.4rem;
 $l-fontsize: 1.3rem;
 
 .form {
@@ -17,8 +17,8 @@ $l-fontsize: 1.3rem;
     &--xlg {
       margin-bottom: 2rem;
       // @TODO why + .8rem
-      height: $i-xlg-fontsize + ($i-xlg-padding-t + $i-xlg-padding-b) + $l-fontsize +
-        (2 * $l-xlg-padding-h) + 0.8rem;
+      height: $i-xlg-fontsize + ($i-xlg-padding-t + $i-xlg-padding-b) +
+        $l-fontsize + (2 * $l-xlg-padding-v) + 0.8rem;
 
       & > .label--linear {
         margin: 0;
@@ -31,7 +31,7 @@ $l-fontsize: 1.3rem;
     INPUT
 */
 input.input,
-select.input--select {
+select.input {
   @extend .input--non-styled;
   display: block;
   padding: 1.2rem;
@@ -70,7 +70,9 @@ select.input--select {
     }
 
     &:placeholder-shown + .label--as-placeholder {
-      transform: translateY(-($i-xlg-fontsize + ($i-xlg-padding-b * 2) + $l-xlg-padding-h));
+      transform: translateY(
+        -($i-xlg-fontsize + ($i-xlg-padding-b * 2) + $l-xlg-padding-v)
+      );
       opacity: 0;
       background-size: 200%;
       background-position-x: -300px;
@@ -80,15 +82,19 @@ select.input--select {
   }
 }
 
+/*  SELECT  */
+select.input {
+}
+
 .label {
   font-size: $l-fontsize;
 
   &--linear {
     display: block;
-    padding: $l-xlg-padding-h $i-xlg-padding-v;
+    padding: $l-xlg-padding-v $i-xlg-padding-v;
     transition: all 0.2s;
     transform: translateY(0);
-    background: linear-gradient(135deg, var(--color-secondary), transparent);
+    background: linear-gradient(135deg, var(--color-primary), transparent);
     background-size: 100%;
     background-repeat: repeat-x;
     background-position-x: 0%;

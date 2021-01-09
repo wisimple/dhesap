@@ -1,6 +1,8 @@
 :root {
-  --color-primary: #76b852;
-  --color-secondary: #1b3b6f;
+  --color-primary: #1b3b6f;
+  --color-secondary: #76b852;
+
+  --color-orange: #f2711c;
 
   --color-background: rgb(248, 248, 248);
 
@@ -24,7 +26,7 @@
 }
 
 .theme-dark {
-  --color-secondary: #d4d4d4;
+  --color-primary: #d4d4d4;
   --color-background: #0e2438;
 
   --color-text: rgb(248, 248, 248);
@@ -91,7 +93,7 @@ body {
   min-height: 80vh;
 
   &--with-tabs {
-    margin: 6rem 0 7rem;
+    margin: 6rem 0 10rem;
   }
 
   &--with-top-tab {

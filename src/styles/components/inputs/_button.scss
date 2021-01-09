@@ -4,26 +4,58 @@
 .button {
   @extend .input--non-styled;
   font-size: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   padding: 1rem;
-  background-color: var(--color-secondary);
-  color: var(--color-background);
-  border-radius: var(--radius);
-  border: 1px solid transparent;
   min-width: 5rem;
+  border-radius: var(--radius);
+  color: var(--color-background);
+  border: 2px solid transparent;
+
+  &--primary {
+    background-color: var(--color-primary);
+    &--outlined {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+  }
+
+  &--secondary {
+    background-color: var(--color-secondary);
+    &--outlined {
+      border-color: var(--color-secondary);
+      color: var(--color-secondary);
+    }
+  }
+
+  &--orange {
+    background-color: var(--color-orange);
+    &--outlined {
+      border-color: var(--color-orange);
+      color: var(--color-orange);
+    }
+  }
 
   &--rounded {
     border-radius: var(--radius-xlg);
   }
 
   &--sm {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
-  &--inverted {
-    background-color: inherit;
-    color: var(--color-secondary);
-    border: 2px solid var(--color-secondary);
+  .icon {
+    display: flex;
+    align-items: center;
+
+    &--left {
+      margin-right: 0.4rem;
+    }
+    &--right {
+      margin-left: 0.4rem;
+    }
   }
 }
 
