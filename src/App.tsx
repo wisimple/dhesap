@@ -5,14 +5,14 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Welcome from 'pages/Welcome';
 import Signin from 'pages/Signin';
 import Signup from 'pages/Signup';
-import LoadingText from 'components/common/LoadingText';
+import TextLoading from 'components/common/TextLoading';
 
 const Home = React.lazy(() => import('pages/me'));
 
 function App() {
   return (
     <Router>
-      <Suspense fallback={<LoadingText />}>
+      <Suspense fallback={<TextLoading />}>
         <Switch>
           <Route exact path='/' component={Welcome} />
           <Route exact path='/signin' component={Signin} />

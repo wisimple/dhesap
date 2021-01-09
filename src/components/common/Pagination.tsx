@@ -8,11 +8,7 @@ interface IProps {
   onChanged?: (index: number) => void;
 }
 
-const Pagination: React.FC<IProps> = ({
-  activePage = 1,
-  totalPages = 1,
-  onChanged = () => {},
-}) => {
+const Pagination: React.FC<IProps> = ({ activePage = 1, totalPages = 1, onChanged = () => {} }) => {
   const [selectedPage, setselectedPage] = useState(activePage);
 
   useEffect(() => {
@@ -34,17 +30,14 @@ const Pagination: React.FC<IProps> = ({
           <li
             key={i}
             onClick={() => setselectedPage(i + 1)}
-            className={`pagination__item ${
-              selectedPage === i + 1 ? 'active' : ''
-            }`}>
+            className={`pagination__item ${selectedPage === i + 1 ? 'active' : ''}`}>
             <button>{i + 1}</button>
           </li>
         ))}
         <li className='pagination__item'>
           <button
             onClick={() => {
-              if (totalPages > selectedPage)
-                setselectedPage((prev) => prev + 1);
+              if (totalPages > selectedPage) setselectedPage((prev) => prev + 1);
             }}>
             <ChevronRight />
           </button>

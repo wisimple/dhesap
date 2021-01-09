@@ -30,23 +30,13 @@ const Create = () => {
           </label>
         </div>
         <div className='form__group'>
-          <input
-            type='number'
-            placeholder='0'
-            className='input'
-            name='balance'
-            id='balance'
-          />
+          <input type='number' placeholder='0' className='input' name='balance' id='balance' />
           <label htmlFor='balance' className='label label--linear'>
             Initial Balance
           </label>
         </div>
         <div className='form__group'>
-          <select
-            name='currency'
-            id='currency'
-            className='input'
-            placeholder='helo'>
+          <select name='currency' id='currency' className='input' placeholder='helo'>
             {currencies.map((c, i) => (
               <option key={i} value={c.value}>
                 {c.sign} - {c.name}
@@ -64,9 +54,7 @@ const Create = () => {
               <button
                 key={i}
                 type='button'
-                className={`button button--sm button--primary${
-                  !selected ? '--outlined' : ''
-                }`}>
+                className={`button button--sm button--primary${!selected ? '--outlined' : ''}`}>
                 <div className='icon icon--left'>
                   <Icon>{item.icon}</Icon>
                 </div>
@@ -79,7 +67,7 @@ const Create = () => {
           </label>
         </div>
         <div className='form__group'>
-          <button type='submit' className='button button--primary'>
+          <button type='submit' className='button button--primary--outlined'>
             Save
           </button>
         </div>

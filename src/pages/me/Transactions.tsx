@@ -3,7 +3,7 @@ import Avatar from 'components/common/Avatar';
 import Pagination from 'components/common/Pagination';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import LoadingText from 'components/common/LoadingText';
+import TextLoading from 'components/common/TextLoading';
 import ScrollableSelect from 'components/common/inputs/ScrollableSelect';
 import Icon from '@material-ui/core/Icon';
 import { accountTypes } from 'constants/accountTypes';
@@ -98,7 +98,7 @@ const Transactions: React.FC = () => {
                       <span>Arif Sami SAHIN</span>
                     </div>
                   </td>
-                  <td className='money text-green'>+300.00$</td>
+                  <td className='text-money text-green'>+300.00$</td>
                   <td>20-02-20</td>
                 </motion.tr>
               ))}
@@ -106,10 +106,8 @@ const Transactions: React.FC = () => {
           )}
         </tbody>
       </table>
-      {loading && <LoadingText />}
-      {!loading && (
-        <Pagination totalPages={4} onChanged={(index) => console.log(index)} />
-      )}
+      {loading && <TextLoading />}
+      {!loading && <Pagination totalPages={4} onChanged={(index) => console.log(index)} />}
     </>
   );
 };

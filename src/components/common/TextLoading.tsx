@@ -5,7 +5,10 @@ interface Props {
 
 const LoadingText = ({ text = 'loading...' }: Props) => {
   return (
-    <motion.span className='loading-text' initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <motion.span
+      style={{ display: 'block', padding: '1rem' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}>
       {text}
     </motion.span>
   );

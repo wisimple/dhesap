@@ -10,8 +10,8 @@ const Index = () => {
   return (
     <LayoutWithTopNav>
       <Switch>
-        <Route exact path={url + '/create'} component={AccountsCreate} />
-        <Route exact path={url + '/edit'} component={AccountsEdit} />
+        <Route path={'/me/accounts/create'} component={AccountsCreate} />
+        <Route path={'/me/accounts/edit'} component={AccountsEdit} />
       </Switch>
     </LayoutWithTopNav>
   );

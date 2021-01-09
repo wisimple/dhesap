@@ -1,4 +1,4 @@
-import { Link, useLocation, useRouteMatch } from 'react-router-dom';
+import { Link, NavLink, useLocation, useRouteMatch } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import Home from '@material-ui/icons/Home';
@@ -43,21 +43,18 @@ const NavigationTabs: React.FC = () => {
     document.documentElement.scrollTop = 0;
   };
 
-  const plusButtonRedicrectUrl = routes.find(
-    (r) => pathname === '/me/tabs' + r.path
-  )?.plusButtonRedirectUrl;
+  const isPlusButtonShown = routes.find((r) => pathname === '/me/tabs' + r.path)
+    ?.plusButtonRedirectUrl;
 
   return (
     <nav className='nav-fixed nav-fixed--bottom'>
       <AnimatePresence>
-        {plusButtonRedicrectUrl && (
+        {isPlusButtonShown && (
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 50 }}>
-            <Link
-              to={plusButtonRedicrectUrl || '/'}
-              className='nav-main-button'>
+            <Link to={isPlusButtonShown || '/'} className='nav-button-fixed-center'>
               <Add />
             </Link>
           </motion.div>
@@ -65,14 +62,10 @@ const NavigationTabs: React.FC = () => {
       </AnimatePresence>
       <ul className='nav-tabs'>
         {routes.map((route) => (
-          <li
-            key={route.path}
-            className={`nav-tabs__item ${
-              url + route.path === pathname ? 'active' : ''
-            }`}>
-            <Link to={url + route.path} onClick={onClick}>
+          <li key={route.path} className='nav-tabs__item'>
+            <NavLink to={'/me/tabs' + route.path} onClick={onClick} activeClassName='active'>
               {route.iconComponent} <span>{route.name}</span>
-            </Link>
+            </NavLink>
           </li>
         ))}
       </ul>

@@ -1,0 +1,13 @@
+.container {
+  padding: 0 var(--container-horizontal-padding);
+  overflow: hidden;
+  min-height: 80vh;
+
+  &--with-tabs {
+    margin: 6rem 0 10rem;
+  }
+
+  &--with-top-tab {
+    margin: 6rem 0 1rem;
+  }
+}

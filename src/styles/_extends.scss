@@ -1,0 +1,39 @@
+.hide-scrollbar {
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.input--non-styled {
+  border: none;
+  background-color: transparent;
+  color: inherit;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.link--non-styled {
+  text-decoration: none;
+  color: inherit;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-linear-gradient {
+  background: -webkit-linear-gradient(-45deg, var(--color-secondary), var(--color-primary));
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

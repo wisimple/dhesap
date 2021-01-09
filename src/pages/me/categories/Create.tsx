@@ -60,11 +60,11 @@ const Create = () => {
             renderItem={(item, i, selected) => (
               <button
                 type='button'
-                className='button-colored'
+                className='button-square button-square--sm'
                 style={{
                   backgroundColor: item,
                 }}>
-                {selected && <Check />}
+                {selected && <Check style={{ color: '#666' }} />}
               </button>
             )}
           />
@@ -74,18 +74,16 @@ const Create = () => {
         </div>
         <div className='form__group'>
           <ScrollableSelect
-            onChanged={({ selectedItem }) =>
-              setselectedBackgroundColor(selectedItem)
-            }
+            onChanged={({ selectedItem }) => setselectedBackgroundColor(selectedItem)}
             options={backgroundColors}
             renderItem={(item, i, selected) => (
               <button
                 type='button'
-                className='button-colored'
+                className='button-square button-square--sm'
                 style={{
                   backgroundColor: item,
                 }}>
-                {selected && <Check />}
+                {selected && <Check style={{ color: '#333' }} />}
               </button>
             )}
           />
@@ -94,7 +92,7 @@ const Create = () => {
           </label>
         </div>
 
-        <button className='button'>Save</button>
+        <button className='button button--primary'>Save</button>
       </form>
     </div>
   );

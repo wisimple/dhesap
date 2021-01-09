@@ -11,8 +11,8 @@ const Index = () => {
   return (
     <LayoutWithTopNav>
       <Switch>
-        <Route exact path={url + '/create'} component={CategoriesCreate} />
-        <Route exact path={url + '/:id/edit'} component={CategoriesEdit} />
+        <Route path={url + '/create'} component={CategoriesCreate} />
+        <Route path={url + '/:id/edit'} component={CategoriesEdit} />
       </Switch>
     </LayoutWithTopNav>
   );

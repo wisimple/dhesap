@@ -19,7 +19,7 @@ const Accounts = () => {
                   <span>Arif Sami SAHIN</span>
                 </div>
               </td>
-              <td className='money text-green'>+300.00$</td>
+              <td className='text-money text-green'>+300.00$</td>
             </tr>
           ))}
         </tbody>

@@ -1,4 +1,4 @@
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import TabsLayout from 'layouts/TabsLayout';
 
 // Tabs
@@ -11,33 +11,26 @@ import Categories from 'pages/me/Categories';
 import TransactionsIndex from 'pages/me/transactions/index';
 import AccountsIndex from 'pages/me/accounts/index';
 import CategoriesIndex from 'pages/me/categories/index';
-
 import SettingsIndex from 'pages/me/settings/index';
 
 function Index() {
-  const { url } = useRouteMatch();
-
   return (
     <Switch>
-      <Route path={url + '/transactions'} component={TransactionsIndex} />
-      <Route path={url + '/accounts'} component={AccountsIndex} />
-      <Route path={url + '/categories'} component={CategoriesIndex} />
-      <Route path={url + '/settings'} component={SettingsIndex} />
-
-      <Route path={url + '/tabs'}>
+      <Route path='/me/tabs'>
         <TabsLayout>
           <Switch>
-            <Route exact path={url + '/tabs/transactions'} component={Home} />
-            <Route exact path={url + '/tabs/accounts'} component={Accounts} />
-            <Route exact path={url + '/tabs/summary'} component={Summary} />
-            <Route
-              exact
-              path={url + '/tabs/categories'}
-              component={Categories}
-            />
+            <Route path={'/me/tabs/transactions'} component={Home} />
+            <Route path={'/me/tabs/accounts'} component={Accounts} />
+            <Route path={'/me/tabs/summary'} component={Summary} />
+            <Route path={'/me/tabs/categories'} component={Categories} />
           </Switch>
         </TabsLayout>
       </Route>
+
+      <Route path={'/me/accounts'} component={AccountsIndex} />
+      <Route path={'/me/transactions'} component={TransactionsIndex} />
+      <Route path={'/me/categories'} component={CategoriesIndex} />
+      <Route path={'/me/settings'} component={SettingsIndex} />
     </Switch>
   );
 }

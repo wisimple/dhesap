@@ -1,197 +1,21 @@
-:root {
-  --color-primary: #1b3b6f;
-  --color-secondary: #76b852;
+@import 'variables';
+@import 'base';
+@import 'mixins';
+@import 'extends';
+@import 'layout';
+@import 'typography';
 
-  --color-orange: #f2711c;
+/*  Layouts     */
+@import './layouts/navigation';
 
-  --color-background: rgb(248, 248, 248);
-
-  --color-text: #333;
-  --color-text-dark: rgb(0, 0, 0);
-  --color-text-dark-1: rgb(109, 109, 109);
-  --color-text-dark-2: rgb(156, 156, 156);
-
-  --color-transparent-dark: rgba(0, 0, 0, 0.025);
-  --color-transparent-dark-1: rgba(0, 0, 0, 0.05);
-  --color-transparent-dark-2: rgba(0, 0, 0, 0.1);
-
-  --border: 1px solid var(--color-transparent-dark);
-  --shadow: 0 0 1rem var(--color-transparent-dark-2);
-  --radius: 3px;
-  --radius-lg: 1rem;
-  --radius-xlg: 2rem;
-
-  --container-horizontal-padding: 1rem;
-  --icon-size: 2.2rem;
-}
-
-.theme-dark {
-  --color-primary: #d4d4d4;
-  --color-background: #0e2438;
-
-  --color-text: rgb(248, 248, 248);
-
-  --color-transparent-dark: rgba(255, 255, 255, 0.02);
-  --color-transparent-dark-1: rgba(255, 255, 255, 0.05);
-  --color-transparent-dark-2: rgba(255, 255, 255, 0.1);
-  --shadow: 0 0 1rem var(--color-transparent-dark-2);
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  box-sizing: border-box;
-  font-size: 1.6rem;
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--color-text);
-  background-color: var(--color-background);
-  -webkit-tap-highlight-color: transparent;
-}
-
-@mixin responsive($device) {
-  /* PWA */
-  // @if ($device == standalone) {
-  //   @media screen and (display-mode: standalone) {
-  //     @content;
-  //   }
-  // }
-  /* Medium devices and up  */
-  @if ($device == tablet) {
-    @media only screen and (min-width: 600px) {
-      @content;
-    }
-  }
-
-  /* Large devices and up */
-  @if ($device == desktop) {
-    @media only screen and (min-width: 992px) {
-      @content;
-    }
-  }
-
-  /* Extra large devices and up */
-  @if ($device == desktop-big) {
-    @media only screen and (min-width: 1200px) {
-      @content;
-    }
-  }
-}
-
-.container {
-  padding: 0 var(--container-horizontal-padding);
-  overflow: hidden;
-  min-height: 80vh;
-
-  &--with-tabs {
-    margin: 6rem 0 10rem;
-  }
-
-  &--with-top-tab {
-    margin: 6rem 0 1rem;
-  }
-
-  // @include responsive(standalone) {
-  //   margin-top: 9.5rem;
-  // }
-}
-
-.money {
-  font-family: 'Roboto Mono', monospace;
-  color: var(--color-text-dark);
-}
-
-.text-red {
-  color: red;
-}
-
-.text-green {
-  color: green;
-}
-
-// Extends
-.hide-scrollbar {
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.input--non-styled {
-  border: none;
-  background-color: transparent;
-  color: inherit;
-
-  &:focus {
-    outline: none;
-  }
-}
-
-.link--non-styled {
-  text-decoration: none;
-  color: inherit;
-}
-
-.loading-text {
-  display: block;
-  padding: 1rem;
-}
-
-.text-truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.text-gradient {
-  background: -webkit-linear-gradient(
-    -45deg,
-    var(--color-secondary),
-    var(--color-primary)
-  );
-
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-a {
-  &,
-  &:link,
-  &:visited,
-  &:active,
-  &:hover {
-    text-decoration: none;
-    color: inherit;
-  }
-}
-
-svg {
-  font-size: var(--icon-size) !important;
-}
-
-@import './mixins';
-
-@import './components/navigation';
+/*  Components   */
 @import './components/table';
 @import './components/logo';
 @import './components/avatar';
-@import './components/multi-select';
+@import './components/icon';
 @import './components/pagination';
+
+/*  Input Components    */
 @import './components/inputs/input';
 @import './components/inputs/button';
-@import './components/inputs/select';
 @import './components/inputs/scrollable-select';

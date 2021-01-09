@@ -4,6 +4,7 @@
 .button {
   @extend .input--non-styled;
   font-size: inherit;
+  font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,9 +14,11 @@
   border-radius: var(--radius);
   color: var(--color-background);
   border: 2px solid transparent;
+  transition: all 0.3s;
 
   &--primary {
     background-color: var(--color-primary);
+
     &--outlined {
       border-color: var(--color-primary);
       color: var(--color-primary);
@@ -59,22 +62,12 @@
   }
 }
 
-.button-colored {
+.button-square {
   @extend .input--non-styled;
-  width: 3rem;
-  height: 3rem;
-  border-radius: var(--radius);
-}
 
-.button-iconed {
-  @extend .input--non-styled;
-  padding: 0.4rem;
-  margin-right: 0.6rem;
-  height: 3rem;
-  width: 3rem;
-  border-radius: 50%;
-
-  & > * {
-    font-size: var(--icon-size) !important;
+  &--sm {
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius);
   }
 }

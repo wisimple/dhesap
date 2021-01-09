@@ -1,0 +1,28 @@
+@mixin responsive($device) {
+  /* PWA */
+  @if ($device == standalone) {
+    @media screen and (display-mode: standalone) {
+      @content;
+    }
+  }
+  /* Medium devices and up  */
+  @if ($device == tablet) {
+    @media only screen and (min-width: 600px) {
+      @content;
+    }
+  }
+
+  /* Large devices and up */
+  @if ($device == desktop) {
+    @media only screen and (min-width: 992px) {
+      @content;
+    }
+  }
+
+  /* Extra large devices and up */
+  @if ($device == desktop-big) {
+    @media only screen and (min-width: 1200px) {
+      @content;
+    }
+  }
+}

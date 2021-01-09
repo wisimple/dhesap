@@ -17,8 +17,8 @@ $l-fontsize: 1.3rem;
     &--xlg {
       margin-bottom: 2rem;
       // @TODO why + .8rem
-      height: $i-xlg-fontsize + ($i-xlg-padding-t + $i-xlg-padding-b) +
-        $l-fontsize + (2 * $l-xlg-padding-v) + 0.8rem;
+      height: $i-xlg-fontsize + ($i-xlg-padding-t + $i-xlg-padding-b) + $l-fontsize +
+        (2 * $l-xlg-padding-v) + 0.8rem;
 
       & > .label--linear {
         margin: 0;
@@ -70,9 +70,7 @@ select.input {
     }
 
     &:placeholder-shown + .label--as-placeholder {
-      transform: translateY(
-        -($i-xlg-fontsize + ($i-xlg-padding-b * 2) + $l-xlg-padding-v)
-      );
+      transform: translateY(-($i-xlg-fontsize + ($i-xlg-padding-b * 2) + $l-xlg-padding-v));
       opacity: 0;
       background-size: 200%;
       background-position-x: -300px;
