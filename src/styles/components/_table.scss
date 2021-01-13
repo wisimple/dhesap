@@ -1,7 +1,11 @@
+.table-container {
+  overflow-x: scroll;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
+  table-layout: auto;
 
   & caption {
     text-align: left;
@@ -14,11 +18,12 @@ table {
 
   td {
     @extend .text-truncate;
+    max-width: 20rem;
   }
 
   & td,
   & th {
-    padding: 1rem;
+    padding: 0.8rem 0.4rem;
     text-align: right;
   }
 

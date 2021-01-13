@@ -42,11 +42,7 @@ const Create = () => {
             onChanged={({ selectedItem }) => setselectedIcon(selectedItem)}
             options={icons}
             renderItem={(item, i, selected) => (
-              <Icon
-                name={item}
-                color={selectedColor}
-                bgColor={selected ? selectedBackgroundColor : ''}
-              />
+              <Icon name={item} color={selectedColor} bgColor={selected ? selectedBackgroundColor : ''} />
             )}
           />
           <label htmlFor='icon' className='label label--linear'>

@@ -17,14 +17,7 @@ const Create = () => {
     <>
       <form onSubmit={handleSubmit} className='form'>
         <div className='form__group'>
-          <input
-            type='text'
-            placeholder='Exp: John Doe'
-            className='input'
-            name='name'
-            id='name'
-            autoFocus
-          />
+          <input type='text' placeholder='Exp: John Doe' className='input' name='name' id='name' autoFocus />
           <label htmlFor='name' className='label label--linear'>
             Account Name
           </label>
@@ -38,8 +31,8 @@ const Create = () => {
         <div className='form__group'>
           <select name='currency' id='currency' className='input' placeholder='helo'>
             {currencies.map((c, i) => (
-              <option key={i} value={c.value}>
-                {c.sign} - {c.name}
+              <option key={i} value={c.code}>
+                {c.symbol} - {c.name}
               </option>
             ))}
           </select>

@@ -8,14 +8,13 @@ interface Props<T> {
   onChanged?: ({ index, selectedItem }: { index: number; selectedItem: T }) => void;
 }
 
-const ScrollableSelect = <T extends any>({
+function ScrollableSelect<T>({
   options,
   defaultSelectedIndex = 0,
-
   lastItem,
   renderItem,
   onChanged = () => {},
-}: Props<T>) => {
+}: Props<T>) {
   const [selectedIndex, setselectedIndex] = useState<number>(defaultSelectedIndex);
 
   useEffect(() => {
@@ -38,6 +37,6 @@ const ScrollableSelect = <T extends any>({
       <li className='scrollable-select__item ' style={{ width: '0.1rem', height: '1rem' }}></li>
     </ul>
   );
-};
+}
 
 export default ScrollableSelect;

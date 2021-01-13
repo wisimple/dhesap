@@ -1,11 +1,12 @@
+import avatar from 'assets/img/avatar-m.png';
 interface Props {
-  imageUrl: string;
+  url?: string;
 }
 
-const Avatar = ({ imageUrl }: Props) => {
+const Avatar = ({ url = avatar }: Props) => {
   return (
     <div className='avatar'>
-      <img src={imageUrl} alt='avatar 1' />
+      <img src={url} alt='avatar 1' />
     </div>
   );
 };
