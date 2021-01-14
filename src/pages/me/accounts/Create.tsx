@@ -60,7 +60,7 @@ const Create = () => {
           </label>
         </div>
         <div className='form__group'>
-          <button type='submit' className='button button--primary--outlined'>
+          <button type='submit' className='button button--primary'>
             Save
           </button>
         </div>

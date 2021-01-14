@@ -7,7 +7,7 @@ import faker from 'faker';
 const currenciesLength = currencies.length;
 const accountTypeLenght = accountTypes.length;
 
-export const seedAccount = (): IAccount => {
+export const seedAccount = (main?: boolean): IAccount => {
   const type = accountTypes[generateRandomNumber(accountTypeLenght)].type;
 
   return {
@@ -15,16 +15,24 @@ export const seedAccount = (): IAccount => {
     name: type === 'company' ? faker.company.companyName() : faker.name.findName(),
     blnc: faker.random.boolean() ? parseFloat(faker.finance.amount()) : -parseFloat(faker.finance.amount()),
     type,
+    main: main,
     crrncy: currencies[generateRandomNumber(currenciesLength)].code,
     avtrThumb: faker.random.boolean()
-      ? `http://placeimg.com/320/320/${
+      ? `http://placeimg.com/640/320/${
           type === 'company' ? 'business' : 'people'
         }?random=${faker.random.number()}`
       : undefined,
     avtr: 'http://placeimg.com/640/480/people',
+    gndr: faker.random.boolean() ? faker.random.boolean() : undefined,
     cAt: faker.date.past(),
     uAt: faker.date.past(),
   };
 };
 
-export const seedAccounts = (count: number): IAccount[] => [...Array(count)].map(seedAccount);
+export const seedAccounts = (count: number): IAccount[] =>
+  [...Array(count)].map((a, i) => {
+    if (i === 0) {
+      return seedAccount(true);
+    }
+    return seedAccount();
+  });

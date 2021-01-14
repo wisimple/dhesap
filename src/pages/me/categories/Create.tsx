@@ -6,7 +6,7 @@ import ScrollableSelect from 'components/common/inputs/ScrollableSelect';
 import Check from '@material-ui/icons/Check';
 import { colors, backgroundColors } from 'constants/colors';
 import { icons } from 'constants/icons';
-import Icon from 'components/common/Icon';
+import CustomIcon from 'components/common/CustomIcon';
 
 const Create = () => {
   const [selectedColor, setselectedColor] = useState('');
@@ -42,7 +42,11 @@ const Create = () => {
             onChanged={({ selectedItem }) => setselectedIcon(selectedItem)}
             options={icons}
             renderItem={(item, i, selected) => (
-              <Icon name={item} color={selectedColor} bgColor={selected ? selectedBackgroundColor : ''} />
+              <CustomIcon
+                name={item}
+                color={selectedColor}
+                bgColor={selected ? selectedBackgroundColor : ''}
+              />
             )}
           />
           <label htmlFor='icon' className='label label--linear'>

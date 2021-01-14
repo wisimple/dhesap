@@ -7,15 +7,64 @@ import TextLoading from 'components/common/TextLoading';
 import ScrollableSelect from 'components/common/inputs/ScrollableSelect';
 import Icon from '@material-ui/core/Icon';
 import { accountTypes } from 'constants/accountTypes';
+import { seedTransactions } from 'seeds/transactions';
+import { getCurrencySymbol } from 'constants/currencies';
+import { ITransaction } from 'models/Transaction';
+import { ICategory } from 'models/Category';
 
 const options = ['All', 'Incomes', 'Expenses'];
+
+const transactios = seedTransactions(30);
+
+const TransactionItem = ({ transaction, index }: { transaction: ITransaction; index: number }) => {
+  console.log(transaction);
+
+  const isPositive = transaction.amnt > 0;
+
+  return (
+    <motion.tr
+      key={transaction._id}
+      variants={{
+        hidden: { opacity: 0, y: -20 },
+        visible: () => ({
+          opacity: 1,
+          y: 0,
+          transition: { delay: index * 0.02 },
+        }),
+      }}
+      initial='hidden'
+      animate='visible'>
+      <td>
+        <div className='flex items-center'>
+          <Avatar
+            url={transaction.from.avtrThumb}
+            type={transaction.from.type}
+            gender={transaction.from.gndr}
+            className='mr-15'
+          />
+          <span>{transaction.from.name}</span>
+        </div>
+      </td>
+      <td className={`text-money text-${isPositive ? 'green' : 'red'}`}>
+        {isPositive && '+'}
+        {transaction.amnt}
+        {transaction.from.crrncy && <span>{getCurrencySymbol(transaction.from.crrncy)}</span>}
+      </td>
+      <td className='text-money text-sm'>
+        {transaction.from.blnc}
+        {transaction.from.crrncy && <span>{getCurrencySymbol(transaction.from.crrncy)}</span>}
+      </td>
+    </motion.tr>
+  );
+};
 
 const Transactions: React.FC = () => {
   const [loading, setloading] = useState(true);
   const [showCategories, setshowCategories] = useState(false);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    setTimeout(() => setloading(false), 200);
+    setTimeout(() => setloading(false), 500);
   }, []);
   return (
     <>
@@ -78,28 +127,8 @@ const Transactions: React.FC = () => {
           <tbody>
             {!loading && (
               <AnimatePresence>
-                {Array.from(Array(15).keys()).map((item, i) => (
-                  <motion.tr
-                    key={i}
-                    variants={{
-                      hidden: { opacity: 0, y: -20 },
-                      visible: () => ({
-                        opacity: 1,
-                        y: 0,
-                        transition: { delay: i * 0.02 },
-                      }),
-                    }}
-                    initial='hidden'
-                    animate='visible'>
-                    <td>
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <Avatar url='https://www.w3schools.com/howto/img_avatar.png' />
-                        <span>Arif Sami SAHIN</span>
-                      </div>
-                    </td>
-                    <td className='text-money text-green'>+130000.00$</td>
-                    <td className='text-money text-sm'>$115000</td>
-                  </motion.tr>
+                {transactios.map((transaction, index) => (
+                  <TransactionItem key={transaction._id} transaction={transaction} index={index} />
                 ))}
               </AnimatePresence>
             )}
@@ -107,7 +136,7 @@ const Transactions: React.FC = () => {
         </table>
       </div>
       {loading && <TextLoading />}
-      {!loading && <Pagination totalPages={4} onChanged={(index) => console.log(index)} />}
+      {!loading && <Pagination totalPages={4} activePage={page} onChanged={(page) => setPage(page)} />}
     </>
   );
 };

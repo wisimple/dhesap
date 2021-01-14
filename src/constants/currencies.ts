@@ -6,8 +6,8 @@ export const currencies: ICurrency[] = [
   { code: 'EURO', name: 'EURO', symbol: '€' },
   { code: 'POUND', name: 'POUND', symbol: '£' },
   { code: 'GOLD', name: 'GOLD (1 gram)', symbol: 'G' },
-  { code: 'NONE', name: 'Others', symbol: '' },
+  { code: undefined, name: 'Others', symbol: '' },
 ];
 
-export const getCurrencySymbol = (code: CurrencyCodes): string | undefined =>
+export const getCurrencySymbol = (code: CurrencyCodes | undefined): string | undefined =>
   currencies.find((c) => c.code === code)?.symbol;

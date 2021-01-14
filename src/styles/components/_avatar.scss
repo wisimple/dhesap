@@ -1,17 +1,6 @@
 .avatar {
-  display: inline-block;
-  background-image: linear-gradient(to right bottom, var(--color-primary), var(--color-secondary));
-  padding: 0.2rem;
-  margin-right: 0.5rem;
   border-radius: 50%;
-
-  max-width: 2.7rem;
-
-  & > img {
-    height: var(--icon-size);
-    width: var(--icon-size);
-    vertical-align: middle;
-    border-radius: 50%;
-    border: 1px solid var(--color-background);
-  }
+  object-fit: cover;
+  height: 4rem;
+  width: 4rem;
 }

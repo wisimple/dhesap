@@ -1,5 +1,6 @@
 .table-container {
   overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 table {
@@ -17,8 +18,8 @@ table {
   }
 
   td {
-    @extend .text-truncate;
-    max-width: 20rem;
+    // @extend .text-truncate;
+    // max-width: 20rem;
   }
 
   & td,

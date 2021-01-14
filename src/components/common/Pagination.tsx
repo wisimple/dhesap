@@ -9,11 +9,9 @@ interface IProps {
 }
 
 const Pagination: React.FC<IProps> = ({ activePage = 1, totalPages = 1, onChanged = () => {} }) => {
-  const [selectedPage, setselectedPage] = useState(activePage);
-
-  useEffect(() => {
-    onChanged(selectedPage);
-  }, [selectedPage]);
+  if (totalPages === 1) {
+    return <></>;
+  }
 
   return (
     <div className='pagination-container'>
@@ -21,7 +19,7 @@ const Pagination: React.FC<IProps> = ({ activePage = 1, totalPages = 1, onChange
         <li className='pagination__item'>
           <button
             onClick={() => {
-              if (selectedPage > 1) setselectedPage((prev) => prev - 1);
+              if (activePage > 1) onChanged(activePage - 1);
             }}>
             <ChevronLeft />
           </button>
@@ -29,15 +27,15 @@ const Pagination: React.FC<IProps> = ({ activePage = 1, totalPages = 1, onChange
         {Array.from(Array(totalPages).keys()).map((page, i) => (
           <li
             key={i}
-            onClick={() => setselectedPage(i + 1)}
-            className={`pagination__item ${selectedPage === i + 1 ? 'active' : ''}`}>
+            onClick={() => onChanged(i + 1)}
+            className={`pagination__item ${activePage === i + 1 ? 'active' : ''}`}>
             <button>{i + 1}</button>
           </li>
         ))}
         <li className='pagination__item'>
           <button
             onClick={() => {
-              if (totalPages > selectedPage) setselectedPage((prev) => prev + 1);
+              if (totalPages > activePage) onChanged(activePage + 1);
             }}>
             <ChevronRight />
           </button>
