@@ -1,17 +1,18 @@
-import { Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+
+import LayoutWithTopNav from 'layouts/LayoutWithTopNav';
 
 import AccountsCreate from 'pages/me/accounts/Create';
 import AccountsEdit from 'pages/me/accounts/Edit';
-import LayoutWithTopNav from 'layouts/LayoutWithTopNav';
+import AccountShow from 'pages/me/accounts/Show';
 
 const Index = () => {
-  const { url } = useRouteMatch();
-
   return (
     <LayoutWithTopNav>
       <Switch>
         <Route path={'/me/accounts/create'} component={AccountsCreate} />
-        <Route path={'/me/accounts/edit'} component={AccountsEdit} />
+        <Route path={'/me/accounts/:id/edit'} component={AccountsEdit} />
+        <Route path={'/me/accounts/:id'} component={AccountShow} />
       </Switch>
     </LayoutWithTopNav>
   );

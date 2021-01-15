@@ -1,20 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Avatar from 'components/common/Avatar';
 import { seedAccounts } from 'seeds/accounts';
 import { getCurrencySymbol } from 'constants/currencies';
 import Pagination from 'components/common/Pagination';
 
-import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
+// import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import UnfoldMoreTwoTone from '@material-ui/icons/UnfoldMoreTwoTone';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
-
-const accounts = seedAccounts(30);
-console.log(accounts);
+import { IAccount } from 'models/Account';
+import LoadingText from 'components/common/TextLoading';
+import { useHistory } from 'react-router-dom';
 
 const Accounts = () => {
-  const [page, setPage] = useState(1);
-  console.log('render');
+  const history = useHistory();
+  const [accounts, setaccounts] = useState<IAccount[]>([]);
+  const [loading, setloading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setaccounts(seedAccounts(30));
+      setloading(false);
+    }, 300);
+  }, []);
+
   return (
     <>
       <form className='form'>
@@ -43,29 +52,25 @@ const Accounts = () => {
           </thead>
           <tbody>
             {accounts.map((account, index) => (
-              <tr key={account._id}>
+              <tr key={account._id} onClick={() => history.push('/me/accounts/' + account._id)}>
                 <td>
                   <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Avatar
-                      url={account.avtrThumb}
-                      type={account.type}
-                      gender={account.gndr}
-                      className='mr-15'
-                    />
+                    <Avatar url={account.avtT} type={account.type} gender={account.gndr} className='mr-15' />
                     <span>{account.name}</span>
                   </div>
                 </td>
                 <td className={`text-money text-${account.blnc > 0 ? 'green' : 'red'}`}>
                   {account.blnc}
-                  <span>{getCurrencySymbol(account.crrncy)}</span>
+                  <span>{getCurrencySymbol(account.crny)}</span>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {loading && <LoadingText />}
 
-      <Pagination totalPages={3} activePage={page} onChanged={(page) => setPage(page)} />
+      <Pagination />
     </>
   );
 };

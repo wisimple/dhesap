@@ -7,6 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-grow: 1;
   width: 100%;
   padding: 1rem;
   min-width: 5rem;
@@ -58,15 +59,5 @@
     &--right {
       margin-left: 0.4rem;
     }
-  }
-}
-
-.button-square {
-  @extend .input--non-styled;
-
-  &--sm {
-    width: 3rem;
-    height: 3rem;
-    border-radius: var(--radius);
   }
 }

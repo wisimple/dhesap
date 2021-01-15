@@ -1,6 +1,17 @@
 .avatar {
   border-radius: 50%;
   object-fit: cover;
-  height: 4rem;
-  width: 4rem;
+
+  &--sm {
+    height: 3rem;
+    width: 3rem;
+  }
+  &--md {
+    height: 4rem;
+    width: 4rem;
+  }
+  &--lg {
+    height: 5rem;
+    width: 5rem;
+  }
 }

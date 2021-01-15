@@ -20,8 +20,7 @@ const CustomIcon = ({
   className = '',
 }: Props) => {
   return (
-    <button
-      type='button'
+    <div
       className={`icon-container icon-container--${size} ${
         rounded ? 'icon-container--rounded' : ''
       } ${className}`}
@@ -32,7 +31,7 @@ const CustomIcon = ({
       <Icon className={`icon icon--${size}`} style={{ color: color }}>
         {name}
       </Icon>
-    </button>
+    </div>
   );
 };
 

@@ -5,6 +5,7 @@
 @import 'base';
 @import 'mixins';
 @import 'extends';
+@import 'flex';
 @import 'layout';
 @import 'typography';
 
@@ -17,6 +18,7 @@
 @import './components/avatar';
 @import './components/icon';
 @import './components/pagination';
+@import './components//badge';
 
 /*  Input Components    */
 @import './components/inputs/input';

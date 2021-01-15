@@ -1,16 +1,15 @@
-import { useState, useEffect } from 'react';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 
 interface IProps {
   activePage?: number;
   totalPages?: number;
-  onChanged?: (index: number) => void;
+  onChanged?: (page: number) => void;
 }
 
-const Pagination: React.FC<IProps> = ({ activePage = 1, totalPages = 1, onChanged = () => {} }) => {
-  if (totalPages === 1) {
-    return <></>;
+const Pagination: React.FC<IProps> = ({ activePage = 1, totalPages = 0, onChanged = () => {} }) => {
+  if (totalPages <= 1) {
+    return null;
   }
 
   return (
@@ -24,10 +23,10 @@ const Pagination: React.FC<IProps> = ({ activePage = 1, totalPages = 1, onChange
             <ChevronLeft />
           </button>
         </li>
-        {Array.from(Array(totalPages).keys()).map((page, i) => (
+        {[...Array(totalPages)].map((page, i) => (
           <li
             key={i}
-            onClick={() => onChanged(i + 1)}
+            onClick={() => onChanged(page)}
             className={`pagination__item ${activePage === i + 1 ? 'active' : ''}`}>
             <button>{i + 1}</button>
           </li>

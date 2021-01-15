@@ -1,4 +1,4 @@
-export type CurrencyCodes = 'TRY' | 'USD' | 'EURO' | 'POUND' | 'GOLD' | undefined;
+export type CurrencyCodes = 'TRY' | 'USD' | 'EUR' | 'GBP' | 'G' | '';
 
 export interface ICurrency {
   code: CurrencyCodes;

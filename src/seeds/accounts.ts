@@ -8,7 +8,7 @@ const currenciesLength = currencies.length;
 const accountTypeLenght = accountTypes.length;
 
 export const seedAccount = (main?: boolean): IAccount => {
-  const type = accountTypes[generateRandomNumber(accountTypeLenght)].type;
+  const type = accountTypes[generateRandomNumber(accountTypeLenght)].value;
 
   return {
     _id: faker.random.uuid(),
@@ -16,13 +16,13 @@ export const seedAccount = (main?: boolean): IAccount => {
     blnc: faker.random.boolean() ? parseFloat(faker.finance.amount()) : -parseFloat(faker.finance.amount()),
     type,
     main: main,
-    crrncy: currencies[generateRandomNumber(currenciesLength)].code,
-    avtrThumb: faker.random.boolean()
+    crny: currencies[generateRandomNumber(currenciesLength)].code,
+    avtT: faker.random.boolean()
       ? `http://placeimg.com/640/320/${
           type === 'company' ? 'business' : 'people'
         }?random=${faker.random.number()}`
       : undefined,
-    avtr: 'http://placeimg.com/640/480/people',
+    avt: 'http://placeimg.com/640/480/people',
     gndr: faker.random.boolean() ? faker.random.boolean() : undefined,
     cAt: faker.date.past(),
     uAt: faker.date.past(),

@@ -4,22 +4,14 @@ import Pagination from 'components/common/Pagination';
 
 import { AnimatePresence, motion } from 'framer-motion';
 import TextLoading from 'components/common/TextLoading';
-import ScrollableSelect from 'components/common/inputs/ScrollableSelect';
-import Icon from '@material-ui/core/Icon';
-import { accountTypes } from 'constants/accountTypes';
 import { seedTransactions } from 'seeds/transactions';
-import { getCurrencySymbol } from 'constants/currencies';
 import { ITransaction } from 'models/Transaction';
-import { ICategory } from 'models/Category';
-
-const options = ['All', 'Incomes', 'Expenses'];
-
-const transactios = seedTransactions(30);
+import CustomIcon from 'components/common/CustomIcon';
+import MoneyText from 'components/common/MoneyText';
+import { useHistory } from 'react-router-dom';
 
 const TransactionItem = ({ transaction, index }: { transaction: ITransaction; index: number }) => {
-  console.log(transaction);
-
-  const isPositive = transaction.amnt > 0;
+  const history = useHistory();
 
   return (
     <motion.tr
@@ -33,26 +25,38 @@ const TransactionItem = ({ transaction, index }: { transaction: ITransaction; in
         }),
       }}
       initial='hidden'
-      animate='visible'>
+      animate='visible'
+      onClick={() => history.push('/me/transactions/' + transaction._id)}>
       <td>
         <div className='flex items-center'>
           <Avatar
-            url={transaction.from.avtrThumb}
+            url={transaction.from.avtT}
             type={transaction.from.type}
             gender={transaction.from.gndr}
             className='mr-15'
           />
-          <span>{transaction.from.name}</span>
+          <div className='flex flex-column'>
+            <span>{transaction.from.name}</span>
+            <div className='flex'>
+              {transaction.ctgrs?.map((c) => {
+                const { name, clr } = c.icon;
+                return <CustomIcon key={c._id} name={name} size='sm' color={clr} />;
+              })}
+            </div>
+          </div>
         </div>
       </td>
-      <td className={`text-money text-${isPositive ? 'green' : 'red'}`}>
-        {isPositive && '+'}
-        {transaction.amnt}
-        {transaction.from.crrncy && <span>{getCurrencySymbol(transaction.from.crrncy)}</span>}
+      <td>
+        <MoneyText amount={transaction.amnt} currency={transaction.from.crny} />
       </td>
-      <td className='text-money text-sm'>
-        {transaction.from.blnc}
-        {transaction.from.crrncy && <span>{getCurrencySymbol(transaction.from.crrncy)}</span>}
+      <td>
+        <MoneyText
+          className='text-sm'
+          amount={transaction.from.blnc}
+          currency={transaction.from.crny}
+          colored={false}
+          withPlus={false}
+        />
       </td>
     </motion.tr>
   );
@@ -60,61 +64,17 @@ const TransactionItem = ({ transaction, index }: { transaction: ITransaction; in
 
 const Transactions: React.FC = () => {
   const [loading, setloading] = useState(true);
-  const [showCategories, setshowCategories] = useState(false);
-  const [page, setPage] = useState(1);
+  const [transactions, settransactions] = useState<ITransaction[]>([]);
 
   useEffect(() => {
-    setTimeout(() => setloading(false), 500);
+    setTimeout(() => {
+      const res = seedTransactions(30);
+      settransactions(res);
+      setloading(false);
+    }, 500);
   }, []);
   return (
     <>
-      <ScrollableSelect
-        options={options}
-        onChanged={({ index, selectedItem }) => console.log(selectedItem)}
-        renderItem={(item, i, isSelected) => (
-          <button
-            className={`button button--rounded button--sm button--primary${isSelected ? '' : '--outlined'}`}>
-            {item}
-          </button>
-        )}
-        lastItem={
-          <button
-            className={`button button--rounded button--sm button--orange${
-              showCategories ? '' : '--outlined'
-            }`}
-            onClick={() => setshowCategories((prev) => !prev)}>
-            <div className='icon icon--left'>
-              <Icon>filter_alt</Icon>
-            </div>
-            Filters by Categories
-          </button>
-        }
-      />
-      <AnimatePresence>
-        {showCategories && (
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, height: 0 },
-              visible: { opacity: 1, height: '6rem' },
-            }}
-            initial='hidden'
-            animate='visible'
-            exit='hidden'>
-            <ScrollableSelect
-              options={accountTypes}
-              renderItem={(item, i, selected) => (
-                <button
-                  type='button'
-                  className={`button button--sm button--rounded button--orange${
-                    selected ? '' : '--outlined'
-                  }`}>
-                  {item.name}
-                </button>
-              )}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
       <div className='table-container'>
         <table className='table'>
           <thead>
@@ -125,18 +85,16 @@ const Transactions: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {!loading && (
-              <AnimatePresence>
-                {transactios.map((transaction, index) => (
-                  <TransactionItem key={transaction._id} transaction={transaction} index={index} />
-                ))}
-              </AnimatePresence>
-            )}
+            <AnimatePresence>
+              {transactions.map((transaction, index) => (
+                <TransactionItem key={transaction._id} transaction={transaction} index={index} />
+              ))}
+            </AnimatePresence>
           </tbody>
         </table>
       </div>
       {loading && <TextLoading />}
-      {!loading && <Pagination totalPages={4} activePage={page} onChanged={(page) => setPage(page)} />}
+      <Pagination />
     </>
   );
 };

@@ -1,32 +1,51 @@
-import avatarMale from 'assets/img/avatar-m.png';
-import avatarFemale from 'assets/img/avatar-f.png';
-import avatarNoGender from 'assets/img/avatar-no-gender.png';
+import avatarMaleImage from 'assets/img/avatar-m.png';
+import avatarFemaleImage from 'assets/img/avatar-f.png';
+import avatarNoGenderImage from 'assets/img/avatar-no-gender.png';
+import companyImage from 'assets/img/company.png';
+import bankImage from 'assets/img/bank.png';
+import coinImage from 'assets/img/coin.png';
+
 import { AccountTypes } from 'models/Account';
 interface Props {
   url?: string;
   className?: string;
   gender?: boolean | undefined;
   type: AccountTypes;
+  size?: 'sm' | 'md' | 'lg';
 }
 
-const Avatar = ({ url, className = '', gender, type }: Props) => {
+const Avatar = ({ url, className = '', gender, type, size = 'md' }: Props) => {
   if (!url) {
     switch (type) {
       case 'person':
         if (gender === undefined) {
-          url = avatarNoGender;
+          url = avatarNoGenderImage;
         } else if (gender === true) {
-          url = avatarMale;
+          url = avatarMaleImage;
         } else {
-          url = avatarFemale;
+          url = avatarFemaleImage;
         }
         break;
-      // @TODO other types will be implemented
-      default:
-        url = avatarFemale;
+      case 'company':
+        url = companyImage;
+        break;
+      case 'bank':
+        url = bankImage;
+        break;
+      case 'coin':
+        url = coinImage;
+        break;
     }
   }
-  return <img src={url} alt='account avatar' className={`avatar ${className}`} width='50' height='50' />;
+  return (
+    <img
+      src={url}
+      alt='account avatar'
+      className={`avatar avatar--${size} ${className}`}
+      width='50'
+      height='50'
+    />
+  );
 };
 
 export default Avatar;

@@ -3,7 +3,7 @@ import { generateRandomNumber } from 'helpers';
 import { ICategory } from 'models/Category';
 import { ITransaction } from 'models/Transaction';
 
-import { seedAccount, seedAccounts } from 'seeds/accounts';
+import { seedAccounts } from 'seeds/accounts';
 import { seedCategories } from './categories';
 
 const accounts = seedAccounts(10);
@@ -34,27 +34,11 @@ export const seedTransaction = (t?: ITransaction): ITransaction => {
     from: accountFrom,
     to: accountTo(),
     amnt: amount,
+    desc: f.random.boolean() ? f.lorem.sentence() : undefined,
     ctgrs: selectedCategories,
+    cAt: f.date.past(),
+    uAt: f.random.boolean() ? f.date.past() : undefined,
   };
 };
 
-export const seedTransactions = (count: number): ITransaction[] => {
-  const transactions: ITransaction[] = [];
-
-  for (let i = 0; i < count; i++) {
-    const newTransaction = seedTransaction();
-    transactions.push(newTransaction);
-
-    if (newTransaction.to) {
-      const extraT = seedTransaction();
-
-      extraT.from = newTransaction.to;
-      extraT.to = newTransaction.from;
-      extraT.amnt = -newTransaction.amnt;
-
-      transactions.push(extraT);
-    }
-  }
-
-  return transactions.reverse();
-};
+export const seedTransactions = (count: number): ITransaction[] => [...Array(count)].map(seedTransaction);
