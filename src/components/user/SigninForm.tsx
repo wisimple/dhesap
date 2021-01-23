@@ -1,12 +1,10 @@
 import FacebookIcon from '@material-ui/icons/Facebook';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import { signin } from 'store/auth/actions';
 
 const SigninForm = () => {
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const [email, setemail] = useState('');

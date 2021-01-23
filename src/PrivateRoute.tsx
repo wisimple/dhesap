@@ -9,7 +9,7 @@ interface Props extends RouteProps {
 }
 
 const PrivateRoute = ({ children, ...rest }: Props) => {
-  const { token } = useSelector((state: RootState) => state.auth);
+  const token = useSelector((state: RootState) => state.authState.token);
   return (
     <Route
       {...rest}

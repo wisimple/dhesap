@@ -13,7 +13,7 @@ import { RootState } from 'store';
 const Home = React.lazy(() => import('pages/me'));
 
 function App() {
-  const token = useSelector((state: RootState) => state.auth.token);
+  const token = useSelector((state: RootState) => state.authState.token);
   return (
     <Router>
       <Suspense fallback={<TextLoading />}>

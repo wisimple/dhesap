@@ -1,24 +1,22 @@
 import ChevronRight from '@material-ui/icons/ChevronRight';
 import CustomIcon from 'components/common/CustomIcon';
-import { ICategory } from 'models/Category';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { seedCategories } from 'seeds/categories';
 import TextLoading from 'components/common/TextLoading';
 import Pagination from 'components/common/Pagination';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from 'store';
+import { setAllCategories } from 'store/category/actions';
+import { InsertInvitationTwoTone } from '@material-ui/icons';
 
 const Categories: React.FC = () => {
-  const [categories, setcategories] = useState<ICategory[]>([]);
-  const [loading, setloading] = useState(true);
+  const categories = useSelector((state: RootState) => state.categoryState.categories);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
-    setTimeout(() => {
-      const res = seedCategories(30);
-      setcategories(res);
-      setloading(false);
-    }, 300);
+    if (categories.length === 0) dispatch(setAllCategories());
   }, []);
 
   return (
@@ -57,7 +55,6 @@ const Categories: React.FC = () => {
           </tbody>
         </table>
       </div>
-      {loading && <TextLoading />}
       <Pagination />
     </>
   );

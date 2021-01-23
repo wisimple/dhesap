@@ -3,9 +3,3 @@ export interface IMongoData {
   cAt: Date;
   uAt?: Date;
 }
-
-export interface IIcon {
-  name: string;
-  bgClr: string;
-  clr: string;
-}

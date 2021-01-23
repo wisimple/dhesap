@@ -41,6 +41,14 @@
     }
   }
 
+  &--red {
+    background-color: var(--color-red);
+    &--outlined {
+      border-color: var(--color-red);
+      color: var(--color-red);
+    }
+  }
+
   &--rounded {
     border-radius: var(--radius-xlg);
   }

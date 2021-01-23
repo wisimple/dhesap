@@ -4,6 +4,9 @@ import { colors, backgroundColors } from 'constants/colors';
 import ScrollableSelect from 'components/common/inputs/ScrollableSelect';
 import CustomIcon from 'components/common/CustomIcon';
 import { ICategory } from 'models/Category';
+import { useDispatch } from 'react-redux';
+import { createCategory, deleteCategory, updateCategory } from 'store/category/actions';
+import { useHistory } from 'react-router-dom';
 
 interface Props {
   data?: ICategory;
@@ -11,6 +14,8 @@ interface Props {
 }
 
 const Create = ({ data, loading }: Props) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [name, setname] = useState('');
   const [iconIndex, seticonIndex] = useState(0);
   const [bgColorIndex, setbgColorIndex] = useState(0);
@@ -25,12 +30,21 @@ const Create = ({ data, loading }: Props) => {
     }
   }, [data]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(icons[iconIndex]);
-    console.log(backgroundColors[bgColorIndex]);
-    console.log(colors[colorIndex]);
+    const categoryDto = {
+      name,
+      icon: { name: icons[iconIndex], bgClr: backgroundColors[bgColorIndex], clr: colors[colorIndex] },
+    };
+    if (data) {
+      console.log(categoryDto);
+
+      await dispatch(updateCategory(data._id, categoryDto));
+    } else {
+      await dispatch(createCategory(categoryDto));
+    }
+    history.goBack();
   };
 
   return (
@@ -98,7 +112,20 @@ const Create = ({ data, loading }: Props) => {
         </label>
       </div>
 
-      <button className='button button--primary'>Save</button>
+      <button type='submit' className='button button--primary'>
+        Save
+      </button>
+      {data && (
+        <button
+          type='button'
+          className='button button--red--outlined'
+          onClick={() => {
+            dispatch(deleteCategory(data?._id));
+            history.replace('/me/tabs/categories');
+          }}>
+          Delete
+        </button>
+      )}
     </form>
   );
 };

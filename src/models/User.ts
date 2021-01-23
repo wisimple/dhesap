@@ -1,7 +1,6 @@
-export interface IUser {
-  _id: string;
+import { IMongoData } from 'models';
+
+export interface IUser extends IMongoData {
   name: string;
   email: string;
-  cAt: Date;
-  uAt: Date;
 }

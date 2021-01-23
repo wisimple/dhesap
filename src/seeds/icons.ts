@@ -1,4 +1,4 @@
-import { IIcon } from 'models';
+import { IIcon } from 'models/Icon';
 
 import { icons } from 'constants/icons';
 import { colors, backgroundColors } from 'constants/colors';
