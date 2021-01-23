@@ -52,7 +52,7 @@ const TransactionItem = ({ transaction, index }: { transaction: ITransaction; in
       <td>
         <MoneyText
           className='text-sm'
-          amount={transaction.from.blnc}
+          amount={transaction.fBlnc}
           currency={transaction.from.crny}
           colored={false}
           withPlus={false}
