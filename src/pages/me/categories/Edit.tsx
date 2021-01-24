@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { seeedCategory } from 'seeds/categories';
+import React, { useEffect } from 'react';
 import CategoryForm from 'components/category/CategoryForm';
-import { ICategory } from 'models/Category';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOneCategory } from 'store/category/actions';
@@ -14,7 +12,7 @@ const Edit = () => {
 
   useEffect(() => {
     dispatch(getOneCategory(params.id));
-  }, []);
+  }, [params]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return <CategoryForm data={category} />;
 };

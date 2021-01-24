@@ -3,21 +3,28 @@ import CustomIcon from 'components/common/CustomIcon';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import TextLoading from 'components/common/TextLoading';
-import Pagination from 'components/common/Pagination';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { setAllCategories } from 'store/category/actions';
-import { InsertInvitationTwoTone } from '@material-ui/icons';
+
+import LoadingText from 'components/common/TextLoading';
 
 const Categories: React.FC = () => {
   const categories = useSelector((state: RootState) => state.categoryState.categories);
   const dispatch = useDispatch();
   const history = useHistory();
+  const [loading, setloading] = useState(false);
 
   useEffect(() => {
-    if (categories.length === 0) dispatch(setAllCategories());
-  }, []);
+    const init = async () => {
+      if (categories.length === 0) {
+        setloading(true);
+        await dispatch(setAllCategories());
+        setloading(false);
+      }
+    };
+    init();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -54,8 +61,8 @@ const Categories: React.FC = () => {
             ))}
           </tbody>
         </table>
+        {loading && <LoadingText />}
       </div>
-      <Pagination />
     </>
   );
 };

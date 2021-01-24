@@ -11,17 +11,25 @@ import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import { IAccount } from 'models/Account';
 import LoadingText from 'components/common/TextLoading';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAllCategories } from 'store/account/actions';
+import { RootState } from 'store';
 
 const Accounts = () => {
+  const accounts = useSelector((state: RootState) => state.accountState.accounts);
+  const [loading, setloading] = useState(false);
+  const dispatch = useDispatch();
   const history = useHistory();
-  const [accounts, setaccounts] = useState<IAccount[]>([]);
-  const [loading, setloading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => {
-      setaccounts(seedAccounts(30));
-      setloading(false);
-    }, 300);
+    const init = async () => {
+      if (accounts.length === 0) {
+        setloading(true);
+        await dispatch(setAllCategories());
+        setloading(false);
+      }
+    };
+    init();
   }, []);
 
   return (
@@ -69,8 +77,6 @@ const Accounts = () => {
         </table>
       </div>
       {loading && <LoadingText />}
-
-      <Pagination />
     </>
   );
 };

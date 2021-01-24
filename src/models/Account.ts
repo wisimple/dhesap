@@ -3,7 +3,7 @@ import { CurrencyCodes } from './Currency';
 
 export type AccountTypes = 'person' | 'company' | 'bank' | 'coin';
 
-export interface IAccount extends IMongoData {
+export interface IAccountDto {
   name: string;
   blnc: number;
   crny: CurrencyCodes;
@@ -13,3 +13,5 @@ export interface IAccount extends IMongoData {
   avtT?: string;
   gndr?: boolean;
 }
+
+export interface IAccount extends IAccountDto, IMongoData {}

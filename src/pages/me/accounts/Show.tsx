@@ -1,36 +1,29 @@
 import Avatar from 'components/common/Avatar';
 import MoneyText from 'components/common/MoneyText';
 import Pagination from 'components/common/Pagination';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
 import { seedTransactions } from 'seeds/transactions';
 
 import Edit from '@material-ui/icons/Edit';
 import React, { useEffect, useState } from 'react';
 import { ITransaction } from 'models/Transaction';
-import LoadingText from 'components/common/TextLoading';
-import { seedAccount } from 'seeds/accounts';
-import { IAccount } from 'models/Account';
 import CustomIcon from 'components/common/CustomIcon';
+import { useDispatch, useSelector } from 'react-redux';
+import { getOneAccount } from 'store/account/actions';
+import { RootState } from 'store';
 
 const Show = () => {
   const { pathname } = useLocation();
+  const params: { id: string } = useParams();
   const history = useHistory();
-  const [account, setAccount] = useState<IAccount | undefined>();
+  const account = useSelector((state: RootState) => state.accountState.account);
   const [transactions, settransactions] = useState<ITransaction[]>([]);
-  const [loading, setloading] = useState(true);
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    setTimeout(() => {
-      const acc = seedAccount();
-      const tran = seedTransactions(30);
-      setAccount(acc);
-      settransactions(tran);
-
-      setloading(false);
-    }, 300);
-  }, []);
-
-  if (loading) return <LoadingText />;
+    dispatch(getOneAccount(params.id));
+    const tran = seedTransactions(30);
+    settransactions(tran);
+  }, [params]);
 
   return (
     <>
@@ -85,7 +78,6 @@ const Show = () => {
           </tbody>
         </table>
       </div>
-      <Pagination totalPages={1} />
     </>
   );
 };

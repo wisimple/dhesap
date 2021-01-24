@@ -3,11 +3,8 @@ import CustomIcon from 'components/common/CustomIcon';
 import MoneyText from 'components/common/MoneyText';
 import Pagination from 'components/common/Pagination';
 import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
-import { seeedCategory } from 'seeds/categories';
-import { seedTransactions } from 'seeds/transactions';
 
 import Edit from '@material-ui/icons/Edit';
-import { ICategory } from 'models/Category';
 import { useEffect, useState } from 'react';
 import { ITransaction } from 'models/Transaction';
 import LoadingText from 'components/common/TextLoading';
@@ -25,7 +22,7 @@ const Show = () => {
 
   useEffect(() => {
     dispatch(getOneCategory(params.id));
-  }, []);
+  }, [params]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!category) return <LoadingText />;
 

@@ -38,8 +38,6 @@ const Create = ({ data, loading }: Props) => {
       icon: { name: icons[iconIndex], bgClr: backgroundColors[bgColorIndex], clr: colors[colorIndex] },
     };
     if (data) {
-      console.log(categoryDto);
-
       await dispatch(updateCategory(data._id, categoryDto));
     } else {
       await dispatch(createCategory(categoryDto));
@@ -55,10 +53,10 @@ const Create = ({ data, loading }: Props) => {
           name='name'
           id='name'
           className='input input--xlg'
-          autoFocus
           placeholder={loading ? 'loading...' : 'Category Name'}
           value={name}
           onChange={({ target }) => setname(target.value)}
+          autoFocus={!data ? true : false}
         />
         <label htmlFor='name' className='label label--linear'>
           Category Name
@@ -108,23 +106,27 @@ const Create = ({ data, loading }: Props) => {
           )}
         />
         <label htmlFor='icon' className='label label--linear'>
-          Select a background color
+          Select an icon color
         </label>
       </div>
 
-      <button type='submit' className='button button--primary'>
-        Save
-      </button>
-      {data && (
-        <button
-          type='button'
-          className='button button--red--outlined'
-          onClick={() => {
-            dispatch(deleteCategory(data?._id));
-            history.replace('/me/tabs/categories');
-          }}>
-          Delete
+      <div className='form__group'>
+        <button type='submit' className='button button--primary'>
+          Save
         </button>
+      </div>
+      {data && (
+        <div className='form__group'>
+          <button
+            type='button'
+            className='button button--red--outlined'
+            onClick={() => {
+              dispatch(deleteCategory(data?._id));
+              history.replace('/me/tabs/categories');
+            }}>
+            Delete
+          </button>
+        </div>
       )}
     </form>
   );

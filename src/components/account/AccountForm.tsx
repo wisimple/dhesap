@@ -3,8 +3,12 @@ import ScrollableSelect from 'components/common/inputs/ScrollableSelect';
 import { currencies } from 'constants/currencies';
 import { accountTypes } from 'constants/accountTypes';
 import Icon from '@material-ui/core/Icon';
-import { IAccount } from 'models/Account';
+import { IAccount, IAccountDto } from 'models/Account';
+import { CurrencyCodes } from 'models/Currency';
+import { useDispatch } from 'react-redux';
 
+import { createAccount, deleteAccount, updateAccount } from 'store/account/actions';
+import { useHistory } from 'react-router-dom';
 interface Props {
   data?: IAccount;
   loading?: boolean;
@@ -15,8 +19,10 @@ const AccountForm = ({ data, loading }: Props) => {
   const [name, setname] = useState('');
   const [balance, setbalance] = useState(0);
   // @TODO 'default user currency will be setted'
-  const [currency, setcurrency] = useState('TRY');
+  const [currency, setcurrency] = useState<CurrencyCodes>('TRY');
   const [isBalancePositive, setisBalancePositive] = useState(true);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     if (data) {
@@ -30,12 +36,22 @@ const AccountForm = ({ data, loading }: Props) => {
     }
   }, [data]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(accountTypeIndex);
-    console.log(name);
-    console.log(balance);
-    console.log(currency);
+
+    const accountDto: IAccountDto = {
+      blnc: balance,
+      crny: currency,
+      name,
+      type: accountTypes[accountTypeIndex].value,
+    };
+
+    if (!data) {
+      await dispatch(createAccount(accountDto));
+    } else {
+      await dispatch(updateAccount(data._id, accountDto));
+    }
+    history.goBack();
   };
   return (
     <>
@@ -90,7 +106,7 @@ const AccountForm = ({ data, loading }: Props) => {
             className='input'
             placeholder='helo'
             value={currency}
-            onChange={({ target }) => setcurrency(target.value)}>
+            onChange={({ target }) => setcurrency(target.value as CurrencyCodes)}>
             {currencies.map((c, i) => (
               <option key={i} value={c.code}>
                 {c.symbol} - {c.name}
@@ -127,6 +143,19 @@ const AccountForm = ({ data, loading }: Props) => {
             Save
           </button>
         </div>
+        {data && (
+          <div className='form__group'>
+            <button
+              type='button'
+              className='button button--red--outlined'
+              onClick={() => {
+                dispatch(deleteAccount(data._id));
+                history.replace('/me/tabs/accounts');
+              }}>
+              Delete
+            </button>
+          </div>
+        )}
       </form>
     </>
   );

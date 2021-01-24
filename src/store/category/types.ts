@@ -1,4 +1,4 @@
-import { ICategory, ICategoryDto } from 'models/Category';
+import { ICategory } from 'models/Category';
 
 export interface CategoryState {
   categories: ICategory[];
