@@ -8,8 +8,8 @@ import {
   DELETE_CATEGORY_SUCCESS,
   GET_ALL_CATEGORIES_SUCCESS,
   GET_ONE_CATEGORY_SUCCESS,
-  SET_LOADING,
-  SET_OPERATION_LOADING,
+  SET_CATEGORY_LOADING,
+  SET_CATEGORY_OPERATION_LOADING,
   UPDATE_CATEGORY_SUCCESS,
 } from './types';
 
@@ -17,7 +17,7 @@ type TActionType = ThunkAction<void, RootState, unknown, CategoryActionTypes>;
 
 export const setAllCategories = (): TActionType => async (dispatch) => {
   try {
-    dispatch(setLoading(true));
+    dispatch(setCategoryLoading(true));
 
     const { data } = await api.get('categories');
 
@@ -30,7 +30,7 @@ export const setAllCategories = (): TActionType => async (dispatch) => {
 
 export const createCategory = (categoryDto: ICategoryDto): TActionType => async (dispatch) => {
   try {
-    dispatch(setOperationLoading(true));
+    dispatch(setCategoryOperationLoading(true));
 
     const { data } = await api.post('categories', categoryDto);
 
@@ -43,7 +43,7 @@ export const createCategory = (categoryDto: ICategoryDto): TActionType => async 
 
 export const getOneCategory = (id: string): TActionType => async (dispatch) => {
   try {
-    dispatch(setLoading(true));
+    dispatch(setCategoryLoading(true));
     const { data } = await api.get(`categories/${id}`);
     dispatch({
       type: GET_ONE_CATEGORY_SUCCESS,
@@ -54,7 +54,7 @@ export const getOneCategory = (id: string): TActionType => async (dispatch) => {
 
 export const updateCategory = (id: string, categoryDto: ICategoryDto): TActionType => async (dispatch) => {
   try {
-    dispatch(setOperationLoading(true));
+    dispatch(setCategoryOperationLoading(true));
     const { data } = await api.put(`categories/${id}`, categoryDto);
     dispatch({
       type: UPDATE_CATEGORY_SUCCESS,
@@ -65,7 +65,7 @@ export const updateCategory = (id: string, categoryDto: ICategoryDto): TActionTy
 
 export const deleteCategory = (id: string): TActionType => async (dispatch) => {
   try {
-    dispatch(setOperationLoading(true));
+    dispatch(setCategoryOperationLoading(true));
     const { data } = await api.delete(`categories/${id}`);
     dispatch({
       type: DELETE_CATEGORY_SUCCESS,
@@ -74,16 +74,16 @@ export const deleteCategory = (id: string): TActionType => async (dispatch) => {
   } catch (error) {}
 };
 
-export const setLoading = (loading: boolean): CategoryActionTypes => {
+const setCategoryLoading = (loading: boolean): CategoryActionTypes => {
   return {
-    type: SET_LOADING,
+    type: SET_CATEGORY_LOADING,
     payload: { loading },
   };
 };
 
-export const setOperationLoading = (opLoading: boolean): CategoryActionTypes => {
+const setCategoryOperationLoading = (opLoading: boolean): CategoryActionTypes => {
   return {
-    type: SET_OPERATION_LOADING,
+    type: SET_CATEGORY_OPERATION_LOADING,
     payload: { opLoading },
   };
 };

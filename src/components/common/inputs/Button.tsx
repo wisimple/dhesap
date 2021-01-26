@@ -5,17 +5,18 @@ interface ButtonProps
   extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   loading?: boolean;
   color?: 'primary' | 'red';
+  rounded?: boolean;
   outlined?: boolean;
 }
 const Button = (props: ButtonProps) => {
-  const { children, loading, color = 'primary', outlined, ...rest } = props;
-  const buttonStyle = `${color}${outlined ? '--outlined' : ''}`;
-  console.log(buttonStyle);
+  const { children, loading, rounded, color = 'primary', outlined, ...rest } = props;
+
+  const buttonStyle = `${rounded ? 'button--rounded' : ''} button--${color}${outlined ? '--outlined' : ''}`;
 
   return (
-    <button className={`button button--${buttonStyle}`} {...rest}>
+    <button className={`button ${buttonStyle}`} type='button' {...rest}>
       {children}
-      {loading && <Loop className='loader' />}
+      {loading && <Loop className='loader icon icon--right' />}
     </button>
   );
 };

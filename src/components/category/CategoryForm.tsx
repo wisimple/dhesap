@@ -13,9 +13,10 @@ import Button from 'components/common/inputs/Button';
 interface Props {
   data?: ICategory;
   loading?: boolean;
+  onSubmitEnd?: () => void;
 }
 
-const CategoryForm = ({ data, loading }: Props) => {
+const CategoryForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [name, setname] = useState('');
@@ -45,7 +46,7 @@ const CategoryForm = ({ data, loading }: Props) => {
     } else {
       await dispatch(createCategory(categoryDto));
     }
-    history.goBack();
+    onSubmitEnd();
   };
 
   return (

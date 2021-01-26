@@ -5,16 +5,19 @@ import { accountTypes } from 'constants/accountTypes';
 import Icon from '@material-ui/core/Icon';
 import { IAccount, IAccountDto } from 'models/Account';
 import { CurrencyCodes } from 'models/Currency';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { createAccount, deleteAccount, updateAccount } from 'store/account/actions';
 import { useHistory } from 'react-router-dom';
+import { RootState } from 'store';
+import Button from 'components/common/inputs/Button';
 interface Props {
   data?: IAccount;
   loading?: boolean;
+  onSubmitEnd?: () => void;
 }
 
-const AccountForm = ({ data, loading }: Props) => {
+const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
   const [accountTypeIndex, setaccountTypeIndex] = useState(0);
   const [name, setname] = useState('');
   const [balance, setbalance] = useState(0);
@@ -23,6 +26,7 @@ const AccountForm = ({ data, loading }: Props) => {
   const [isBalancePositive, setisBalancePositive] = useState(true);
   const dispatch = useDispatch();
   const history = useHistory();
+  const opLoading = useSelector((state: RootState) => state.accountState.opLoading);
 
   useEffect(() => {
     if (data) {
@@ -51,7 +55,7 @@ const AccountForm = ({ data, loading }: Props) => {
     } else {
       await dispatch(updateAccount(data._id, accountDto));
     }
-    history.goBack();
+    onSubmitEnd();
   };
   return (
     <>
@@ -139,9 +143,9 @@ const AccountForm = ({ data, loading }: Props) => {
           </label>
         </div>
         <div className='form__group'>
-          <button type='submit' className='button button--primary'>
+          <Button type='submit' loading={opLoading}>
             Save
-          </button>
+          </Button>
         </div>
         {data && !data.main && (
           <div className='form__group'>

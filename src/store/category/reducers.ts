@@ -5,8 +5,8 @@ import {
   DELETE_CATEGORY_SUCCESS,
   GET_ALL_CATEGORIES_SUCCESS,
   GET_ONE_CATEGORY_SUCCESS,
-  SET_LOADING,
-  SET_OPERATION_LOADING,
+  SET_CATEGORY_LOADING,
+  SET_CATEGORY_OPERATION_LOADING,
   UPDATE_CATEGORY_SUCCESS,
 } from './types';
 
@@ -16,10 +16,10 @@ const initialState: CategoryState = {
 
 export function categoryReducer(state = initialState, action: CategoryActionTypes): CategoryState {
   switch (action.type) {
-    case SET_LOADING:
+    case SET_CATEGORY_LOADING:
       return { ...state, loading: action.payload.loading };
 
-    case SET_OPERATION_LOADING:
+    case SET_CATEGORY_OPERATION_LOADING:
       return { ...state, opLoading: action.payload.opLoading };
 
     case GET_ALL_CATEGORIES_SUCCESS:

@@ -10,7 +10,7 @@ api.interceptors.response.use(
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(res);
-        }, 250);
+        }, 1250);
       });
     } else {
       return res;

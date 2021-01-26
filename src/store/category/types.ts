@@ -12,16 +12,16 @@ export const CREATE_CATEGORY_SUCCESS = 'CREATE_CATEGORY_SUCCESS';
 export const UPDATE_CATEGORY_SUCCESS = 'UPDATE_CATEGORY_SUCCESS';
 export const DELETE_CATEGORY_SUCCESS = 'DELETE_CATEGORY_SUCCESS';
 export const GET_ONE_CATEGORY_SUCCESS = 'GET_ONE_CATEGORY_SUCCESS';
-export const SET_LOADING = 'SET_LOADING';
-export const SET_OPERATION_LOADING = 'SET_OPERATION_LOADING';
-interface SetLoadingAction {
-  type: typeof SET_LOADING;
+export const SET_CATEGORY_LOADING = 'SET_CATEGORY_LOADING';
+export const SET_CATEGORY_OPERATION_LOADING = 'SET_CATEGORY_OPERATION_LOADING';
+interface SetCategoryLoadingAction {
+  type: typeof SET_CATEGORY_LOADING;
   payload: {
     loading: boolean;
   };
 }
-interface SetOperationLoadingAction {
-  type: typeof SET_OPERATION_LOADING;
+interface SetCategoryOperationLoadingAction {
+  type: typeof SET_CATEGORY_OPERATION_LOADING;
   payload: {
     opLoading: boolean;
   };
@@ -65,5 +65,5 @@ export type CategoryActionTypes =
   | GetOneCategorySuccessAction
   | UpdateCategorySuccessAction
   | DeleteCategorySuccessAction
-  | SetLoadingAction
-  | SetOperationLoadingAction;
+  | SetCategoryLoadingAction
+  | SetCategoryOperationLoadingAction;

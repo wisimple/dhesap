@@ -60,12 +60,22 @@
   .icon {
     display: flex;
     align-items: center;
+    font-size: 1.8rem !important;
 
     &--left {
-      margin-right: 0.4rem;
+      margin-right: 0.7rem;
     }
     &--right {
-      margin-left: 0.4rem;
+      margin-left: 0.7rem;
     }
+  }
+}
+
+.button-group {
+  .button:first-child {
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  }
+  .button:last-child {
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
   }
 }

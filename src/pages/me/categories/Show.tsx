@@ -6,7 +6,6 @@ import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
 
 import Edit from '@material-ui/icons/Edit';
 import { useEffect } from 'react';
-import LoadingText from 'components/common/TextLoading';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { getOneCategory } from 'store/category/actions';

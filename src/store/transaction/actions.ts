@@ -1,4 +1,4 @@
-import { ITransactionDto } from 'models/Transaction';
+import { ITransactionCrudDto } from 'models/Transaction';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'store';
 import api from 'utils/api';
@@ -25,9 +25,11 @@ export const getTransactions = (params: { page: number }): TActionType => async 
   } catch (error) {}
 };
 
-export const createTransaction = (accountDto: ITransactionDto): TActionType => async (dispatch) => {
+export const createTransaction = (transactonCrudDto: ITransactionCrudDto): TActionType => async (
+  dispatch
+) => {
   try {
-    const { data } = await api.post('transactions', accountDto);
+    const { data } = await api.post('transactions', transactonCrudDto);
 
     dispatch({
       type: CREATE_TRANSACTION,
@@ -46,11 +48,11 @@ export const getOneTransaction = (id: string): TActionType => async (dispatch) =
   } catch (error) {}
 };
 
-export const updateTransaction = (id: string, accountDto: ITransactionDto): TActionType => async (
+export const updateTransaction = (id: string, transactonCrudDto: ITransactionCrudDto): TActionType => async (
   dispatch
 ) => {
   try {
-    const { data } = await api.put(`transactions/${id}`, accountDto);
+    const { data } = await api.put(`transactions/${id}`, transactonCrudDto);
     dispatch({
       type: UPDATE_TRANSACTION,
       payload: { transaction: data },

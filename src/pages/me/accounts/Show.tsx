@@ -1,27 +1,26 @@
 import Avatar from 'components/common/Avatar';
 import MoneyText from 'components/common/MoneyText';
 import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
-import { seedTransactions } from 'seeds/transactions';
 
 import Edit from '@material-ui/icons/Edit';
-import React, { useEffect, useState } from 'react';
-import { ITransaction } from 'models/Transaction';
+import React, { useEffect } from 'react';
 import CustomIcon from 'components/common/CustomIcon';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOneAccount } from 'store/account/actions';
 import { RootState } from 'store';
+import { ITransaction } from 'models/Transaction';
+
+const transactions: ITransaction[] = [];
 
 const Show = () => {
   const { pathname } = useLocation();
   const params: { id: string } = useParams();
   const history = useHistory();
-  const account = useSelector((state: RootState) => state.accountState.account);
-  const [transactions, settransactions] = useState<ITransaction[]>([]);
+  const { account, loading } = useSelector((state: RootState) => state.accountState);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(getOneAccount(params.id));
-    const tran = seedTransactions(30);
-    settransactions(tran);
+    if (account?._id !== params.id) dispatch(getOneAccount(params.id));
   }, [params]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -29,7 +28,7 @@ const Show = () => {
       <Link to={`${pathname}/edit`}>
         <div className='flex items-center'>
           <Avatar type={account?.type || 'person'} className='mr-2' />
-          <h2>{account?.name}</h2>
+          <h2>{loading ? 'loading...' : account?.name}</h2>
           <Edit className='icon--sm link ml-1' />
         </div>
       </Link>

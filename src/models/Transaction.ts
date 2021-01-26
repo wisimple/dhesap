@@ -17,4 +17,9 @@ export interface ITransactionDto {
   dueAt?: Date;
 }
 
+export interface ITransactionCrudDto {
+  from: string;
+  amnt: number;
+}
+
 export interface ITransaction extends ITransactionDto, IMongoData {}
