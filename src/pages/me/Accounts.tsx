@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import Avatar from 'components/common/Avatar';
-import { seedAccounts } from 'seeds/accounts';
 import { getCurrencySymbol } from 'constants/currencies';
-import Pagination from 'components/common/Pagination';
 
 // import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
 import UnfoldMoreTwoTone from '@material-ui/icons/UnfoldMoreTwoTone';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import { IAccount } from 'models/Account';
 import LoadingText from 'components/common/TextLoading';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,7 +27,7 @@ const Accounts = () => {
       }
     };
     init();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

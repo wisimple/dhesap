@@ -26,7 +26,7 @@ const Pagination: React.FC<IProps> = ({ activePage = 1, totalPages = 0, onChange
         {[...Array(totalPages)].map((page, i) => (
           <li
             key={i}
-            onClick={() => onChanged(page)}
+            onClick={() => onChanged(i + 1)}
             className={`pagination__item ${activePage === i + 1 ? 'active' : ''}`}>
             <button>{i + 1}</button>
           </li>

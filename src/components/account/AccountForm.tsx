@@ -143,7 +143,7 @@ const AccountForm = ({ data, loading }: Props) => {
             Save
           </button>
         </div>
-        {data && (
+        {data && !data.main && (
           <div className='form__group'>
             <button
               type='button'

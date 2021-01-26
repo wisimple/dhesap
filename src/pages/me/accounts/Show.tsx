@@ -1,6 +1,5 @@
 import Avatar from 'components/common/Avatar';
 import MoneyText from 'components/common/MoneyText';
-import Pagination from 'components/common/Pagination';
 import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
 import { seedTransactions } from 'seeds/transactions';
 
@@ -23,7 +22,7 @@ const Show = () => {
     dispatch(getOneAccount(params.id));
     const tran = seedTransactions(30);
     settransactions(tran);
-  }, [params]);
+  }, [params]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

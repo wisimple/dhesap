@@ -4,7 +4,7 @@ import { ICategory } from 'models/Category';
 
 type TransactionTypes = 'debt';
 
-export interface ITransaction extends IMongoData {
+export interface ITransactionDto {
   from: IAccount;
   to?: IAccount;
   amnt: number;
@@ -16,3 +16,5 @@ export interface ITransaction extends IMongoData {
   desc?: string;
   dueAt?: Date;
 }
+
+export interface ITransaction extends ITransactionDto, IMongoData {}

@@ -4,22 +4,25 @@ import { colors, backgroundColors } from 'constants/colors';
 import ScrollableSelect from 'components/common/inputs/ScrollableSelect';
 import CustomIcon from 'components/common/CustomIcon';
 import { ICategory } from 'models/Category';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createCategory, deleteCategory, updateCategory } from 'store/category/actions';
 import { useHistory } from 'react-router-dom';
+import { RootState } from 'store';
+import Button from 'components/common/inputs/Button';
 
 interface Props {
   data?: ICategory;
   loading?: boolean;
 }
 
-const Create = ({ data, loading }: Props) => {
+const CategoryForm = ({ data, loading }: Props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [name, setname] = useState('');
   const [iconIndex, seticonIndex] = useState(0);
   const [bgColorIndex, setbgColorIndex] = useState(0);
   const [colorIndex, setcolorIndex] = useState(0);
+  const opLoading = useSelector((state: RootState) => state.categoryState.opLoading);
 
   useEffect(() => {
     if (data) {
@@ -111,25 +114,27 @@ const Create = ({ data, loading }: Props) => {
       </div>
 
       <div className='form__group'>
-        <button type='submit' className='button button--primary'>
+        <Button type='submit' loading={opLoading}>
           Save
-        </button>
+        </Button>
       </div>
+
       {data && (
         <div className='form__group'>
-          <button
+          <Button
             type='button'
-            className='button button--red--outlined'
+            color='red'
+            outlined
             onClick={() => {
               dispatch(deleteCategory(data?._id));
               history.replace('/me/tabs/categories');
             }}>
             Delete
-          </button>
+          </Button>
         </div>
       )}
     </form>
   );
 };
 
-export default Create;
+export default CategoryForm;

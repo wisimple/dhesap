@@ -10,20 +10,14 @@ import { setAllCategories } from 'store/category/actions';
 import LoadingText from 'components/common/TextLoading';
 
 const Categories: React.FC = () => {
-  const categories = useSelector((state: RootState) => state.categoryState.categories);
+  const { categories, loading } = useSelector((state: RootState) => state.categoryState);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [loading, setloading] = useState(false);
 
   useEffect(() => {
-    const init = async () => {
-      if (categories.length === 0) {
-        setloading(true);
-        await dispatch(setAllCategories());
-        setloading(false);
-      }
-    };
-    init();
+    if (categories.length === 0) {
+      dispatch(setAllCategories());
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

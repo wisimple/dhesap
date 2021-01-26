@@ -5,26 +5,26 @@ import Pagination from 'components/common/Pagination';
 import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
 
 import Edit from '@material-ui/icons/Edit';
-import { useEffect, useState } from 'react';
-import { ITransaction } from 'models/Transaction';
+import { useEffect } from 'react';
 import LoadingText from 'components/common/TextLoading';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { getOneCategory } from 'store/category/actions';
+
+const transactions: any[] = [];
 
 const Show = () => {
   const { pathname } = useLocation();
   const params: { id: string } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const category = useSelector((state: RootState) => state.categoryState.category);
-  const [transactions, settransactions] = useState<ITransaction[]>([]);
+  const { category, loading } = useSelector((state: RootState) => state.categoryState);
 
   useEffect(() => {
-    dispatch(getOneCategory(params.id));
+    if (category?._id !== params.id) {
+      dispatch(getOneCategory(params.id));
+    }
   }, [params]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  if (!category) return <LoadingText />;
 
   return (
     <>
@@ -37,7 +37,7 @@ const Show = () => {
             color={category?.icon.clr}
             className='mr-1'
           />
-          <h2>{category?.name}</h2>
+          <h2>{loading ? 'loading...' : category?.name}</h2>
           <Edit className='icon--sm link ml-1' />
         </div>
       </Link>

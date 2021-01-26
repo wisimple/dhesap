@@ -29,7 +29,7 @@ const SigninForm = () => {
         <h3>Signin to your account</h3>
         <div className='form__group'>
           <input
-            type='text'
+            type='email'
             className='input'
             id='email'
             placeholder='Your email address'

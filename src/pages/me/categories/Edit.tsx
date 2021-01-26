@@ -8,13 +8,15 @@ import { RootState } from 'store';
 const Edit = () => {
   const params: { id: string } = useParams();
   const dispatch = useDispatch();
-  const category = useSelector((state: RootState) => state.categoryState.category);
+  const { category, loading } = useSelector((state: RootState) => state.categoryState);
 
   useEffect(() => {
-    dispatch(getOneCategory(params.id));
+    if (category?._id !== params.id) {
+      dispatch(getOneCategory(params.id));
+    }
   }, [params]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return <CategoryForm data={category} />;
+  return <CategoryForm data={category} loading={loading} />;
 };
 
 export default Edit;

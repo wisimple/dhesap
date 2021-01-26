@@ -2,31 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Avatar from 'components/common/Avatar';
 import Pagination from 'components/common/Pagination';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import TextLoading from 'components/common/TextLoading';
-import { seedTransactions } from 'seeds/transactions';
 import { ITransaction } from 'models/Transaction';
 import CustomIcon from 'components/common/CustomIcon';
 import MoneyText from 'components/common/MoneyText';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTransactions } from 'store/transaction/actions';
+import { RootState } from 'store';
 
 const TransactionItem = ({ transaction, index }: { transaction: ITransaction; index: number }) => {
   const history = useHistory();
 
   return (
-    <motion.tr
-      key={transaction._id}
-      variants={{
-        hidden: { opacity: 0, y: -20 },
-        visible: () => ({
-          opacity: 1,
-          y: 0,
-          transition: { delay: index * 0.02 },
-        }),
-      }}
-      initial='hidden'
-      animate='visible'
-      onClick={() => history.push('/me/transactions/' + transaction._id)}>
+    <tr onClick={() => history.push('/me/transactions/' + transaction._id)}>
       <td>
         <div className='flex items-center'>
           <Avatar
@@ -58,21 +47,26 @@ const TransactionItem = ({ transaction, index }: { transaction: ITransaction; in
           withPlus={false}
         />
       </td>
-    </motion.tr>
+    </tr>
   );
 };
 
 const Transactions: React.FC = () => {
-  const [loading, setloading] = useState(true);
-  const [transactions, settransactions] = useState<ITransaction[]>([]);
+  const [loading, setloading] = useState(false);
+  const { transactions, totalPages, activePage } = useSelector((state: RootState) => state.transactionState);
 
+  const dispatch = useDispatch();
   useEffect(() => {
-    setTimeout(() => {
-      const res = seedTransactions(30);
-      settransactions(res);
+    async function init() {
+      setloading(true);
+      await dispatch(getTransactions({ page: 1 }));
       setloading(false);
-    }, 500);
-  }, []);
+    }
+    if (transactions.length === 0) {
+      init();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <>
       <div className='table-container'>
@@ -85,16 +79,18 @@ const Transactions: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            <AnimatePresence>
-              {transactions.map((transaction, index) => (
-                <TransactionItem key={transaction._id} transaction={transaction} index={index} />
-              ))}
-            </AnimatePresence>
+            {transactions.map((transaction, index) => (
+              <TransactionItem key={transaction._id} transaction={transaction} index={index} />
+            ))}
           </tbody>
         </table>
       </div>
       {loading && <TextLoading />}
-      <Pagination />
+      <Pagination
+        totalPages={totalPages}
+        activePage={activePage}
+        onChanged={(page) => dispatch(getTransactions({ page }))}
+      />
     </>
   );
 };

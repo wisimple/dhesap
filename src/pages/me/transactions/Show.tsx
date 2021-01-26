@@ -1,16 +1,18 @@
-import { ITransaction } from 'models/Transaction';
-import { useEffect, useState } from 'react';
-import { seedTransaction } from 'seeds/transactions';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { RootState } from 'store';
+
+import { getOneTransaction } from 'store/transaction/actions';
 
 const Show = () => {
-  const [transaction, settransaction] = useState<ITransaction>();
+  const dispatch = useDispatch();
+  const params: { id: string } = useParams();
+  const transaction = useSelector((state: RootState) => state.transactionState.transaction);
 
   useEffect(() => {
-    setTimeout(() => {
-      const res = seedTransaction();
-      settransaction(res);
-    }, 300);
-  }, []);
+    dispatch(getOneTransaction(params.id));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div>
       <h3>{transaction?._id}</h3>
