@@ -4,6 +4,7 @@ interface Props<T> {
   lastItem?: React.ReactNode;
   renderItem: (option: T, index: number, isSelected: boolean) => React.ReactNode;
   onChanged?: (item: T, index: number) => void;
+  loading?: boolean;
 }
 
 function ScrollableSelect<T>({
@@ -12,9 +13,11 @@ function ScrollableSelect<T>({
   lastItem,
   renderItem,
   onChanged = () => {},
+  loading,
 }: Props<T>) {
   return (
     <ul className='scrollable-select'>
+      {loading && <li className='scrollable-select__item'>loading...</li>}
       {options.map((option, index) => (
         <li key={index} className='scrollable-select__item' onClick={() => onChanged(option, index)}>
           {renderItem(option, index, selectedIndex === index)}

@@ -20,6 +20,7 @@ export interface ITransactionDto {
 export interface ITransactionCrudDto {
   from: string;
   amnt: number;
+  ctgrs?: string[];
 }
 
 export interface ITransaction extends ITransactionDto, IMongoData {}

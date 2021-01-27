@@ -54,7 +54,13 @@
   }
 
   &--sm {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    padding: 0.3rem 0.7rem;
+  }
+
+  &--md {
+    font-size: 1.3rem;
+    padding: 0.6rem 0.8rem;
   }
 
   .icon {
@@ -72,6 +78,14 @@
 }
 
 .button-group {
+  .button {
+    border-radius: 0;
+  }
+
+  & .button:not(:last-child) {
+    border-right: none;
+  }
+
   .button:first-child {
     border-radius: var(--radius-lg) 0 0 var(--radius-lg);
   }

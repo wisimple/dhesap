@@ -20,8 +20,7 @@ export const getAllAccounts = (params?: { sort?: string; search?: string }): TAc
   dispatch
 ) => {
   try {
-    dispatch({ type: GET_ALL_ACCOUNTS_START });
-
+    dispatch(setAccountLoading(true));
     const { data } = await api.get('accounts', { params });
     dispatch({
       type: GET_ALL_ACCOUNTS_SUCCESS,

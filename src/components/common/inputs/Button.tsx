@@ -7,12 +7,14 @@ interface ButtonProps
   color?: 'primary' | 'red';
   rounded?: boolean;
   outlined?: boolean;
+  size?: 'sm' | 'md';
 }
 const Button = (props: ButtonProps) => {
-  const { children, loading, rounded, color = 'primary', outlined, ...rest } = props;
+  const { children, loading, rounded, size, color = 'primary', outlined, ...rest } = props;
 
-  const buttonStyle = `${rounded ? 'button--rounded' : ''} button--${color}${outlined ? '--outlined' : ''}`;
-
+  const buttonStyle = `${size ? `button--${size}` : ''} ${rounded ? 'button--rounded' : ''} button--${color}${
+    outlined ? '--outlined' : ''
+  }`;
   return (
     <button className={`button ${buttonStyle}`} type='button' {...rest}>
       {children}

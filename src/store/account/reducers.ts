@@ -23,8 +23,6 @@ export function accountReducer(state = initialState, action: AccountActionTypes)
     case SET_ACCOUNT_OPERATION_LOADING:
       return { ...state, opLoading: action.payload.opLoading };
 
-    case GET_ALL_ACCOUNTS_START:
-      return { ...state, accounts: [], loading: true };
     case GET_ALL_ACCOUNTS_SUCCESS:
       return { ...state, accounts: action.payload.accounts, loading: false };
 

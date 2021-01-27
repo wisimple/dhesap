@@ -7,6 +7,9 @@ import {
   DELETE_TRANSACTION,
   GET_ONE_TRANSACTION,
   GET_PAGINATED_TRANSACTIONS,
+  SET_TRANSACTIONS_ACTIVE_PAGE,
+  SET_TRANSACTION_LOADING,
+  SET_TRANSACTION_OPERATION_LOADING,
   TransactionActionTypes,
   UPDATE_TRANSACTION,
 } from './types';
@@ -15,6 +18,7 @@ type TActionType = ThunkAction<void, RootState, unknown, TransactionActionTypes>
 
 export const getTransactions = (params: { page: number }): TActionType => async (dispatch) => {
   try {
+    dispatch(setTransactionLoading(true));
     const { data } = await api.get('transactions', { params: { ...params } });
 
     const { transactions, totalPages, activePage } = data;
@@ -29,6 +33,7 @@ export const createTransaction = (transactonCrudDto: ITransactionCrudDto): TActi
   dispatch
 ) => {
   try {
+    dispatch(setTransactionOperationLoading(true));
     const { data } = await api.post('transactions', transactonCrudDto);
 
     dispatch({
@@ -40,6 +45,7 @@ export const createTransaction = (transactonCrudDto: ITransactionCrudDto): TActi
 
 export const getOneTransaction = (id: string): TActionType => async (dispatch) => {
   try {
+    dispatch(setTransactionLoading(true));
     const { data } = await api.get(`transactions/${id}`);
     dispatch({
       type: GET_ONE_TRANSACTION,
@@ -52,6 +58,7 @@ export const updateTransaction = (id: string, transactonCrudDto: ITransactionCru
   dispatch
 ) => {
   try {
+    dispatch(setTransactionOperationLoading(true));
     const { data } = await api.put(`transactions/${id}`, transactonCrudDto);
     dispatch({
       type: UPDATE_TRANSACTION,
@@ -68,4 +75,25 @@ export const deleteTransaction = (id: string): TActionType => async (dispatch) =
       payload: { transaction: data },
     });
   } catch (error) {}
+};
+
+export const setTransactionsActivePage = (activePage: number): TransactionActionTypes => {
+  return {
+    type: SET_TRANSACTIONS_ACTIVE_PAGE,
+    payload: { activePage },
+  };
+};
+
+const setTransactionLoading = (loading: boolean): TransactionActionTypes => {
+  return {
+    type: SET_TRANSACTION_LOADING,
+    payload: { loading },
+  };
+};
+
+const setTransactionOperationLoading = (opLoading: boolean): TransactionActionTypes => {
+  return {
+    type: SET_TRANSACTION_OPERATION_LOADING,
+    payload: { opLoading },
+  };
 };

@@ -15,7 +15,7 @@ import {
 
 type TActionType = ThunkAction<void, RootState, unknown, CategoryActionTypes>;
 
-export const setAllCategories = (): TActionType => async (dispatch) => {
+export const getAllCategories = (): TActionType => async (dispatch) => {
   try {
     dispatch(setCategoryLoading(true));
 

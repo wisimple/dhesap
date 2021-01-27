@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'store';
-import { setAllCategories } from 'store/category/actions';
+import { getAllCategories } from 'store/category/actions';
 
 import LoadingText from 'components/common/TextLoading';
 
@@ -16,7 +16,7 @@ const Categories: React.FC = () => {
 
   useEffect(() => {
     if (categories.length === 0) {
-      dispatch(setAllCategories());
+      dispatch(getAllCategories());
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

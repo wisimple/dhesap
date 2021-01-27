@@ -2,10 +2,6 @@ import { useEffect, useState } from 'react';
 
 import Avatar from 'components/common/Avatar';
 
-// import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
-import UnfoldMoreTwoTone from '@material-ui/icons/UnfoldMoreTwoTone';
-import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import LoadingText from 'components/common/TextLoading';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,25 +20,25 @@ const Accounts = () => {
   const { accounts, loading } = useSelector((state: RootState) => state.accountState);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [queryParams, setqueryParams] = useState<QueryParams>();
+  const [queryParams, setqueryParams] = useState<QueryParams>({ sortBy: '' });
 
   const toggleSort = (key: string) => {
-    const newState = {
+    setqueryParams({
       search: '',
       sortBy: key,
       sortOrder: queryParams?.sortBy === key ? !queryParams?.sortOrder : false,
-    };
-    setqueryParams(newState);
-    dispatch(getAllAccounts({ sort: `${newState?.sortOrder ? '-' : ''}${newState?.sortBy}` }));
+    });
   };
 
-  console.log(queryParams);
-
+  // @TODO debounce function will be added for search
   useEffect(() => {
-    if (accounts.length < 1) {
-      dispatch(getAllAccounts());
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    dispatch(
+      getAllAccounts({
+        sort: `${queryParams?.sortOrder ? '-' : ''}${queryParams?.sortBy}`,
+        search: queryParams?.search,
+      })
+    );
+  }, [queryParams]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -54,13 +50,16 @@ const Accounts = () => {
             className='input'
             placeholder='Search an Account'
             value={queryParams?.search || ''}
-            onChange={({ target }) => setqueryParams((prev) => ({ search: target.value }))}
+            onChange={({ target }) => {
+              setqueryParams({ search: target.value });
+            }}
           />
           <label htmlFor='search' className='label label--linear label--as-placeholder'>
             Search an Account
           </label>
         </div>
       </form>
+
       <div className='table-container'>
         <table className='table'>
           <thead>

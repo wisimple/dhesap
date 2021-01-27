@@ -15,7 +15,7 @@ const MoneyText = ({ amount, colored = true, withPlus = true, currency, classNam
   const color = colored ? `text-${isPositive ? 'green' : 'red'}` : '';
   return (
     <span className={`text-money ${color} ${className}`} style={styles}>
-      {withPlus && isPositive && '+'}
+      {withPlus && isPositive && amount !== 0 && '+'}
       {amount}
       {currency && <span>{getCurrencySymbol(currency)}</span>}
     </span>

@@ -127,15 +127,12 @@ const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             selectedIndex={accountTypeIndex}
             onChanged={(item, index) => setaccountTypeIndex(index)}
             renderItem={(item, index, selected) => (
-              <button
-                key={index}
-                type='button'
-                className={`button button--sm button--primary${!selected ? '--outlined' : ''}`}>
+              <Button outlined={!selected} size='md'>
                 <div className='icon icon--left'>
                   <Icon>{item.icon}</Icon>
                 </div>
                 {item.name}
-              </button>
+              </Button>
             )}
           />
           <label htmlFor='type' className='label label--linear'>
@@ -149,15 +146,16 @@ const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
         </div>
         {data && !data.main && (
           <div className='form__group'>
-            <button
+            <Button
               type='button'
-              className='button button--red--outlined'
+              color='red'
+              outlined
               onClick={() => {
                 dispatch(deleteAccount(data._id));
                 history.replace('/me/tabs/accounts');
               }}>
               Delete
-            </button>
+            </Button>
           </div>
         )}
       </form>

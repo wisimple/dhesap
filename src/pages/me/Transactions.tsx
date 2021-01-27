@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Avatar from 'components/common/Avatar';
 import Pagination from 'components/common/Pagination';
 
-import TextLoading from 'components/common/TextLoading';
 import { ITransaction } from 'models/Transaction';
 import CustomIcon from 'components/common/CustomIcon';
 import MoneyText from 'components/common/MoneyText';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTransactions } from 'store/transaction/actions';
+import { getTransactions, setTransactionsActivePage } from 'store/transaction/actions';
 import { RootState } from 'store';
+import LoadingText from 'components/common/TextLoading';
 
 const TransactionItem = ({ transaction, index }: { transaction: ITransaction; index: number }) => {
   const history = useHistory();
@@ -52,19 +52,13 @@ const TransactionItem = ({ transaction, index }: { transaction: ITransaction; in
 };
 
 const Transactions: React.FC = () => {
-  const [loading, setloading] = useState(false);
-  const { transactions, totalPages, activePage } = useSelector((state: RootState) => state.transactionState);
+  const { transactions, totalPages, activePage, loading } = useSelector(
+    (state: RootState) => state.transactionState
+  );
 
   const dispatch = useDispatch();
   useEffect(() => {
-    async function init() {
-      setloading(true);
-      await dispatch(getTransactions({ page: 1 }));
-      setloading(false);
-    }
-    if (transactions.length === 0) {
-      init();
-    }
+    dispatch(getTransactions({ page: 1 }));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -85,12 +79,16 @@ const Transactions: React.FC = () => {
           </tbody>
         </table>
       </div>
-      {loading && <TextLoading />}
       <Pagination
         totalPages={totalPages}
         activePage={activePage}
-        onChanged={(page) => dispatch(getTransactions({ page }))}
+        loading={loading}
+        onChanged={(page) => {
+          dispatch(setTransactionsActivePage(page));
+          dispatch(getTransactions({ page }));
+        }}
       />
+      {loading && transactions.length === 0 && <LoadingText />}
     </>
   );
 };
