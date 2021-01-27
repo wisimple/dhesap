@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { store } from 'store';
+import { setAppLoading } from 'store/app/actions';
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_ENDPOINT,
@@ -20,5 +22,17 @@ api.interceptors.response.use(
     console.log(err);
   }
 );
+
+api.interceptors.request.use((req) => {
+  store.dispatch(setAppLoading(true));
+
+  return req;
+});
+
+api.interceptors.response.use((res) => {
+  store.dispatch(setAppLoading(false));
+
+  return res;
+});
 
 export default api;

@@ -12,7 +12,7 @@ const Index = () => {
     <LayoutWithTopNav>
       <Switch>
         <Route path={url + '/create'} component={TransactionsCreate} />
-        <Route path={url + '/edit'} component={TransactionsEdit} />
+        <Route path={url + '/:id/edit'} component={TransactionsEdit} />
         <Route path={url + '/:id'} component={TransactionShow} />
       </Switch>
     </LayoutWithTopNav>

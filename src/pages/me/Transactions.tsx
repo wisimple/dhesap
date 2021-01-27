@@ -23,6 +23,7 @@ const TransactionItem = ({ transaction, index }: { transaction: ITransaction; in
             type={transaction.from.type}
             gender={transaction.from.gndr}
             className='mr-15'
+            size='sm'
           />
           <div className='flex flex-column'>
             <span>{transaction.from.name}</span>
@@ -37,15 +38,6 @@ const TransactionItem = ({ transaction, index }: { transaction: ITransaction; in
       </td>
       <td>
         <MoneyText amount={transaction.amnt} currency={transaction.from.crny} />
-      </td>
-      <td>
-        <MoneyText
-          className='text-sm'
-          amount={transaction.fBlnc}
-          currency={transaction.from.crny}
-          colored={false}
-          withPlus={false}
-        />
       </td>
     </tr>
   );
@@ -69,7 +61,6 @@ const Transactions: React.FC = () => {
             <tr>
               <th>Name</th>
               <th>Amount</th>
-              <th>Balance</th>
             </tr>
           </thead>
           <tbody>

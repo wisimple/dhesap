@@ -7,7 +7,6 @@ export interface AccountState {
   opLoading?: boolean;
 }
 
-export const GET_ALL_ACCOUNTS_START = 'GET_ALL_ACCOUNTS_START';
 export const GET_ALL_ACCOUNTS_SUCCESS = 'GET_ALL_ACCOUNTS_SUCCESS';
 export const CREATE_ACCOUNT_SUCCESS = 'CREATE_ACCOUNT_SUCCESS';
 export const UPDATE_ACCOUNT_SUCCESS = 'UPDATE_ACCOUNT_SUCCESS';
@@ -26,9 +25,6 @@ interface SetAccountOperationLoadingAction {
   payload: {
     opLoading: boolean;
   };
-}
-interface GetAllAccountsStartAction {
-  type: typeof GET_ALL_ACCOUNTS_START;
 }
 interface GetAllAccountsSuccessAction {
   type: typeof GET_ALL_ACCOUNTS_SUCCESS;
@@ -64,7 +60,6 @@ interface DeleteAccountSuccessAction {
 
 export type AccountActionTypes =
   | GetAllAccountsSuccessAction
-  | GetAllAccountsStartAction
   | CreateAccountSuccessAction
   | GetOneAccountSuccessAction
   | UpdateAccountSuccessAction

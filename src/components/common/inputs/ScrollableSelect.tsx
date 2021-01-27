@@ -19,7 +19,10 @@ function ScrollableSelect<T>({
     <ul className='scrollable-select'>
       {loading && <li className='scrollable-select__item'>loading...</li>}
       {options.map((option, index) => (
-        <li key={index} className='scrollable-select__item' onClick={() => onChanged(option, index)}>
+        <li
+          key={'index' + index}
+          className='scrollable-select__item'
+          onClick={() => onChanged(option, index)}>
           {renderItem(option, index, selectedIndex === index)}
         </li>
       ))}

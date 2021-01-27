@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
 import { RootState } from 'store';
 
 import { getOneTransaction } from 'store/transaction/actions';
@@ -8,6 +8,8 @@ import { getOneTransaction } from 'store/transaction/actions';
 const Show = () => {
   const dispatch = useDispatch();
   const params: { id: string } = useParams();
+  const { pathname } = useLocation();
+  const history = useHistory();
   const transaction = useSelector((state: RootState) => state.transactionState.transaction);
 
   useEffect(() => {
@@ -15,7 +17,9 @@ const Show = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div>
-      <h3>{transaction?._id}</h3>
+      <Link to={`${pathname}/edit`}>
+        <h3>{transaction?._id}</h3>
+      </Link>
       <pre>{JSON.stringify(transaction, null, 2)}</pre>
     </div>
   );

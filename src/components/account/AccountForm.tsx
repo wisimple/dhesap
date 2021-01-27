@@ -67,7 +67,7 @@ const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             className='input'
             name='name'
             id='name'
-            autoFocus
+            autoFocus={!data ? true : false}
             value={name}
             onChange={({ target }) => setname(target.value)}
           />
