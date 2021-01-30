@@ -1,4 +1,7 @@
 import { IAccount } from 'models/Account';
+import { ThunkAction } from 'redux-thunk';
+import { RootState } from 'store';
+import { TransactionActionTypes } from 'store/transaction/types';
 
 export interface AccountState {
   accounts: IAccount[];
@@ -66,3 +69,10 @@ export type AccountActionTypes =
   | DeleteAccountSuccessAction
   | SetAccountLoadingAction
   | SetAccountOperationLoadingAction;
+
+export type AccountThunkActionTypes = ThunkAction<
+  void,
+  RootState,
+  unknown,
+  AccountActionTypes | TransactionActionTypes
+>;

@@ -15,3 +15,5 @@ const middleware = applyMiddleware(thunk, logger);
 export const store = createStore(rootReducer, middleware);
 
 export type RootState = ReturnType<typeof rootReducer>;
+
+export type AppDispatch = typeof store.dispatch;

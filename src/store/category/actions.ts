@@ -1,8 +1,9 @@
 import { ICategoryDto } from 'models/Category';
-import { ThunkAction } from 'redux-thunk';
-import { RootState } from 'store';
+
+import { UPDATE_TRANSACTION_CATEGORIES } from 'store/transaction/types';
 import api from 'utils/api';
 import {
+  CategoryThunkActionTypes,
   CategoryActionTypes,
   CREATE_CATEGORY_SUCCESS,
   DELETE_CATEGORY_SUCCESS,
@@ -13,10 +14,10 @@ import {
   UPDATE_CATEGORY_SUCCESS,
 } from './types';
 
-type TActionType = ThunkAction<void, RootState, unknown, CategoryActionTypes>;
-
-export const getAllCategories = (): TActionType => async (dispatch) => {
+export const getAllCategories = (): CategoryThunkActionTypes => async (dispatch, getState) => {
   try {
+    const { categoryState } = getState();
+
     dispatch(setCategoryLoading(true));
 
     const { data } = await api.get('categories');
@@ -28,7 +29,7 @@ export const getAllCategories = (): TActionType => async (dispatch) => {
   } catch (error) {}
 };
 
-export const createCategory = (categoryDto: ICategoryDto): TActionType => async (dispatch) => {
+export const createCategory = (categoryDto: ICategoryDto): CategoryThunkActionTypes => async (dispatch) => {
   try {
     dispatch(setCategoryOperationLoading(true));
 
@@ -41,7 +42,7 @@ export const createCategory = (categoryDto: ICategoryDto): TActionType => async 
   } catch (error) {}
 };
 
-export const getOneCategory = (id: string): TActionType => async (dispatch) => {
+export const getOneCategory = (id: string): CategoryThunkActionTypes => async (dispatch) => {
   try {
     dispatch(setCategoryLoading(true));
     const { data } = await api.get(`categories/${id}`);
@@ -52,7 +53,9 @@ export const getOneCategory = (id: string): TActionType => async (dispatch) => {
   } catch (error) {}
 };
 
-export const updateCategory = (id: string, categoryDto: ICategoryDto): TActionType => async (dispatch) => {
+export const updateCategory = (id: string, categoryDto: ICategoryDto): CategoryThunkActionTypes => async (
+  dispatch
+) => {
   try {
     dispatch(setCategoryOperationLoading(true));
     const { data } = await api.put(`categories/${id}`, categoryDto);
@@ -60,10 +63,17 @@ export const updateCategory = (id: string, categoryDto: ICategoryDto): TActionTy
       type: UPDATE_CATEGORY_SUCCESS,
       payload: { category: data },
     });
+
+    dispatch({
+      type: UPDATE_TRANSACTION_CATEGORIES,
+      payload: {
+        category: data,
+      },
+    });
   } catch (error) {}
 };
 
-export const deleteCategory = (id: string): TActionType => async (dispatch) => {
+export const deleteCategory = (id: string): CategoryThunkActionTypes => async (dispatch) => {
   try {
     dispatch(setCategoryOperationLoading(true));
     const { data } = await api.delete(`categories/${id}`);

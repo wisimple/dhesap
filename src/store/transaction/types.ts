@@ -1,4 +1,9 @@
+import { IAccount } from 'models/Account';
+import { ICategory } from 'models/Category';
 import { ITransaction } from 'models/Transaction';
+import { ThunkAction } from 'redux-thunk';
+import { RootState } from 'store';
+import { AccountActionTypes } from 'store/account/types';
 
 export interface TransactionState {
   transactions: ITransaction[];
@@ -17,6 +22,23 @@ export const GET_ONE_TRANSACTION = 'GET_ONE_TRANSACTION';
 export const SET_TRANSACTION_LOADING = 'SET_TRANSACTION_LOADING';
 export const SET_TRANSACTION_OPERATION_LOADING = 'SET_TRANSACTION_OPERATION_LOADING';
 export const SET_TRANSACTIONS_ACTIVE_PAGE = 'SET_TRANSACTIONS_ACTIVE_PAGE';
+
+export const UPDATE_TRANSACTION_ACCOUNTS = 'UPDATE_TRANSACTION_ACCOUNTS';
+export const UPDATE_TRANSACTION_CATEGORIES = 'UPDATE_TRANSACTION_CATEGORIES';
+
+interface UpdateTransactionCategories {
+  type: typeof UPDATE_TRANSACTION_CATEGORIES;
+  payload: {
+    category: ICategory;
+  };
+}
+interface UpdateTransactionAccounts {
+  type: typeof UPDATE_TRANSACTION_ACCOUNTS;
+  payload: {
+    account: IAccount;
+  };
+}
+
 interface SetTransactionSActivePageAction {
   type: typeof SET_TRANSACTIONS_ACTIVE_PAGE;
   payload: {
@@ -79,4 +101,13 @@ export type TransactionActionTypes =
   | DeleteTransactionAction
   | SetTransactionLoadingAction
   | SetTransactionOperationLoadingAction
-  | SetTransactionSActivePageAction;
+  | SetTransactionSActivePageAction
+  | UpdateTransactionAccounts
+  | UpdateTransactionCategories;
+
+export type TransactionThunkActionTypes = ThunkAction<
+  void,
+  RootState,
+  unknown,
+  TransactionActionTypes | AccountActionTypes
+>;

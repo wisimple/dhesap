@@ -10,7 +10,7 @@ interface Props {
   styles?: React.CSSProperties;
 }
 
-const MoneyText = ({ amount, colored = true, withPlus = true, currency, className = '', styles }: Props) => {
+const MoneyText = ({ amount, colored = true, withPlus, currency, className = '', styles }: Props) => {
   const isPositive = amount >= 0;
   const color = colored ? `text-${isPositive ? 'green' : 'red'}` : '';
   return (

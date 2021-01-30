@@ -49,6 +49,14 @@
     }
   }
 
+  &--green {
+    background-color: var(--color-green);
+    &--outlined {
+      border-color: var(--color-green);
+      color: var(--color-green);
+    }
+  }
+
   &--rounded {
     border-radius: var(--radius-xlg);
   }
@@ -82,14 +90,12 @@
     border-radius: 0;
   }
 
-  & .button:not(:last-child) {
-    border-right: none;
-  }
-
   .button:first-child {
     border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+    border-right: none;
   }
   .button:last-child {
     border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    border-left: none;
   }
 }

@@ -1,26 +1,33 @@
 interface Props<T> {
   options: T[];
-  selectedOptions?: T[];
+  selectedIds?: string[];
   key?: string;
   renderItem: (item: T, index: number, isSelected: boolean) => React.ReactNode;
-  onChanged?: (selectedOptions: T[]) => void;
+  onChanged?: (selectedIds: string[]) => void;
 }
 
 function ScrollableSelectMulti<T>({
   options,
-  selectedOptions = [],
+  selectedIds = [],
   onChanged = () => {},
   key = '_id',
   renderItem,
 }: Props<T & any>) {
-  const selectedIndexes = selectedOptions.find((o, i) => o[key] === 'sdfsdf');
+  const handleOnSelect = (option: T & any, isSelected: boolean) => {
+    let newState = [];
+    if (isSelected) {
+      newState = selectedIds.filter((c) => c !== option[key]);
+    } else {
+      newState = [...selectedIds, option[key]];
+    }
 
-  const handleOnSelect = (option: T, isSelected: boolean) => {};
+    onChanged(newState);
+  };
 
   return (
     <ul className='scrollable-select'>
       {options.map((option, index) => {
-        const isSelected = selectedOptions.find((o, i) => o._id == 'dsf');
+        const isSelected = selectedIds.includes(option[key]);
         return (
           <li
             key={`index${index}`}

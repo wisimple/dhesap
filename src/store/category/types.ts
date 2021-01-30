@@ -1,4 +1,7 @@
 import { ICategory } from 'models/Category';
+import { ThunkAction } from 'redux-thunk';
+import { RootState } from 'store';
+import { TransactionActionTypes } from 'store/transaction/types';
 
 export interface CategoryState {
   categories: ICategory[];
@@ -67,3 +70,10 @@ export type CategoryActionTypes =
   | DeleteCategorySuccessAction
   | SetCategoryLoadingAction
   | SetCategoryOperationLoadingAction;
+
+export type CategoryThunkActionTypes = ThunkAction<
+  void,
+  RootState,
+  unknown,
+  CategoryActionTypes | TransactionActionTypes
+>;

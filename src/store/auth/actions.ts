@@ -22,6 +22,24 @@ export const signin = (email: string, password: string): TActionType => async (d
   } catch (error) {}
 };
 
+export const signup = (name: string, email: string, password: string): TActionType => async (dispatch) => {
+  try {
+    const { data } = await api.post('auth/signup', {
+      name,
+      email,
+      password,
+    });
+
+    api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+    localStorage.setItem('token', data.token);
+
+    dispatch({
+      type: SIGN_UP,
+      payload: data,
+    });
+  } catch (error) {}
+};
+
 export function signout(): AuthActionTypes {
   localStorage.clear();
   api.defaults.headers.common['Authorization'] = '';

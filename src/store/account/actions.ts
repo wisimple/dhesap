@@ -1,9 +1,10 @@
 import { IAccountDto } from 'models/Account';
-import { ThunkAction } from 'redux-thunk';
-import { RootState } from 'store';
+import { UPDATE_TRANSACTION_ACCOUNTS } from 'store/transaction/types';
+
 import api from 'utils/api';
 import {
   AccountActionTypes,
+  AccountThunkActionTypes,
   CREATE_ACCOUNT_SUCCESS,
   DELETE_ACCOUNT_SUCCESS,
   GET_ALL_ACCOUNTS_SUCCESS,
@@ -13,12 +14,13 @@ import {
   UPDATE_ACCOUNT_SUCCESS,
 } from './types';
 
-type TActionType = ThunkAction<void, RootState, unknown, AccountActionTypes>;
-
-export const getAllAccounts = (params?: { sort?: string; search?: string }): TActionType => async (
-  dispatch
-) => {
+export const getAllAccounts = (params?: {
+  sort?: string;
+  search?: string;
+}): AccountThunkActionTypes => async (dispatch, getState) => {
   try {
+    const { accountState } = getState();
+
     dispatch(setAccountLoading(true));
     const { data } = await api.get('accounts', { params });
     dispatch({
@@ -30,7 +32,7 @@ export const getAllAccounts = (params?: { sort?: string; search?: string }): TAc
   }
 };
 
-export const createAccount = (accountDto: IAccountDto): TActionType => async (dispatch) => {
+export const createAccount = (accountDto: IAccountDto): AccountThunkActionTypes => async (dispatch) => {
   try {
     dispatch(setAccountOperationLoading(true));
     const { data } = await api.post('accounts', accountDto);
@@ -44,7 +46,7 @@ export const createAccount = (accountDto: IAccountDto): TActionType => async (di
   }
 };
 
-export const getOneAccount = (id: string): TActionType => async (dispatch) => {
+export const getOneAccount = (id: string): AccountThunkActionTypes => async (dispatch) => {
   try {
     dispatch(setAccountLoading(true));
     const { data } = await api.get(`accounts/${id}`);
@@ -57,7 +59,9 @@ export const getOneAccount = (id: string): TActionType => async (dispatch) => {
   }
 };
 
-export const updateAccount = (id: string, accountDto: IAccountDto): TActionType => async (dispatch) => {
+export const updateAccount = (id: string, accountDto: IAccountDto): AccountThunkActionTypes => async (
+  dispatch
+) => {
   try {
     dispatch(setAccountOperationLoading(true));
     const { data } = await api.put(`accounts/${id}`, accountDto);
@@ -65,12 +69,17 @@ export const updateAccount = (id: string, accountDto: IAccountDto): TActionType 
       type: UPDATE_ACCOUNT_SUCCESS,
       payload: { account: data },
     });
+
+    dispatch({
+      type: UPDATE_TRANSACTION_ACCOUNTS,
+      payload: { account: data },
+    });
   } catch (error) {
     dispatch(setAccountOperationLoading(false));
   }
 };
 
-export const deleteAccount = (id: string): TActionType => async (dispatch) => {
+export const deleteAccount = (id: string): AccountThunkActionTypes => async (dispatch) => {
   try {
     dispatch(setAccountOperationLoading(true));
     const { data } = await api.delete(`accounts/${id}`);

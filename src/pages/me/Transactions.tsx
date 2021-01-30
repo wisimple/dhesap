@@ -37,7 +37,10 @@ const TransactionItem = ({ transaction, index }: { transaction: ITransaction; in
         </div>
       </td>
       <td>
-        <MoneyText amount={transaction.amnt} currency={transaction.from.crny} />
+        <MoneyText amount={transaction.amnt} currency={transaction.from.crny} withPlus />
+      </td>
+      <td>
+        <MoneyText amount={transaction.fBlnc} currency={transaction.from.crny} />
       </td>
     </tr>
   );
@@ -50,7 +53,9 @@ const Transactions: React.FC = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getTransactions({ page: 1 }));
+    if (transactions.length < 1) {
+      dispatch(getTransactions({ page: 1 }));
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -61,6 +66,7 @@ const Transactions: React.FC = () => {
             <tr>
               <th>Name</th>
               <th>Amount</th>
+              <th>Balance</th>
             </tr>
           </thead>
           <tbody>

@@ -19,6 +19,7 @@ export interface ITransactionDto {
 
 export interface ITransactionCrudDto {
   from: string;
+  to?: string;
   amnt: number;
   ctgrs?: string[];
 }

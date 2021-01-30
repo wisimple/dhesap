@@ -17,9 +17,8 @@ interface SigninAction {
 interface SignupAction {
   type: typeof SIGN_UP;
   payload: {
-    name: string;
-    email: string;
-    password: string;
+    user: IUser;
+    token: string;
   };
 }
 

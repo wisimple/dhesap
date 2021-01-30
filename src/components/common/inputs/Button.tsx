@@ -4,7 +4,7 @@ import Loop from '@material-ui/icons/Loop';
 interface ButtonProps
   extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
   loading?: boolean;
-  color?: 'primary' | 'red';
+  color?: 'primary' | 'red' | 'green';
   rounded?: boolean;
   outlined?: boolean;
   size?: 'sm' | 'md';

@@ -9,6 +9,8 @@ import {
   SET_TRANSACTION_OPERATION_LOADING,
   SET_TRANSACTION_LOADING,
   SET_TRANSACTIONS_ACTIVE_PAGE,
+  UPDATE_TRANSACTION_ACCOUNTS,
+  UPDATE_TRANSACTION_CATEGORIES,
 } from './types';
 
 const initialState: TransactionState = {
@@ -57,6 +59,38 @@ export function transactionReducer(state = initialState, action: TransactionActi
     case DELETE_TRANSACTION: {
       const { transaction } = action.payload;
       return { ...state, transactions: state.transactions.filter((t) => t._id !== transaction._id) };
+    }
+
+    case UPDATE_TRANSACTION_ACCOUNTS: {
+      const { account } = action.payload;
+      return {
+        ...state,
+        transactions: state.transactions.map((t) => {
+          if (t.from._id === account._id) {
+            return { ...t, from: account };
+          } else if (t.to?._id === account._id) {
+            return { ...t, to: account };
+          } else {
+            return t;
+          }
+        }),
+      };
+    }
+
+    case UPDATE_TRANSACTION_CATEGORIES: {
+      const { category } = action.payload;
+      return {
+        ...state,
+        transactions: state.transactions.map((t) => {
+          const newCategories = t.ctgrs?.map((cat) => {
+            if (cat._id === category._id) {
+              return category;
+            }
+            return cat;
+          });
+          return { ...t, ctgrs: newCategories };
+        }),
+      };
     }
     default:
       return state;

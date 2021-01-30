@@ -1,7 +1,6 @@
 import { ITransactionCrudDto } from 'models/Transaction';
-import { ThunkAction } from 'redux-thunk';
-import { RootState } from 'store';
 import api from 'utils/api';
+
 import {
   CREATE_TRANSACTION,
   DELETE_TRANSACTION,
@@ -11,12 +10,15 @@ import {
   SET_TRANSACTION_LOADING,
   SET_TRANSACTION_OPERATION_LOADING,
   TransactionActionTypes,
+  TransactionThunkActionTypes,
   UPDATE_TRANSACTION,
 } from './types';
 
-type TActionType = ThunkAction<void, RootState, unknown, TransactionActionTypes>;
+import { UPDATE_ACCOUNT_SUCCESS } from 'store/account/types';
 
-export const getTransactions = (params: { page: number }): TActionType => async (dispatch) => {
+export const getTransactions = (params: { page: number }): TransactionThunkActionTypes => async (
+  dispatch
+) => {
   try {
     dispatch(setTransactionLoading(true));
     const { data } = await api.get('transactions', { params: { ...params } });
@@ -29,9 +31,9 @@ export const getTransactions = (params: { page: number }): TActionType => async 
   } catch (error) {}
 };
 
-export const createTransaction = (transactonCrudDto: ITransactionCrudDto): TActionType => async (
-  dispatch
-) => {
+export const createTransaction = (
+  transactonCrudDto: ITransactionCrudDto
+): TransactionThunkActionTypes => async (dispatch) => {
   try {
     dispatch(setTransactionOperationLoading(true));
     const { data } = await api.post('transactions', transactonCrudDto);
@@ -40,10 +42,26 @@ export const createTransaction = (transactonCrudDto: ITransactionCrudDto): TActi
       type: CREATE_TRANSACTION,
       payload: { transaction: data },
     });
+
+    dispatch({
+      type: UPDATE_ACCOUNT_SUCCESS,
+      payload: {
+        account: data.from,
+      },
+    });
+
+    if (data.to) {
+      dispatch({
+        type: UPDATE_ACCOUNT_SUCCESS,
+        payload: {
+          account: data.to,
+        },
+      });
+    }
   } catch (error) {}
 };
 
-export const getOneTransaction = (id: string): TActionType => async (dispatch) => {
+export const getOneTransaction = (id: string): TransactionThunkActionTypes => async (dispatch) => {
   try {
     dispatch(setTransactionLoading(true));
     const { data } = await api.get(`transactions/${id}`);
@@ -54,9 +72,10 @@ export const getOneTransaction = (id: string): TActionType => async (dispatch) =
   } catch (error) {}
 };
 
-export const updateTransaction = (id: string, transactonCrudDto: ITransactionCrudDto): TActionType => async (
-  dispatch
-) => {
+export const updateTransaction = (
+  id: string,
+  transactonCrudDto: ITransactionCrudDto
+): TransactionThunkActionTypes => async (dispatch) => {
   try {
     dispatch(setTransactionOperationLoading(true));
     const { data } = await api.put(`transactions/${id}`, transactonCrudDto);
@@ -64,10 +83,26 @@ export const updateTransaction = (id: string, transactonCrudDto: ITransactionCru
       type: UPDATE_TRANSACTION,
       payload: { transaction: data },
     });
+
+    dispatch({
+      type: UPDATE_ACCOUNT_SUCCESS,
+      payload: {
+        account: data.from,
+      },
+    });
+
+    if (data.to) {
+      dispatch({
+        type: UPDATE_ACCOUNT_SUCCESS,
+        payload: {
+          account: data.to,
+        },
+      });
+    }
   } catch (error) {}
 };
 
-export const deleteTransaction = (id: string): TActionType => async (dispatch) => {
+export const deleteTransaction = (id: string): TransactionThunkActionTypes => async (dispatch) => {
   try {
     const { data } = await api.delete(`transactions/${id}`);
     dispatch({

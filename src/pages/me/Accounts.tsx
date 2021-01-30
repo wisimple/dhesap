@@ -100,14 +100,14 @@ const Accounts = () => {
                   </div>
                 </td>
                 <td>
-                  <MoneyText amount={account.blnc} withPlus={false} currency={account.crny} />
+                  <MoneyText amount={account.blnc} currency={account.crny} />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      {loading && <LoadingText />}
+      {accounts.length === 0 && loading && <LoadingText />}
     </>
   );
 };
