@@ -15,7 +15,7 @@ const Categories: React.FC = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (categories.length < 1) {
+    if (categories.length < 2) {
       dispatch(getAllCategories());
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

@@ -53,7 +53,7 @@ const Transactions: React.FC = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if (transactions.length < 1) {
+    if (transactions.length < 2) {
       dispatch(getTransactions({ page: 1 }));
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

@@ -125,29 +125,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
           />
           <label className='label label--linear'>Select an Account</label>
         </div>
-        <div className='form__group'>
-          <span>
-            <span onClick={() => setaccountToIndex(0)}>Alici bir hesap ekle </span>
-            {accountToIndex !== undefined && <span onClick={() => setaccountToIndex(undefined)}>X</span>}
-          </span>
-          {accountToIndex !== undefined && (
-            <div>
-              <ScrollableSelect
-                options={accounts}
-                selectedIndex={accountToIndex}
-                loading={!accounts.length && accountsLoading}
-                renderItem={(account, index, isSelected) => (
-                  <Button outlined={!isSelected} size='md' rounded>
-                    <Avatar type={account.type} size='sm' className='mr-15' /> {account.name}
-                  </Button>
-                )}
-                onChanged={(item, i) => setaccountToIndex(i)}
-              />
-              <label className='label label--linear'>Select an Account</label>
-              <pre>{JSON.stringify(accounts[accountToIndex], null, 2)}</pre>
-            </div>
-          )}
-        </div>
+
         <div className='form__group'>
           <ScrollableSelectMulti
             options={categories}
@@ -169,7 +147,10 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
         </div>
 
         <div className='form__group'>
-          <Button type='submit' loading={opLoading}>
+          <Button
+            type='submit'
+            loading={opLoading}
+            disabled={loading || categoriesLoading || accountsLoading}>
             Save
           </Button>
         </div>

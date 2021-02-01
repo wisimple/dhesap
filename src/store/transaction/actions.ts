@@ -33,7 +33,7 @@ export const getTransactions = (params: { page: number }): TransactionThunkActio
 
 export const createTransaction = (
   transactonCrudDto: ITransactionCrudDto
-): TransactionThunkActionTypes => async (dispatch) => {
+): TransactionThunkActionTypes => async (dispatch, getState) => {
   try {
     dispatch(setTransactionOperationLoading(true));
     const { data } = await api.post('transactions', transactonCrudDto);
@@ -58,6 +58,11 @@ export const createTransaction = (
         },
       });
     }
+
+    const { transactionState } = getState();
+    if (transactionState.activePage !== 1) {
+      dispatch(getTransactions({ page: 1 }));
+    }
   } catch (error) {}
 };
 
@@ -75,7 +80,7 @@ export const getOneTransaction = (id: string): TransactionThunkActionTypes => as
 export const updateTransaction = (
   id: string,
   transactonCrudDto: ITransactionCrudDto
-): TransactionThunkActionTypes => async (dispatch) => {
+): TransactionThunkActionTypes => async (dispatch, getState) => {
   try {
     dispatch(setTransactionOperationLoading(true));
     const { data } = await api.put(`transactions/${id}`, transactonCrudDto);
@@ -99,16 +104,22 @@ export const updateTransaction = (
         },
       });
     }
+
+    const { transactionState } = getState();
+    dispatch(getTransactions({ page: transactionState.activePage }));
   } catch (error) {}
 };
 
-export const deleteTransaction = (id: string): TransactionThunkActionTypes => async (dispatch) => {
+export const deleteTransaction = (id: string): TransactionThunkActionTypes => async (dispatch, getState) => {
   try {
     const { data } = await api.delete(`transactions/${id}`);
     dispatch({
       type: DELETE_TRANSACTION,
       payload: { transaction: data },
     });
+
+    const { transactionState } = getState();
+    dispatch(getTransactions({ page: transactionState.activePage }));
   } catch (error) {}
 };
 

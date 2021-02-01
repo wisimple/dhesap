@@ -1,4 +1,5 @@
 import { IAccountDto } from 'models/Account';
+import { getTransactions } from 'store/transaction/actions';
 import { UPDATE_TRANSACTION_ACCOUNTS } from 'store/transaction/types';
 
 import api from 'utils/api';
@@ -41,6 +42,10 @@ export const createAccount = (accountDto: IAccountDto): AccountThunkActionTypes 
       type: CREATE_ACCOUNT_SUCCESS,
       payload: { account: data },
     });
+
+    if (data.blnc !== 0) {
+      dispatch(getTransactions({ page: 1 }));
+    }
   } catch (error) {
     dispatch(setAccountOperationLoading(false));
   }
