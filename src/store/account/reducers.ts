@@ -12,6 +12,7 @@ import {
 
 const initialState: AccountState = {
   accounts: [],
+  transactions: [],
 };
 
 export function accountReducer(state = initialState, action: AccountActionTypes): AccountState {
@@ -28,8 +29,10 @@ export function accountReducer(state = initialState, action: AccountActionTypes)
     case CREATE_ACCOUNT_SUCCESS:
       return { ...state, accounts: [action.payload.account, ...state.accounts], opLoading: false };
 
-    case GET_ONE_ACCOUNT_SUCCESS:
-      return { ...state, account: action.payload.account, loading: false };
+    case GET_ONE_ACCOUNT_SUCCESS: {
+      const { account, transactions } = action.payload;
+      return { ...state, account, transactions, loading: false };
+    }
 
     case UPDATE_ACCOUNT_SUCCESS:
       const { account } = action.payload;

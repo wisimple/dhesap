@@ -18,10 +18,8 @@ import {
 export const getAllAccounts = (params?: {
   sort?: string;
   search?: string;
-}): AccountThunkActionTypes => async (dispatch, getState) => {
+}): AccountThunkActionTypes => async (dispatch) => {
   try {
-    const { accountState } = getState();
-
     dispatch(setAccountLoading(true));
     const { data } = await api.get('accounts', { params });
     dispatch({
@@ -57,7 +55,7 @@ export const getOneAccount = (id: string): AccountThunkActionTypes => async (dis
     const { data } = await api.get(`accounts/${id}`);
     dispatch({
       type: GET_ONE_ACCOUNT_SUCCESS,
-      payload: { account: data },
+      payload: { account: data.account, transactions: data.transactions },
     });
   } catch (error) {
     dispatch(setAccountLoading(false));

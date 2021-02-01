@@ -14,10 +14,8 @@ import {
   UPDATE_CATEGORY_SUCCESS,
 } from './types';
 
-export const getAllCategories = (): CategoryThunkActionTypes => async (dispatch, getState) => {
+export const getAllCategories = (): CategoryThunkActionTypes => async (dispatch) => {
   try {
-    const { categoryState } = getState();
-
     dispatch(setCategoryLoading(true));
 
     const { data } = await api.get('categories');
@@ -48,7 +46,7 @@ export const getOneCategory = (id: string): CategoryThunkActionTypes => async (d
     const { data } = await api.get(`categories/${id}`);
     dispatch({
       type: GET_ONE_CATEGORY_SUCCESS,
-      payload: { category: data },
+      payload: { category: data.category, transactions: data.transactions },
     });
   } catch (error) {}
 };

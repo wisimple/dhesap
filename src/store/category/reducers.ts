@@ -12,6 +12,7 @@ import {
 
 const initialState: CategoryState = {
   categories: [],
+  transactions: [],
 };
 
 export function categoryReducer(state = initialState, action: CategoryActionTypes): CategoryState {
@@ -28,8 +29,10 @@ export function categoryReducer(state = initialState, action: CategoryActionType
     case CREATE_CATEGORY_SUCCESS:
       return { ...state, categories: [action.payload.category, ...state.categories], opLoading: false };
 
-    case GET_ONE_CATEGORY_SUCCESS:
-      return { ...state, category: action.payload.category, loading: false };
+    case GET_ONE_CATEGORY_SUCCESS: {
+      const { category, transactions } = action.payload;
+      return { ...state, category, transactions, loading: false };
+    }
 
     case UPDATE_CATEGORY_SUCCESS: {
       const { category } = action.payload;

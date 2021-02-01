@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory, useLocation, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { RootState } from 'store';
 
 import { getOneTransaction } from 'store/transaction/actions';
@@ -9,7 +9,6 @@ const Show = () => {
   const dispatch = useDispatch();
   const params: { id: string } = useParams();
   const { pathname } = useLocation();
-  const history = useHistory();
   const transaction = useSelector((state: RootState) => state.transactionState.transaction);
 
   useEffect(() => {

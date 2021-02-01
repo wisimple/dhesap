@@ -13,22 +13,17 @@ import LoadingText from 'components/common/TextLoading';
 
 const TransactionItem = ({ transaction, index }: { transaction: ITransaction; index: number }) => {
   const history = useHistory();
+  const { cAt, from, _id, ctgrs, amnt } = transaction;
 
   return (
-    <tr onClick={() => history.push('/me/transactions/' + transaction._id)}>
+    <tr onClick={() => history.push('/me/transactions/' + _id)}>
       <td>
         <div className='flex items-center'>
-          <Avatar
-            url={transaction.from.avtT}
-            type={transaction.from.type}
-            gender={transaction.from.gndr}
-            className='mr-15'
-            size='sm'
-          />
+          <Avatar url={from.avtT} type={from.type} gender={from.gndr} className='mr-15' size='sm' />
           <div className='flex flex-column'>
-            <span>{transaction.from.name}</span>
+            <span>{from.name}</span>
             <div className='flex'>
-              {transaction.ctgrs?.map((c) => {
+              {ctgrs?.map((c) => {
                 const { name, clr } = c.icon;
                 return <CustomIcon key={c._id} name={name} size='sm' color={clr} />;
               })}
@@ -37,10 +32,10 @@ const TransactionItem = ({ transaction, index }: { transaction: ITransaction; in
         </div>
       </td>
       <td>
-        <MoneyText amount={transaction.amnt} currency={transaction.from.crny} withPlus />
+        <MoneyText amount={amnt} currency={from.crny} withPlus />
       </td>
       <td>
-        <MoneyText amount={transaction.fBlnc} currency={transaction.from.crny} />
+        <small>{new Date(cAt).toLocaleDateString()}</small>
       </td>
     </tr>
   );
@@ -66,7 +61,7 @@ const Transactions: React.FC = () => {
             <tr>
               <th>Name</th>
               <th>Amount</th>
-              <th>Balance</th>
+              <th>Date</th>
             </tr>
           </thead>
           <tbody>

@@ -55,7 +55,7 @@ const NavigationTabs: React.FC = () => {
       </AnimatePresence>
       <ul className='nav-tabs'>
         {routes.map((route) => (
-          <li key={route.path} className='nav-tabs__item'>
+          <li key={route.path} className='nav-tabs__item' onClick={() => window.scrollTo(0, 0)}>
             <NavLink to={'/me/tabs' + route.path} activeClassName='active'>
               {route.iconComponent} <span>{route.name}</span>
             </NavLink>

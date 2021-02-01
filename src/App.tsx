@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
@@ -14,6 +14,12 @@ const Home = React.lazy(() => import('pages/me'));
 
 function App() {
   const token = useSelector((state: RootState) => state.authState.token);
+  const theme = useSelector((state: RootState) => state.appState.theme);
+
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
+
   return (
     <Router>
       <Suspense fallback={<TextLoading />}>

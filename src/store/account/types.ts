@@ -1,4 +1,5 @@
 import { IAccount } from 'models/Account';
+import { ITransaction } from 'models/Transaction';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'store';
 import { TransactionActionTypes } from 'store/transaction/types';
@@ -6,6 +7,7 @@ import { TransactionActionTypes } from 'store/transaction/types';
 export interface AccountState {
   accounts: IAccount[];
   account?: IAccount;
+  transactions: ITransaction[];
   loading?: boolean;
   opLoading?: boolean;
 }
@@ -45,6 +47,7 @@ interface GetOneAccountSuccessAction {
   type: typeof GET_ONE_ACCOUNT_SUCCESS;
   payload: {
     account: IAccount;
+    transactions: ITransaction[];
   };
 }
 

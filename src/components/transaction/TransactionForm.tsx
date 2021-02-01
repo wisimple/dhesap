@@ -10,11 +10,9 @@ import { RootState } from 'store';
 import { createTransaction, deleteTransaction, updateTransaction } from 'store/transaction/actions';
 import { getAllAccounts } from 'store/account/actions';
 import { getAllCategories } from 'store/category/actions';
-import CustomIcon from 'components/common/CustomIcon';
 import ScrollableSelectMulti from 'components/common/inputs/ScrollableSelectMulti';
 import Icon from '@material-ui/core/Icon';
 import { useHistory } from 'react-router-dom';
-import { ICategory } from 'models/Category';
 
 interface Props {
   data?: ITransaction;
@@ -25,9 +23,9 @@ interface Props {
 const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
   const [isPositive, setisPositive] = useState(true);
   const [accountIndex, setaccountIndex] = useState(0);
-  const [accountToIndex, setaccountToIndex] = useState<number | undefined>();
   const [selectedCategoryIds, setselectedCategoryIds] = useState<Array<string>>([]);
   const [amount, setamount] = useState(0);
+  const [description, setdescription] = useState('');
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -49,6 +47,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
       if (data.amnt < 0) setisPositive(false);
       setamount(Math.abs(data.amnt));
       setaccountIndex(accounts.findIndex((account) => account._id === data.from._id));
+      setdescription(data.desc || '');
       console.log(data.ctgrs);
 
       setselectedCategoryIds(data.ctgrs?.map((c) => c._id) || []);
@@ -61,9 +60,10 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
 
     const transactionCrudDto: ITransactionCrudDto = {
       from: accounts[accountIndex]._id,
-      to: accountToIndex !== undefined ? accounts[accountToIndex]._id : undefined,
+
       amnt: isPositive ? amount : -amount,
       ctgrs: selectedCategoryIds.length ? selectedCategoryIds : undefined,
+      desc: description || undefined,
     };
 
     console.log(transactionCrudDto);
@@ -132,7 +132,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             selectedIds={selectedCategoryIds}
             onChanged={(selectedIds) => setselectedCategoryIds(selectedIds)}
             renderItem={(category, index, isSelected) => {
-              const { name, icon } = category;
+              const { icon } = category;
               return (
                 <Button outlined={!isSelected} rounded size='md'>
                   <Icon className='mr-1'>{icon.name}</Icon>
@@ -144,6 +144,18 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
           <label className='label label--linear'>
             Select Category <small>(you can choose multiple)</small>
           </label>
+        </div>
+
+        <div className='form__group'>
+          <input
+            type='text'
+            name='desc'
+            id='desc'
+            className='input'
+            placeholder='Note'
+            value={description}
+            onChange={({ target }) => setdescription(target.value)}
+          />
         </div>
 
         <div className='form__group'>
@@ -162,7 +174,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
               color='red'
               onClick={() => {
                 dispatch(deleteTransaction(data._id));
-                history.replace('/me/tabs/transactions');
+                history.go(-2);
               }}>
               Delete
             </Button>

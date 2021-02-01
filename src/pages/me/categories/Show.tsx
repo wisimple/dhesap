@@ -10,20 +10,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { getOneCategory } from 'store/category/actions';
 
-const transactions: any[] = [];
-
 const Show = () => {
   const { pathname } = useLocation();
   const params: { id: string } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const { category, loading } = useSelector((state: RootState) => state.categoryState);
+  const { category, loading, transactions } = useSelector((state: RootState) => state.categoryState);
 
   useEffect(() => {
-    if (category?._id !== params.id) {
-      dispatch(getOneCategory(params.id));
-    }
-  }, [params]); // eslint-disable-line react-hooks/exhaustive-deps
+    dispatch(getOneCategory(params.id));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -63,7 +59,9 @@ const Show = () => {
                   <td>
                     <MoneyText amount={amnt} currency={from.crny} />
                   </td>
-                  <td className='text-xsm'>{transaction.cAt.toLocaleDateString()}</td>
+                  <td>
+                    <small>{new Date(transaction.cAt).toLocaleDateString()}</small>
+                  </td>
                 </tr>
               );
             })}

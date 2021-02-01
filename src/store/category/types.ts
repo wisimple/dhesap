@@ -1,4 +1,5 @@
 import { ICategory } from 'models/Category';
+import { ITransaction } from 'models/Transaction';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from 'store';
 import { TransactionActionTypes } from 'store/transaction/types';
@@ -8,6 +9,7 @@ export interface CategoryState {
   category?: ICategory;
   loading?: boolean;
   opLoading?: boolean;
+  transactions: ITransaction[];
 }
 
 export const GET_ALL_CATEGORIES_SUCCESS = 'GET_ALL_CATEGORIES_SUCCESS';
@@ -46,6 +48,7 @@ interface GetOneCategorySuccessAction {
   type: typeof GET_ONE_CATEGORY_SUCCESS;
   payload: {
     category: ICategory;
+    transactions: ITransaction[];
   };
 }
 

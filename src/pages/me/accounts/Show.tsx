@@ -8,19 +8,17 @@ import CustomIcon from 'components/common/CustomIcon';
 import { useDispatch, useSelector } from 'react-redux';
 import { getOneAccount } from 'store/account/actions';
 import { RootState } from 'store';
-import { ITransaction } from 'models/Transaction';
-
-const transactions: ITransaction[] = [];
+import LoadingText from 'components/common/TextLoading';
 
 const Show = () => {
   const { pathname } = useLocation();
   const params: { id: string } = useParams();
   const history = useHistory();
-  const { account, loading } = useSelector((state: RootState) => state.accountState);
+  const { account, transactions, loading } = useSelector((state: RootState) => state.accountState);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (account?._id !== params.id) dispatch(getOneAccount(params.id));
+    dispatch(getOneAccount(params.id));
   }, [params]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -36,7 +34,7 @@ const Show = () => {
         <table className='table'>
           <thead>
             <tr>
-              <th>Account</th>
+              <th>Description</th>
               <th>Amount</th>
               <th>Balance</th>
               <th>Date</th>
@@ -44,12 +42,12 @@ const Show = () => {
           </thead>
           <tbody>
             {transactions.map((transaction, index) => {
-              const { _id, from, amnt } = transaction;
+              const { _id, desc, amnt, cAt } = transaction;
               return (
                 <tr key={_id} onClick={() => history.push('/me/transactions/' + transaction._id)}>
                   <td>
                     <div className='flex flex-wrap items-center'>
-                      {transaction.to && <span className='mr-1'>{transaction.to?.name}</span>}
+                      <span>{desc}</span>
                       <div className='flex items-center flex-wrap'>
                         {transaction.ctgrs?.map((c) => (
                           <div
@@ -64,18 +62,26 @@ const Show = () => {
                     </div>
                   </td>
                   <td>
-                    <MoneyText amount={amnt} currency={from.crny} />
+                    <MoneyText amount={amnt} currency={account?.crny} />
                   </td>
                   <td>
-                    <MoneyText amount={from.blnc} currency={from.crny} colored={false} className='text-sm' />
+                    <MoneyText
+                      amount={transaction.fBlnc}
+                      currency={account?.crny}
+                      colored={false}
+                      className='text-sm'
+                    />
                   </td>
-                  <td className='text-xsm'>{transaction.cAt.toLocaleDateString()}</td>
+                  <td className=''>
+                    <small>{new Date(cAt).toLocaleDateString()}</small>
+                  </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
       </div>
+      {loading && !transactions.length && <LoadingText />}
     </>
   );
 };
