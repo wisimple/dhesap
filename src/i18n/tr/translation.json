@@ -37,6 +37,8 @@
   "selectTheCategories": "Kategori seçiniz",
   "youCanChooseMultiple": "Birden fazla seçebilirsiniz",
   "note": "Not",
+  "phoneNumber": "Telefon Numarası",
+  "notRequired": "Boş bırakılabilir",
 
   "income": "Gelir",
   "expense": "Gider",
@@ -64,5 +66,9 @@
 
   "name": "Ad",
   "amount": "Tutar",
-  "date": "Tarih"
+  "date": "Tarih",
+
+  "changeTheLanguage": "Dili değiştir",
+  "turkish": "Türkçe",
+  "english": "İngilizce"
 }

@@ -37,6 +37,8 @@
   "selectTheCategories": "Select the Categories",
   "youCanChooseMultiple": "You can choose multiple",
   "note": "Note",
+  "phoneNumber": "Phone Number",
+  "notRequired": "Not required",
 
   "income": "Income",
   "expense": "Expense",
@@ -64,5 +66,9 @@
 
   "name": "Name",
   "amount": "Amount",
-  "date": "Date"
+  "date": "Date",
+
+  "changeTheLanguage": "Change the language",
+  "turkish": "Turkish",
+  "english": "English"
 }

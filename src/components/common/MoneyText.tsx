@@ -1,4 +1,5 @@
 import { getCurrencySymbol } from 'constants/currencies';
+import { formatMoney } from 'helpers';
 import { CurrencyCodes } from 'models/Currency';
 
 interface Props {
@@ -16,7 +17,7 @@ const MoneyText = ({ amount, colored = true, withPlus, currency, className = '',
   return (
     <span className={`text-money ${color} ${className}`} style={styles}>
       {withPlus && isPositive && amount !== 0 && '+'}
-      {amount}
+      {formatMoney(amount)}
       {currency && <span>{getCurrencySymbol(currency)}</span>}
     </span>
   );

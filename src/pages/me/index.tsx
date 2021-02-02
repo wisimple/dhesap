@@ -12,8 +12,16 @@ import TransactionsIndex from 'pages/me/transactions/index';
 import AccountsIndex from 'pages/me/accounts/index';
 import CategoriesIndex from 'pages/me/categories/index';
 import SettingsIndex from 'pages/me/settings/index';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getUserData } from 'store/auth/actions';
 
 function Index() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserData());
+  }, []);
   return (
     <Switch>
       <Route path='/me/tabs'>

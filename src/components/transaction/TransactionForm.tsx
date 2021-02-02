@@ -106,6 +106,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
         <div className='form__group'>
           <input
             type='number'
+            step='any'
             className='input'
             name='amnt'
             placeholder={`0 ${accounts[accountIndex]?.crny || ''}`}

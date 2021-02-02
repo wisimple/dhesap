@@ -1,7 +1,8 @@
 /* 
     BUTTON
 */
-.button {
+.button,
+a.button {
   @extend .input--non-styled;
   font-size: inherit;
   display: flex;

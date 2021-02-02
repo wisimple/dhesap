@@ -12,6 +12,8 @@ export interface IAccountDto {
   avt?: string;
   avtT?: string;
   gndr?: boolean;
+  phn?: string;
+  desc?: string;
 }
 
 export interface IAccount extends IAccountDto, IMongoData {}

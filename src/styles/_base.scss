@@ -150,3 +150,18 @@ a {
     margin-right: 1rem;
   }
 }
+
+.mx {
+  &-05 {
+    margin: 0 0.25rem;
+  }
+  &-1 {
+    margin: 0 0.5rem;
+  }
+  &-15 {
+    margin: 0 0.75rem;
+  }
+  &-2 {
+    margin: 0 1rem;
+  }
+}

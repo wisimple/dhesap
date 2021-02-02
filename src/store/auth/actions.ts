@@ -1,11 +1,8 @@
-import { AuthActionTypes, SIGN_IN, SIGN_OUT, SIGN_UP } from './types';
-import { ThunkAction } from 'redux-thunk';
-import { RootState } from 'store';
+import { AuthActionTypes, AuthThunkActionTypes, SIGN_IN, SIGN_OUT, SIGN_UP, SET_USER } from './types';
+
 import api from 'utils/api';
 
-type TActionType = ThunkAction<void, RootState, unknown, AuthActionTypes>;
-
-export const signin = (email: string, password: string): TActionType => async (dispatch) => {
+export const signin = (email: string, password: string): AuthThunkActionTypes => async (dispatch) => {
   try {
     const { data } = await api.post('auth/signin', {
       email,
@@ -22,7 +19,9 @@ export const signin = (email: string, password: string): TActionType => async (d
   } catch (error) {}
 };
 
-export const signup = (name: string, email: string, password: string): TActionType => async (dispatch) => {
+export const signup = (name: string, email: string, password: string): AuthThunkActionTypes => async (
+  dispatch
+) => {
   try {
     const { data } = await api.post('auth/signup', {
       name,
@@ -47,3 +46,16 @@ export function signout(): AuthActionTypes {
     type: SIGN_OUT,
   };
 }
+
+export const getUserData = (): AuthThunkActionTypes => async (dispatch) => {
+  try {
+    const { data } = await api.get('me');
+
+    dispatch({
+      type: SET_USER,
+      payload: {
+        user: data,
+      },
+    });
+  } catch (error) {}
+};

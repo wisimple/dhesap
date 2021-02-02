@@ -1,4 +1,6 @@
 import { IUser } from 'models/User';
+import { ThunkAction } from 'redux-thunk';
+import { RootState } from 'store';
 
 export interface AuthState {
   user: IUser | null;
@@ -8,6 +10,14 @@ export interface AuthState {
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const SIGN_OUT = 'SIGN_OUT';
+export const SET_USER = 'SET_USER';
+
+interface SetUserAction {
+  type: typeof SET_USER;
+  payload: {
+    user: IUser;
+  };
+}
 
 interface SigninAction {
   type: typeof SIGN_IN;
@@ -26,4 +36,5 @@ interface SignoutAction {
   type: typeof SIGN_OUT;
 }
 
-export type AuthActionTypes = SigninAction | SignupAction | SignoutAction;
+export type AuthActionTypes = SigninAction | SignupAction | SignoutAction | SetUserAction;
+export type AuthThunkActionTypes = ThunkAction<void, RootState, unknown, AuthActionTypes>;

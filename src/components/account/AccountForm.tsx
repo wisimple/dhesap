@@ -23,6 +23,8 @@ const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
   const [accountTypeIndex, setaccountTypeIndex] = useState(0);
   const [name, setname] = useState('');
   const [balance, setbalance] = useState(0);
+  const [phone, setphone] = useState('');
+  const [description, setdescription] = useState('');
   // @TODO 'default user currency will be setted'
   const [currency, setcurrency] = useState<CurrencyCodes>('TRY');
   const [isBalancePositive, setisBalancePositive] = useState(true);
@@ -36,6 +38,9 @@ const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
       setname(data.name);
       setbalance(data.blnc);
       setcurrency(data.crny);
+      setphone(data.phn || '');
+      setdescription(data.desc || '');
+
       if (data.blnc < 0) {
         setisBalancePositive(false);
       }
@@ -138,6 +143,34 @@ const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
           />
           <label htmlFor='type' className='label label--linear'>
             {t('accountType')}
+          </label>
+        </div>
+        <div className='form__group '>
+          <input
+            type='text'
+            placeholder='05333333333'
+            className='input'
+            name='phn'
+            id='phn'
+            value={phone}
+            onChange={({ target }) => setphone(target.value)}
+          />
+          <label htmlFor='phn' className='label label--linear'>
+            {t('phoneNumber')} ({t('notRequired')})
+          </label>
+        </div>
+        <div className='form__group '>
+          <input
+            type='text'
+            placeholder={t('description')}
+            className='input'
+            name='desc'
+            id='desc'
+            value={description}
+            onChange={({ target }) => setdescription(target.value)}
+          />
+          <label htmlFor='desc' className='label label--linear'>
+            {t('description')} ({t('notRequired')})
           </label>
         </div>
         <div className='form__group'>
