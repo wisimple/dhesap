@@ -11,6 +11,8 @@ import { getTransactions, setTransactionsActivePage } from 'store/transaction/ac
 import { RootState } from 'store';
 import LoadingText from 'components/common/TextLoading';
 
+import { useTranslation } from 'react-i18next';
+
 const TransactionItem = ({ transaction, index }: { transaction: ITransaction; index: number }) => {
   const history = useHistory();
   const { cAt, from, _id, ctgrs, amnt } = transaction;
@@ -42,6 +44,7 @@ const TransactionItem = ({ transaction, index }: { transaction: ITransaction; in
 };
 
 const Transactions: React.FC = () => {
+  const { t } = useTranslation();
   const { transactions, totalPages, activePage, loading } = useSelector(
     (state: RootState) => state.transactionState
   );
@@ -59,9 +62,9 @@ const Transactions: React.FC = () => {
         <table className='table'>
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Amount</th>
-              <th>Date</th>
+              <th>{t('account')}</th>
+              <th>{t('amount')}</th>
+              <th>{t('date')}</th>
             </tr>
           </thead>
           <tbody>

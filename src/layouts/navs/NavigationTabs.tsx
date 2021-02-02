@@ -7,27 +7,29 @@ import Category from '@material-ui/icons/Category';
 import BarChart from '@material-ui/icons/BarChart';
 import Add from '@material-ui/icons/Add';
 
+import { useTranslation } from 'react-i18next';
+
 const routes = [
   {
-    name: 'Summary',
+    name: 'summary' as const,
     path: '/summary',
     plusButtonRedirectUrl: null,
     iconComponent: <BarChart />,
   },
   {
-    name: 'Transactions',
+    name: 'transactions' as const,
     path: '/transactions',
     plusButtonRedirectUrl: '/me/transactions/create',
     iconComponent: <Home />,
   },
   {
-    name: 'Accounts',
+    name: 'accounts' as const,
     path: '/accounts',
     plusButtonRedirectUrl: '/me/accounts/create',
     iconComponent: <SupervisorAccount />,
   },
   {
-    name: 'Categories',
+    name: 'categories' as const,
     path: '/categories',
     plusButtonRedirectUrl: '/me/categories/create',
     iconComponent: <Category />,
@@ -35,6 +37,8 @@ const routes = [
 ];
 
 const NavigationTabs: React.FC = () => {
+  const { t } = useTranslation();
+
   const { pathname } = useLocation();
 
   const isPlusButtonShown = routes.find((r) => pathname === '/me/tabs' + r.path)?.plusButtonRedirectUrl;
@@ -57,7 +61,7 @@ const NavigationTabs: React.FC = () => {
         {routes.map((route) => (
           <li key={route.path} className='nav-tabs__item' onClick={() => window.scrollTo(0, 0)}>
             <NavLink to={'/me/tabs' + route.path} activeClassName='active'>
-              {route.iconComponent} <span>{route.name}</span>
+              {route.iconComponent} <span>{t(route.name)}</span>
             </NavLink>
           </li>
         ))}

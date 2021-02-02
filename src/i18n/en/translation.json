@@ -1,0 +1,68 @@
+{
+  "auth": {
+    "signin": "Signin",
+    "signup": "Signup",
+    "signout": "Signout",
+    "continueWith": "Continue with",
+    "signInToYourAccount": "Signin to your account"
+  },
+
+  "inputs": {
+    "yourName": "Your Name",
+    "exampleName": "Exp. John DOE",
+    "yourEmailAddress": "Your email address",
+    "password": "Password"
+  },
+
+  "categories": "Categories",
+  "transactions": "Transactions",
+  "accounts": "Accounts",
+  "account": "Account",
+  "balance": "Balance",
+  "initialBalance": "Initial Balance",
+  "summary": "Summary",
+  "settings": "Settings",
+  "switchTheme": "Switch Theme",
+  "loading": "loading...",
+  "description": "Description",
+  "defaultCurrency": "Default Currency",
+  "accountType": "Account Type",
+  "save": "Save",
+  "delete": "Delete",
+  "categoryName": "Category Name",
+  "selectAnIcon": "Select an icon",
+  "selectAnIconColor": "Select an icon color",
+  "selectAnIconBackgroundColor": "Select an icon background color",
+  "selectAnAccount": "Select an Account",
+  "selectTheCategories": "Select the Categories",
+  "youCanChooseMultiple": "You can choose multiple",
+  "note": "Note",
+
+  "income": "Income",
+  "expense": "Expense",
+  "creditor": "Creditor",
+  "debtor": "Debtor",
+  "or": "or",
+
+  "personAccount": "Person Account",
+  "companyAccount": "Company Account",
+  "bankAccount": "Bank Account",
+  "coinWallet": "Coin Wallet",
+
+  "setAsDebtor": "Set as debtor",
+  "setAsCreditor": "Set as creditor",
+
+  "TRY": "Turkish Lira",
+  "USD": "United State Dollar",
+  "EURO": "Euro",
+  "GBP": "British Pound",
+  "GOLD": "GOLD (1 gram)",
+  "others": "Others",
+
+  "searchAnAccount": "Search an account",
+  "accountName": "Account Name",
+
+  "name": "Name",
+  "amount": "Amount",
+  "date": "Date"
+}

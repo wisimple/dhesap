@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 interface Props<T> {
   options: T[];
   selectedIndex?: number;
@@ -15,9 +17,10 @@ function ScrollableSelect<T>({
   onChanged = () => {},
   loading,
 }: Props<T>) {
+  const { t } = useTranslation();
   return (
     <ul className='scrollable-select'>
-      {loading && <li className='scrollable-select__item'>loading...</li>}
+      {loading && <li className='scrollable-select__item'>{t('loading')}</li>}
       {options.map((option, index) => (
         <li
           key={'index' + index}

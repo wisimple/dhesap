@@ -9,6 +9,7 @@ import { createCategory, deleteCategory, updateCategory } from 'store/category/a
 import { useHistory } from 'react-router-dom';
 import { RootState } from 'store';
 import Button from 'components/common/inputs/Button';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   data?: ICategory;
@@ -17,6 +18,7 @@ interface Props {
 }
 
 const CategoryForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
   const [name, setname] = useState('');
@@ -57,13 +59,13 @@ const CategoryForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
           name='name'
           id='name'
           className='input input--xlg'
-          placeholder={loading ? 'loading...' : 'Category Name'}
+          placeholder={loading ? t('loading') : t('categoryName')}
           value={name}
           onChange={({ target }) => setname(target.value)}
           autoFocus={!data ? true : false}
         />
         <label htmlFor='name' className='label label--linear'>
-          Category Name
+          {t('categoryName')}
         </label>
       </div>
       <div className='form__group'>
@@ -80,7 +82,7 @@ const CategoryForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
           )}
         />
         <label htmlFor='icon' className='label label--linear'>
-          Select an icon
+          {t('selectAnIcon')}
         </label>
       </div>
       <div className='form__group'>
@@ -95,7 +97,7 @@ const CategoryForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
           )}
         />
         <label htmlFor='icon' className='label label--linear'>
-          Select a background color
+          {t('selectAnIconBackgroundColor')}
         </label>
       </div>
       <div className='form__group'>
@@ -110,13 +112,13 @@ const CategoryForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
           )}
         />
         <label htmlFor='icon' className='label label--linear'>
-          Select an icon color
+          {t('selectAnIconColor')}
         </label>
       </div>
 
       <div className='form__group'>
         <Button type='submit' loading={opLoading}>
-          Save
+          {t('save')}
         </Button>
       </div>
 
@@ -130,7 +132,7 @@ const CategoryForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
               dispatch(deleteCategory(data?._id));
               history.replace('/me/tabs/categories');
             }}>
-            Delete
+            {t('delete')}
           </Button>
         </div>
       )}

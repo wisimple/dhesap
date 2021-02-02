@@ -13,6 +13,7 @@ import { getAllCategories } from 'store/category/actions';
 import ScrollableSelectMulti from 'components/common/inputs/ScrollableSelectMulti';
 import Icon from '@material-ui/core/Icon';
 import { useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   data?: ITransaction;
@@ -21,6 +22,7 @@ interface Props {
 }
 
 const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
+  const { t } = useTranslation();
   const [isPositive, setisPositive] = useState(true);
   const [accountIndex, setaccountIndex] = useState(0);
   const [selectedCategoryIds, setselectedCategoryIds] = useState<Array<string>>([]);
@@ -84,15 +86,19 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             <Button outlined={!isPositive} onClick={() => setisPositive(true)} color='green'>
               {isPositive && <Check className='icon icon--left' />}
               <div className='flex flex-column'>
-                <span className='mb-1'>Income</span>
-                <small>or Creditor</small>
+                <span className='mb-1'>{t('income')}</span>
+                <small>
+                  {t('or')} {t('creditor')}
+                </small>
               </div>
             </Button>
             <Button outlined={isPositive} onClick={() => setisPositive(false)} color='red'>
               {!isPositive && <Check className='icon icon--left' />}
               <div className='flex flex-column'>
-                <span className='mb-1'>Expense</span>
-                <small>or Debtor</small>
+                <span className='mb-1'>{t('expense')}</span>
+                <small>
+                  {t('or')} {t('debtor')}
+                </small>
               </div>
             </Button>
           </div>
@@ -108,7 +114,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             onChange={({ target }) => setamount(parseFloat(target.value))}
           />
           <label htmlFor='amnt' className='label label--linear'>
-            Amount ({accounts[accountIndex]?.crny || ''})
+            {t('amount')} ({accounts[accountIndex]?.crny || ''})
           </label>
         </div>
         <div className='form__group'>
@@ -123,7 +129,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             )}
             onChanged={(item, i) => setaccountIndex(i)}
           />
-          <label className='label label--linear'>Select an Account</label>
+          <label className='label label--linear'>{t('selectAnAccount')}</label>
         </div>
 
         <div className='form__group'>
@@ -142,7 +148,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             }}
           />
           <label className='label label--linear'>
-            Select Category <small>(you can choose multiple)</small>
+            {t('selectTheCategories')} <small>({t('youCanChooseMultiple')})</small>
           </label>
         </div>
 
@@ -152,7 +158,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             name='desc'
             id='desc'
             className='input'
-            placeholder='Note'
+            placeholder={t('note')}
             value={description}
             onChange={({ target }) => setdescription(target.value)}
           />
@@ -163,7 +169,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             type='submit'
             loading={opLoading}
             disabled={loading || categoriesLoading || accountsLoading}>
-            Save
+            {t('save')}
           </Button>
         </div>
 
@@ -176,7 +182,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
                 dispatch(deleteTransaction(data._id));
                 history.go(-2);
               }}>
-              Delete
+              {t('delete')}
             </Button>
           </div>
         )}

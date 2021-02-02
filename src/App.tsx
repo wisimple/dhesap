@@ -2,6 +2,8 @@ import React, { Suspense, useEffect } from 'react';
 
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
+import 'i18n/config';
+
 import Welcome from 'pages/Welcome';
 import Signin from 'pages/Signin';
 import Signup from 'pages/Signup';
@@ -9,16 +11,20 @@ import TextLoading from 'components/common/TextLoading';
 import PrivateRoute from 'PrivateRoute';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
+import { useTranslation } from 'react-i18next';
 
 const Home = React.lazy(() => import('pages/me'));
 
 function App() {
   const token = useSelector((state: RootState) => state.authState.token);
-  const theme = useSelector((state: RootState) => state.appState.theme);
+  const { theme, language } = useSelector((state: RootState) => state.appState);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     document.body.className = theme;
-  }, [theme]);
+    i18n.changeLanguage(language);
+    console.log('render');
+  }, [theme, language]);
 
   return (
     <Router>

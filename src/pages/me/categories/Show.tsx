@@ -9,8 +9,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { getOneCategory } from 'store/category/actions';
+import { useTranslation } from 'react-i18next';
 
 const Show = () => {
+  const { t } = useTranslation();
   const { pathname } = useLocation();
   const params: { id: string } = useParams();
   const history = useHistory();
@@ -32,7 +34,7 @@ const Show = () => {
             color={category?.icon.clr}
             className='mr-1'
           />
-          <h2>{loading ? 'loading...' : category?.name}</h2>
+          <h2>{loading ? t('loading') : category?.name}</h2>
           <Edit className='icon--sm link ml-1' />
         </div>
       </Link>
@@ -40,9 +42,9 @@ const Show = () => {
         <table className='table'>
           <thead>
             <tr>
-              <th>Account</th>
-              <th>Amount</th>
-              <th>Date</th>
+              <th>{t('account')}</th>
+              <th>{t('amount')}</th>
+              <th>{t('date')}</th>
             </tr>
           </thead>
           <tbody>

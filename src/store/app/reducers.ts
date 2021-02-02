@@ -1,8 +1,9 @@
-import { AppState, AppActionTypes, SET_APP_LOADING, SET_APP_THEME } from './types';
+import { AppState, AppActionTypes, SET_APP_LOADING, SET_APP_THEME, SET_APP_LANGUAGE } from './types';
 
 const initialState: AppState = {
   loading: false,
   theme: localStorage.getItem('theme') || '',
+  language: localStorage.getItem('language') || 'tr',
 };
 
 export function appReducer(state = initialState, action: AppActionTypes): AppState {
@@ -16,6 +17,12 @@ export function appReducer(state = initialState, action: AppActionTypes): AppSta
       const { theme } = action.payload;
       localStorage.setItem('theme', theme);
       return { ...state, theme };
+    }
+
+    case SET_APP_LANGUAGE: {
+      const { language } = action.payload;
+      localStorage.setItem('language', language);
+      return { ...state, language };
     }
 
     default:

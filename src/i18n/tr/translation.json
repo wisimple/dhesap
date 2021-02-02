@@ -1,0 +1,68 @@
+{
+  "auth": {
+    "signin": "Giriş Yap",
+    "signup": "Kayıt Ol",
+    "signout": "Çıkış Yap",
+    "continueWith": "Devam et",
+    "signInToYourAccount": "Hesabına giriş yap"
+  },
+
+  "inputs": {
+    "yourName": "Adın ve Soyadın",
+    "exampleName": "Örn. Ali YILMAZ",
+    "yourEmailAddress": "E-posta adresin",
+    "password": "Parola"
+  },
+
+  "categories": "Kategoriler",
+  "transactions": "Hesap Hareketleri",
+  "accounts": "Hesaplar",
+  "account": "Hesap",
+  "balance": "Bakiye",
+  "initialBalance": "Başlangıç Bakiyesi",
+  "summary": "Özet",
+  "settings": "Ayarlar",
+  "switchTheme": "Temayı değiştir",
+  "loading": "yükleniyor...",
+  "description": "Açıklama",
+  "defaultCurrency": "Para birimi",
+  "accountType": "Hesap Türü",
+  "save": "Kaydet",
+  "delete": "Sil",
+  "categoryName": "Kategori Adı",
+  "selectAnIcon": "İkon seçiniz",
+  "selectAnIconColor": "İkon için renk seçiniz",
+  "selectAnIconBackgroundColor": "İkon arka plan rengini seçiniz",
+  "selectAnAccount": "Hesap seçiniz",
+  "selectTheCategories": "Kategori seçiniz",
+  "youCanChooseMultiple": "Birden fazla seçebilirsiniz",
+  "note": "Not",
+
+  "income": "Gelir",
+  "expense": "Gider",
+  "creditor": "Alacaklı",
+  "debtor": "Borçlu",
+  "or": "veya",
+
+  "personAccount": "Kişi Hesabı",
+  "companyAccount": "Şirket Hesabı",
+  "bankAccount": "Banka Hesabı",
+  "coinWallet": "Coin Cüzdanı",
+
+  "setAsDebtor": "Borçlu olarak ayarla",
+  "setAsCreditor": "Alacaklı olarak ayarla",
+
+  "TRY": "Türk Lirası",
+  "USD": "Amerikan Doları",
+  "EURO": "Euro",
+  "GBP": "İngiliz Sterlini",
+  "GOLD": "Altın (1 gram)",
+  "others": "Diğer",
+
+  "searchAnAccount": "Hesap Ara",
+  "accountName": "Hesap Adı",
+
+  "name": "Ad",
+  "amount": "Tutar",
+  "date": "Tarih"
+}

@@ -10,6 +10,7 @@ import { RootState } from 'store';
 import MoneyText from 'components/common/MoneyText';
 import Icon from '@material-ui/core/Icon';
 
+import { useTranslation } from 'react-i18next';
 interface QueryParams {
   sortOrder?: boolean;
   sortBy?: string;
@@ -17,6 +18,7 @@ interface QueryParams {
 }
 
 const Accounts = () => {
+  const { t } = useTranslation();
   const { accounts, loading } = useSelector((state: RootState) => state.accountState);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -48,14 +50,14 @@ const Accounts = () => {
             type='text'
             name='search'
             className='input'
-            placeholder='Search an Account'
+            placeholder={t('searchAnAccount')}
             value={queryParams?.search || ''}
             onChange={({ target }) => {
               setqueryParams({ search: target.value });
             }}
           />
           <label htmlFor='search' className='label label--linear label--as-placeholder'>
-            Search an Account
+            {t('accountName')}
           </label>
         </div>
       </form>
@@ -66,7 +68,7 @@ const Accounts = () => {
             <tr>
               <th className='cursor-pointer' onClick={() => toggleSort('name')}>
                 <div className='flex justify-start items-center'>
-                  Account
+                  {t('account')}
                   <Icon className='ml-1'>
                     {queryParams?.sortBy === 'name'
                       ? queryParams?.sortOrder
@@ -78,7 +80,7 @@ const Accounts = () => {
               </th>
               <th className='cursor-pointer' onClick={() => toggleSort('blnc')}>
                 <div className='flex justify-end items-center'>
-                  Balance
+                  {t('balance')}
                   <Icon className='ml-1'>
                     {queryParams?.sortBy === 'blnc'
                       ? queryParams?.sortOrder

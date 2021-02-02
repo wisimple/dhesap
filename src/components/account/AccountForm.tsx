@@ -11,6 +11,7 @@ import { createAccount, deleteAccount, updateAccount } from 'store/account/actio
 import { useHistory } from 'react-router-dom';
 import { RootState } from 'store';
 import Button from 'components/common/inputs/Button';
+import { useTranslation } from 'react-i18next';
 interface Props {
   data?: IAccount;
   loading?: boolean;
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
+  const { t } = useTranslation();
   const [accountTypeIndex, setaccountTypeIndex] = useState(0);
   const [name, setname] = useState('');
   const [balance, setbalance] = useState(0);
@@ -63,7 +65,7 @@ const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
         <div className='form__group '>
           <input
             type='text'
-            placeholder={loading ? 'loading...' : 'Exp: John Doe'}
+            placeholder={loading ? t('loading') : t('inputs.exampleName')}
             className='input'
             name='name'
             id='name'
@@ -72,7 +74,7 @@ const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             onChange={({ target }) => setname(target.value)}
           />
           <label htmlFor='name' className='label label--linear'>
-            Account Name
+            {t('accountName')}
           </label>
         </div>
         {!data && (
@@ -88,7 +90,7 @@ const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
                 onChange={({ target }) => setbalance(parseFloat(target.value))}
               />
               <label htmlFor='balance' className='label label--linear'>
-                Initial Balance
+                {t('initialBalance')}
               </label>
             </div>
             {/* @TODO minus is not working correctly */}
@@ -99,7 +101,7 @@ const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
                 setisBalancePositive((prev) => !prev);
                 setbalance((prev) => -prev);
               }}>
-              {isBalancePositive ? '- set as negative' : '+ set as positive'}
+              {isBalancePositive ? t('setAsDebtor') : t('setAsCreditor')}
             </button>
           </div>
         )}
@@ -108,17 +110,16 @@ const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             name='currency'
             id='currency'
             className='input'
-            placeholder='helo'
             value={currency}
             onChange={({ target }) => setcurrency(target.value as CurrencyCodes)}>
             {currencies.map((c, i) => (
               <option key={i} value={c.code}>
-                {c.symbol} - {c.name}
+                {c.symbol} - {t(c.name)}
               </option>
             ))}
           </select>
           <label htmlFor='currency' className='label label--linear'>
-            Default Currency
+            {t('defaultCurrency')}
           </label>
         </div>
         <div className='form__group'>
@@ -131,17 +132,17 @@ const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
                 <div className='icon icon--left'>
                   <Icon>{item.icon}</Icon>
                 </div>
-                {item.name}
+                {t(item.name)}
               </Button>
             )}
           />
           <label htmlFor='type' className='label label--linear'>
-            Account Type
+            {t('accountType')}
           </label>
         </div>
         <div className='form__group'>
           <Button type='submit' loading={opLoading}>
-            Save
+            {t('save')}
           </Button>
         </div>
         {data && !data.main && (
@@ -154,7 +155,7 @@ const AccountForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
                 dispatch(deleteAccount(data._id));
                 history.replace('/me/tabs/accounts');
               }}>
-              Delete
+              {t('delete')}
             </Button>
           </div>
         )}

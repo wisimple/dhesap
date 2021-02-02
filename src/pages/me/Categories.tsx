@@ -9,7 +9,10 @@ import { getAllCategories } from 'store/category/actions';
 
 import LoadingText from 'components/common/TextLoading';
 
+import { useTranslation } from 'react-i18next';
+
 const Categories: React.FC = () => {
+  const { t } = useTranslation();
   const { categories, loading } = useSelector((state: RootState) => state.categoryState);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -26,7 +29,7 @@ const Categories: React.FC = () => {
         <table className='table'>
           <thead>
             <tr>
-              <th>Categories</th>
+              <th>{t('categories')}</th>
             </tr>
           </thead>
           <tbody>

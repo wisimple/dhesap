@@ -4,7 +4,10 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signin } from 'store/auth/actions';
 
+import { useTranslation } from 'react-i18next';
+
 const SigninForm = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const [email, setemail] = useState('');
@@ -19,20 +22,20 @@ const SigninForm = () => {
     <div>
       <button className='button button--sm mb-1' style={{ backgroundColor: '#1877f2' }}>
         <FacebookIcon className='mr-2' />
-        Continue with Facebook
+        {t('auth.continueWith')} Facebook
       </button>
       <button className='button button--sm mb-1' style={{ backgroundColor: '#E23F29' }}>
         <FacebookIcon className='mr-2' />
-        Continue with Google
+        {t('auth.continueWith')} Google
       </button>
       <form className='form' onSubmit={handleSubmit}>
-        <h3>Signin to your account</h3>
+        <h3>{t('auth.signInToYourAccount')}</h3>
         <div className='form__group'>
           <input
             type='email'
             className='input'
             id='email'
-            placeholder='Your email address'
+            placeholder={t('inputs.yourEmailAddress')}
             value={email}
             onChange={({ target }) => setemail(target.value)}
           />
@@ -42,13 +45,13 @@ const SigninForm = () => {
             type='password'
             className='input'
             id='password'
-            placeholder='Password'
+            placeholder={t('inputs.password')}
             value={password}
             onChange={({ target }) => setpassword(target.value)}
           />
         </div>
         <div className='form__group'>
-          <button className='button button--primary'>Signin</button>
+          <button className='button button--primary'>{t('auth.signin')}</button>
         </div>
       </form>
     </div>

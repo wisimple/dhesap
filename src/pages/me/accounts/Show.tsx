@@ -9,8 +9,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getOneAccount } from 'store/account/actions';
 import { RootState } from 'store';
 import LoadingText from 'components/common/TextLoading';
+import { useTranslation } from 'react-i18next';
 
 const Show = () => {
+  const { t } = useTranslation();
   const { pathname } = useLocation();
   const params: { id: string } = useParams();
   const history = useHistory();
@@ -19,14 +21,14 @@ const Show = () => {
 
   useEffect(() => {
     dispatch(getOneAccount(params.id));
-  }, [params]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
       <Link to={`${pathname}/edit`}>
         <div className='flex items-center'>
           <Avatar type={account?.type || 'person'} className='mr-2' />
-          <h2>{loading ? 'loading...' : account?.name}</h2>
+          <h2>{loading ? t('loading') : account?.name}</h2>
           <Edit className='icon--sm link ml-1' />
         </div>
       </Link>
@@ -34,10 +36,10 @@ const Show = () => {
         <table className='table'>
           <thead>
             <tr>
-              <th>Description</th>
-              <th>Amount</th>
-              <th>Balance</th>
-              <th>Date</th>
+              <th>{t('description')}</th>
+              <th>{t('amount')}</th>
+              <th>{t('balance')}</th>
+              <th>{t('date')}</th>
             </tr>
           </thead>
           <tbody>
