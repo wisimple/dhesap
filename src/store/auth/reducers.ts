@@ -1,7 +1,7 @@
-import { AuthActionTypes, AuthState, SET_USER, SIGN_IN, SIGN_OUT, SIGN_UP } from './types';
+import { AuthActionTypes, AuthState, SET_USER, SIGN_IN, SIGN_OUT, SIGN_UP, UPDATE_USER } from './types';
 
 const initialState: AuthState = {
-  user: null,
+  user: undefined,
   token: localStorage.getItem('token') || null,
 };
 
@@ -13,9 +13,10 @@ export function authReducer(state = initialState, action: AuthActionTypes): Auth
       return { ...state, user, token };
     }
     case SIGN_OUT:
-      return { ...state, user: null, token: null };
+      return { ...state, user: undefined, token: null };
 
-    case SET_USER: {
+    case SET_USER:
+    case UPDATE_USER: {
       const { user } = action.payload;
       return { ...state, user };
     }

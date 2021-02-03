@@ -9,9 +9,10 @@ import Signin from 'pages/Signin';
 import Signup from 'pages/Signup';
 import TextLoading from 'components/common/TextLoading';
 import PrivateRoute from 'PrivateRoute';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { useTranslation } from 'react-i18next';
+import { updateUserSettings } from 'store/auth/actions';
 
 const Home = React.lazy(() => import('pages/me'));
 
@@ -19,11 +20,11 @@ function App() {
   const token = useSelector((state: RootState) => state.authState.token);
   const { theme, language } = useSelector((state: RootState) => state.appState);
   const { i18n } = useTranslation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     document.body.className = theme;
     i18n.changeLanguage(language);
-    console.log('render');
   }, [theme, language]);
 
   return (

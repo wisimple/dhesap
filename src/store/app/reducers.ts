@@ -4,6 +4,7 @@ const initialState: AppState = {
   loading: false,
   theme: localStorage.getItem('theme') || '',
   language: localStorage.getItem('language') || 'tr',
+  defaultCurrency: 'TRY',
 };
 
 export function appReducer(state = initialState, action: AppActionTypes): AppState {

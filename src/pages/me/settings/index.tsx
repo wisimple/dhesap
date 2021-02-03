@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { setAppTheme } from 'store/app/actions';
 import { setAppLanguage } from 'store/app/actions';
-import { signout } from 'store/auth/actions';
+import { signout, updateUserSettings } from 'store/auth/actions';
 
 const Index = () => {
   const { t } = useTranslation();
@@ -14,7 +14,14 @@ const Index = () => {
   const { theme, language } = useSelector((state: RootState) => state.appState);
 
   const toggleTheme = (checked: boolean) => {
-    dispatch(setAppTheme(checked ? 'theme-dark' : ''));
+    const newTheme = checked ? 'theme-dark' : '';
+    dispatch(setAppTheme(newTheme));
+    dispatch(updateUserSettings({ theme: newTheme }));
+  };
+
+  const changeLanguage = (lang: string) => {
+    dispatch(setAppLanguage(lang));
+    dispatch(updateUserSettings({ lang }));
   };
 
   return (
@@ -41,7 +48,7 @@ const Index = () => {
           renderItem={(item, index, isSelected) => {
             return <Button outlined={!isSelected}>{t(item.name)}</Button>;
           }}
-          onChanged={(item, index) => dispatch(setAppLanguage(item.value))}
+          onChanged={(item, index) => changeLanguage(item.value)}
         />
         <label className='label label--linear'>{t('changeTheLanguage')}</label>
       </div>

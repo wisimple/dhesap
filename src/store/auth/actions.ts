@@ -1,6 +1,16 @@
-import { AuthActionTypes, AuthThunkActionTypes, SIGN_IN, SIGN_OUT, SIGN_UP, SET_USER } from './types';
+import {
+  AuthActionTypes,
+  AuthThunkActionTypes,
+  SIGN_IN,
+  SIGN_OUT,
+  SIGN_UP,
+  SET_USER,
+  UPDATE_USER,
+} from './types';
 
 import api from 'utils/api';
+import { IUserSettings } from 'models/User';
+import { setAppLanguage, setAppTheme } from 'store/app/actions';
 
 export const signin = (email: string, password: string): AuthThunkActionTypes => async (dispatch) => {
   try {
@@ -53,6 +63,22 @@ export const getUserData = (): AuthThunkActionTypes => async (dispatch) => {
 
     dispatch({
       type: SET_USER,
+      payload: {
+        user: data,
+      },
+    });
+
+    dispatch(setAppLanguage(data.settings.lang || 'tr'));
+    dispatch(setAppTheme(data.settings.theme || ''));
+  } catch (error) {}
+};
+
+export const updateUserSettings = (settings: IUserSettings): AuthThunkActionTypes => async (dispatch) => {
+  try {
+    const { data } = await api.put('me/settings', settings);
+
+    dispatch({
+      type: UPDATE_USER,
       payload: {
         user: data,
       },

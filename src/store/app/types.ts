@@ -1,9 +1,14 @@
+import { IUserSettings } from 'models/User';
+import { ThunkAction } from 'redux-thunk';
+import { RootState } from 'store';
+
 export type ThemeTypes = string | '' | 'theme-dark';
 export type LanguageTypes = string | 'tr' | 'en';
 export interface AppState {
   loading: boolean;
   theme: ThemeTypes;
   language: LanguageTypes;
+  defaultCurrency: string;
 }
 
 export const SET_APP_LOADING = 'SET_APP_LOADING';
@@ -31,3 +36,5 @@ interface SetAppLanguage {
 }
 
 export type AppActionTypes = SetAppLoading | SetAppTheme | SetAppLanguage;
+
+export type AppThunkActionTypes = ThunkAction<void, RootState, unknown, AppActionTypes>;
