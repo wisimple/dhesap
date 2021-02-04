@@ -39,9 +39,7 @@ const Show = () => {
           Math.abs(account.blnc)
         )}${getCurrencySymbol(
           account.crny
-        )} borcunuz bulunmaktadir. Borcunuzu en kisa surede odemenizi rica ederiz. https://dhesap.com${
-          account._id
-        }`
+        )} borcunuz bulunmaktadir. Borcunuzu en kisa surede odemenizi rica ederiz. | dhesap`
       );
   }, [account, user]);
 
@@ -56,7 +54,7 @@ const Show = () => {
       </div>
       {account !== undefined && account.blnc < 0 && (
         <a
-          href={`sms:+${account?.phn};?&body=${smsMessage}`}
+          href={`sms:${account?.phn};?&body=${smsMessage}`}
           className='button button--md button--primary--outlined'>
           <span>Borç bilgisini SMS ile gönder</span>
           <Sms className='ml-1' />

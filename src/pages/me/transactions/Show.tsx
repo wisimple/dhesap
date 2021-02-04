@@ -5,6 +5,8 @@ import { RootState } from 'store';
 
 import { getOneTransaction } from 'store/transaction/actions';
 
+import Button from 'components/common/inputs/Button';
+
 const Show = () => {
   const dispatch = useDispatch();
   const params: { id: string } = useParams();
@@ -17,9 +19,9 @@ const Show = () => {
   return (
     <div>
       <Link to={`${pathname}/edit`}>
-        <h3>{transaction?._id}</h3>
+        <Button>Bu hesap hareketini duzenle</Button>
       </Link>
-      <pre>{JSON.stringify(transaction, null, 2)}</pre>
+      <p>bu kisim hesap hareketinin tum ayrintiliari gosterilecektir</p>
     </div>
   );
 };
