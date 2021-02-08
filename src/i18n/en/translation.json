@@ -7,6 +7,9 @@
     "signInToYourAccount": "Signin to your account"
   },
 
+  "startUsingNow": "Signup now and start using FREE",
+  "dontYouHaveAccount": "Don't you have an account",
+
   "inputs": {
     "yourName": "Your Name",
     "exampleName": "Exp. John DOE",

@@ -1,17 +1,26 @@
-import FacebookIcon from '@material-ui/icons/Facebook';
-import { useState } from 'react';
+import FacebookIcon from "@material-ui/icons/Facebook";
+import { useState } from "react";
 
-import { useDispatch } from 'react-redux';
-import { signin } from 'store/auth/actions';
+import { useDispatch, useSelector } from "react-redux";
+import { signin } from "store/auth/actions";
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { RootState } from "store";
+import Button from "components/common/inputs/Button";
 
-const SigninForm = () => {
+import Error from "@material-ui/icons/Error";
+import { Link } from "react-router-dom";
+
+interface Props extends React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> {}
+
+const SigninForm = ({ ...rest }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const [email, setemail] = useState('');
-  const [password, setpassword] = useState('');
+  const { loading, error } = useSelector((state: RootState) => state.authState);
+
+  const [email, setemail] = useState("");
+  const [password, setpassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,42 +28,48 @@ const SigninForm = () => {
   };
 
   return (
-    <div>
-      <button className='button button--sm mb-1' style={{ backgroundColor: '#1877f2' }}>
-        <FacebookIcon className='mr-2' />
-        {t('auth.continueWith')} Facebook
-      </button>
-      <button className='button button--sm mb-1' style={{ backgroundColor: '#E23F29' }}>
-        <FacebookIcon className='mr-2' />
-        {t('auth.continueWith')} Google
-      </button>
-      <form className='form' onSubmit={handleSubmit}>
-        <h3>{t('auth.signInToYourAccount')}</h3>
-        <div className='form__group'>
-          <input
-            type='email'
-            className='input'
-            id='email'
-            placeholder={t('inputs.yourEmailAddress')}
-            value={email}
-            onChange={({ target }) => setemail(target.value)}
-          />
+    <form className="form" onSubmit={handleSubmit} {...rest}>
+      <div className="form__group">
+        <input
+          type="email"
+          className="input"
+          id="email"
+          placeholder={t("inputs.yourEmailAddress")}
+          value={email}
+          onChange={({ target }) => setemail(target.value)}
+          required
+        />
+      </div>
+      <div className="form__group">
+        <input
+          type="password"
+          className="input"
+          id="password"
+          placeholder={t("inputs.password")}
+          value={password}
+          onChange={({ target }) => setpassword(target.value)}
+          required
+        />
+      </div>
+      {error && (
+        <div className="form__group">
+          <div className="alert alert--red">
+            <Error className="mr-1" /> {error}
+          </div>
         </div>
-        <div className='form__group'>
-          <input
-            type='password'
-            className='input'
-            id='password'
-            placeholder={t('inputs.password')}
-            value={password}
-            onChange={({ target }) => setpassword(target.value)}
-          />
-        </div>
-        <div className='form__group'>
-          <button className='button button--primary'>{t('auth.signin')}</button>
-        </div>
-      </form>
-    </div>
+      )}
+      <div className="form__group">
+        <Button loading={loading} type="submit">
+          {t("auth.signin")}
+        </Button>
+      </div>
+      <div className="form__group" style={{ textAlign: "center" }}>
+        {t("dontYouHaveAccount")}{" "}
+        <Link to="/signup" style={{ color: "blue", textDecorationLine: "underline" }}>
+          {t("auth.signup")}
+        </Link>
+      </div>
+    </form>
   );
 };
 

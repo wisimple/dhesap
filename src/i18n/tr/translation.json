@@ -7,6 +7,9 @@
     "signInToYourAccount": "Hesabına giriş yap"
   },
 
+  "startUsingNow": "Hemen kaydol ve ücretsiz kullanmaya başla!",
+  "dontYouHaveAccount": "Henüz bir hesabın yok mu?",
+
   "inputs": {
     "yourName": "Adın ve Soyadın",
     "exampleName": "Örn. Ali YILMAZ",

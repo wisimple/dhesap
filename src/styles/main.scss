@@ -1,28 +1,29 @@
-@import 'fonts';
+@import "fonts";
 
-@import 'variables';
+@import "variables";
 
-@import 'base';
-@import 'mixins';
-@import 'extends';
-@import 'flex';
-@import 'layout';
-@import 'typography';
-@import 'animations';
+@import "base";
+@import "mixins";
+@import "extends";
+@import "flex";
+@import "layout";
+@import "typography";
+@import "animations";
 
 /*  Layouts     */
-@import './layouts/navigation';
+@import "./layouts/navigation";
 
 /*  Components   */
-@import './components/table';
-@import './components/logo';
-@import './components/avatar';
-@import './components/icon';
-@import './components/pagination';
-@import './components//badge';
+@import "./components/table";
+@import "./components/logo";
+@import "./components/avatar";
+@import "./components/icon";
+@import "./components/pagination";
+@import "./components/badge";
+@import "./components/alert";
 
 /*  Input Components    */
-@import './components/inputs/input';
-@import './components/inputs/button';
-@import './components/inputs/scrollable-select';
-@import './components//inputs/switch';
+@import "./components/inputs/input";
+@import "./components/inputs/button";
+@import "./components/inputs/scrollable-select";
+@import "./components//inputs/switch";

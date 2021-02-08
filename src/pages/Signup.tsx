@@ -1,11 +1,13 @@
-import SignupForm from 'components/user/SignupForm';
+import SignupForm from "components/user/SignupForm";
+import { useTranslation } from "react-i18next";
 
 const Signup = () => {
+  const { t } = useTranslation();
   return (
-    <div className='flex justify-center items-center' style={{ height: '100vh' }}>
-      <div style={{ width: '50rem' }}>
-        <SignupForm />
-      </div>
+    <div className="flex flex-column justify-center items-center" style={{ height: "100vh" }}>
+      <div className="logo logo--bg">dhesap</div>
+      <p style={{ margin: "2rem 0" }}>{t("startUsingNow")}</p>
+      <SignupForm style={{ width: "100%", padding: "1rem" }} />
     </div>
   );
 };
