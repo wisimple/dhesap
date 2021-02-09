@@ -67,7 +67,9 @@ const SignupForm = ({ ...rest }: Props) => {
         </div>
       )}
       <div className="form__group">
-        <Button type="submit">{t("auth.signin")}</Button>
+        <Button type="submit" loading={loading} block>
+          {t("auth.signin")}
+        </Button>
       </div>
     </form>
   );

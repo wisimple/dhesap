@@ -37,3 +37,21 @@
 .items-center {
   align-items: center;
 }
+
+.j-space-between {
+  justify-content: space-between;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  @include responsive(desktop) {
+    flex-direction: row;
+  }
+}
+
+.col-3 {
+  flex: 33.333%;
+}

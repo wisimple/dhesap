@@ -11,29 +11,31 @@ api.interceptors.response.use(
     if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
       return new Promise((resolve) => {
         setTimeout(() => {
+          store.dispatch(setAppLoading(false));
           resolve(res);
         }, 400);
       });
     } else {
+      store.dispatch(setAppLoading(false));
       return res;
     }
   },
   (err) => {
-    store.dispatch(setAppLoading(false));
+    console.log("error occured");
     throw err;
   }
 );
 
-api.interceptors.request.use((req) => {
-  store.dispatch(setAppLoading(true));
+api.interceptors.request.use(
+  (req) => {
+    store.dispatch(setAppLoading(true));
 
-  return req;
-});
-
-api.interceptors.response.use((res) => {
-  store.dispatch(setAppLoading(false));
-
-  return res;
-});
+    return req;
+  },
+  (err) => {
+    console.log("sss");
+    throw err;
+  }
+);
 
 export default api;

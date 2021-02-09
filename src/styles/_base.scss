@@ -17,6 +17,7 @@ body {
   color: var(--color-text);
   background-color: var(--color-background);
   -webkit-tap-highlight-color: transparent;
+  position: relative;
 }
 
 a {
@@ -44,6 +45,9 @@ a {
   }
   &-1 {
     padding: 0.5rem;
+  }
+  &-2 {
+    padding: 1rem;
   }
 }
 .py {
@@ -163,5 +167,19 @@ a {
   }
   &-2 {
     margin: 0 1rem;
+  }
+}
+.my {
+  &-05 {
+    margin: 0.25rem 0;
+  }
+  &-1 {
+    margin: 0.5rem 0;
+  }
+  &-15 {
+    margin: 0.75rem 0;
+  }
+  &-2 {
+    margin: 1rem 0;
   }
 }

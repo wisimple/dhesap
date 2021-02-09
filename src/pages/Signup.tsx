@@ -7,7 +7,7 @@ const Signup = () => {
     <div className="flex flex-column justify-center items-center" style={{ height: "100vh" }}>
       <div className="logo logo--bg">dhesap</div>
       <p style={{ margin: "2rem 0" }}>{t("startUsingNow")}</p>
-      <SignupForm style={{ width: "100%", padding: "1rem" }} />
+      <SignupForm />
     </div>
   );
 };

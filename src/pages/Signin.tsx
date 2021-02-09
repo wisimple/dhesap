@@ -8,7 +8,7 @@ const Signup = () => {
       <div className="logo logo--bg" style={{ marginBottom: "3rem" }}>
         dhesap
       </div>
-      <SigninForm style={{ width: "100%", padding: "1rem" }} />
+      <SigninForm />
     </div>
   );
 };

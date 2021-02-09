@@ -59,13 +59,13 @@ const SigninForm = ({ ...rest }: Props) => {
         </div>
       )}
       <div className="form__group">
-        <Button loading={loading} type="submit">
+        <Button loading={loading} type="submit" block>
           {t("auth.signin")}
         </Button>
       </div>
       <div className="form__group" style={{ textAlign: "center" }}>
         {t("dontYouHaveAccount")}{" "}
-        <Link to="/signup" style={{ color: "blue", textDecorationLine: "underline" }}>
+        <Link to="/signup" className="link">
           {t("auth.signup")}
         </Link>
       </div>
