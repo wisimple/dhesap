@@ -1,19 +1,19 @@
-import Button from 'components/common/inputs/Button';
-import { useEffect, useState } from 'react';
-import Check from '@material-ui/icons/Check';
-import ScrollableSelect from 'components/common/inputs/ScrollableSelect';
-import { useDispatch, useSelector } from 'react-redux';
-import { ITransaction, ITransactionCrudDto } from 'models/Transaction';
-import Avatar from 'components/common/Avatar';
+import Button from "components/common/inputs/Button";
+import { useEffect, useState } from "react";
+import Check from "@material-ui/icons/Check";
+import ScrollableSelect from "components/common/inputs/ScrollableSelect";
+import { useDispatch, useSelector } from "react-redux";
+import { ITransaction, ITransactionCrudDto } from "models/Transaction";
+import Avatar from "components/common/Avatar";
 
-import { RootState } from 'store';
-import { createTransaction, deleteTransaction, updateTransaction } from 'store/transaction/actions';
-import { getAllAccounts } from 'store/account/actions';
-import { getAllCategories } from 'store/category/actions';
-import ScrollableSelectMulti from 'components/common/inputs/ScrollableSelectMulti';
-import Icon from '@material-ui/core/Icon';
-import { useHistory } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { RootState } from "store";
+import { createTransaction, deleteTransaction, updateTransaction } from "store/transaction/actions";
+import { getAllAccounts } from "store/account/actions";
+import { getAllCategories } from "store/category/actions";
+import ScrollableSelectMulti from "components/common/inputs/ScrollableSelectMulti";
+import Icon from "@material-ui/core/Icon";
+import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   data?: ITransaction;
@@ -27,7 +27,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
   const [accountIndex, setaccountIndex] = useState(0);
   const [selectedCategoryIds, setselectedCategoryIds] = useState<Array<string>>([]);
   const [amount, setamount] = useState(0);
-  const [description, setdescription] = useState('');
+  const [description, setdescription] = useState("");
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
       if (data.amnt < 0) setisPositive(false);
       setamount(Math.abs(data.amnt));
       setaccountIndex(accounts.findIndex((account) => account._id === data.from._id));
-      setdescription(data.desc || '');
+      setdescription(data.desc || "");
       console.log(data.ctgrs);
 
       setselectedCategoryIds(data.ctgrs?.map((c) => c._id) || []);
@@ -58,7 +58,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('submit');
+    console.log("submit");
 
     const transactionCrudDto: ITransactionCrudDto = {
       from: accounts[accountIndex]._id,
@@ -81,45 +81,45 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className='form__group'>
-          <div className='flex button-group'>
-            <Button outlined={!isPositive} onClick={() => setisPositive(true)} color='green'>
-              {isPositive && <Check className='icon icon--left' />}
-              <div className='flex flex-column'>
-                <span className='mb-1'>{t('income')}</span>
+        <div className="form__group">
+          <div className="flex button-group">
+            <Button outlined={!isPositive} onClick={() => setisPositive(true)} color="green">
+              {isPositive && <Check className="icon icon--left" />}
+              <div className="flex flex-column">
+                <span className="mb-1">{t("income")}</span>
                 <small>
-                  {t('or')} {t('creditor')}
+                  {t("or")} {t("creditor")}
                 </small>
               </div>
             </Button>
-            <Button outlined={isPositive} onClick={() => setisPositive(false)} color='red'>
-              {!isPositive && <Check className='icon icon--left' />}
-              <div className='flex flex-column'>
-                <span className='mb-1'>{t('expense')}</span>
+            <Button outlined={isPositive} onClick={() => setisPositive(false)} color="red">
+              {!isPositive && <Check className="icon icon--left" />}
+              <div className="flex flex-column">
+                <span className="mb-1">{t("expense")}</span>
                 <small>
-                  {t('or')} {t('debtor')}
+                  {t("or")} {t("debtor")}
                 </small>
               </div>
             </Button>
           </div>
         </div>
-        <div className='form__group'>
+        <div className="form__group">
           <input
-            type='number'
-            step='any'
-            className='input'
-            name='amnt'
-            placeholder={`0 ${accounts[accountIndex]?.crny || ''}`}
+            type="number"
+            step="any"
+            className="input"
+            name="amnt"
+            placeholder={`0 ${accounts[accountIndex]?.crny || ""}`}
             autoFocus={!data ? true : false}
-            value={amount ? amount : ''}
+            value={amount ? amount : ""}
             onChange={({ target }) => setamount(parseFloat(target.value))}
           />
-          <label htmlFor='amnt' className='label label--linear'>
-            {t('amount')} ({accounts[accountIndex]?.crny || ''})
+          <label htmlFor="amnt" className="label label--linear">
+            {t("amount")} ({accounts[accountIndex]?.crny || ""})
           </label>
         </div>
-        <div className='form__group'>
-          <ScrollableSelect
+        <div className="form__group">
+          {/* <ScrollableSelect
             options={accounts}
             selectedIndex={accountIndex}
             loading={!accounts.length && accountsLoading}
@@ -129,11 +129,25 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
               </Button>
             )}
             onChanged={(item, i) => setaccountIndex(i)}
-          />
-          <label className='label label--linear'>{t('selectAnAccount')}</label>
+          /> */}
+          <select
+            name="account"
+            className="input"
+            onChange={({ target }) => setaccountIndex(target.selectedIndex)}
+            value={accounts[accountIndex]?._id}
+          >
+            {accounts.map((account) => (
+              <option key={account._id} value={account._id}>
+                {account.name}
+              </option>
+            ))}
+          </select>
+          <label htmlFor="account" className="label label--linear">
+            {t("selectAnAccount")} {accountIndex}
+          </label>
         </div>
 
-        <div className='form__group'>
+        <div className="form__group">
           <ScrollableSelectMulti
             options={categories}
             selectedIds={selectedCategoryIds}
@@ -141,49 +155,51 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             renderItem={(category, index, isSelected) => {
               const { icon } = category;
               return (
-                <Button outlined={!isSelected} rounded size='md'>
-                  <Icon className='mr-1'>{icon.name}</Icon>
+                <Button outlined={!isSelected} rounded size="md">
+                  <Icon className="mr-1">{icon.name}</Icon>
                   {category.name}
                 </Button>
               );
             }}
           />
-          <label className='label label--linear'>
-            {t('selectTheCategories')} <small>({t('youCanChooseMultiple')})</small>
+          <label className="label label--linear">
+            {t("selectTheCategories")} <small>({t("youCanChooseMultiple")})</small>
           </label>
         </div>
 
-        <div className='form__group'>
+        <div className="form__group">
           <input
-            type='text'
-            name='desc'
-            id='desc'
-            className='input'
-            placeholder={t('note')}
+            type="text"
+            name="desc"
+            id="desc"
+            className="input"
+            placeholder={t("note")}
             value={description}
             onChange={({ target }) => setdescription(target.value)}
           />
         </div>
 
-        <div className='form__group'>
+        <div className="form__group">
           <Button
-            type='submit'
+            type="submit"
             loading={opLoading}
-            disabled={loading || categoriesLoading || accountsLoading}>
-            {t('save')}
+            disabled={loading || categoriesLoading || accountsLoading}
+          >
+            {t("save")}
           </Button>
         </div>
 
         {data && (
-          <div className='form__group'>
+          <div className="form__group">
             <Button
               outlined
-              color='red'
+              color="red"
               onClick={() => {
                 dispatch(deleteTransaction(data._id));
                 history.go(-2);
-              }}>
-              {t('delete')}
+              }}
+            >
+              {t("delete")}
             </Button>
           </div>
         )}
