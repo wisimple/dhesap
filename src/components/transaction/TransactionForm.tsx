@@ -143,7 +143,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             ))}
           </select>
           <label htmlFor="account" className="label label--linear">
-            {t("selectAnAccount")} {accountIndex}
+            {t("selectAnAccount")}
           </label>
         </div>
 
