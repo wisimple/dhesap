@@ -14,6 +14,7 @@ import ScrollableSelectMulti from "components/common/inputs/ScrollableSelectMult
 import Icon from "@material-ui/core/Icon";
 import { Link, useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import MoneyText from "components/common/MoneyText";
 
 interface Props {
   data?: ITransaction;
@@ -118,9 +119,19 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
             {t("amount")} ({accounts[accountIndex]?.crny || ""})
           </label>
         </div>
+        {accounts.length > 0 && (
+          <div className="flex flex-column justify-center items-center" style={{ height: 100 }}>
+            <p className="mb-1">{t("upToDateBalance")}</p>
+            <MoneyText
+              size="large"
+              amount={accounts[accountIndex]?.blnc}
+              currency={accounts[accountIndex]?.crny}
+            />
+          </div>
+        )}
         <div className="form__group">
-          <div style={{ display: "flex" }}>
-            <div style={{ flexGrow: 1 }}>
+          <div className="flex">
+            <div className="flex-grow">
               <select
                 name="account"
                 className="input"
