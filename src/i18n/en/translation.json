@@ -48,6 +48,7 @@
   "creditor": "Creditor",
   "debtor": "Debtor",
   "or": "or",
+  "transactionHistory": "Transaction History",
 
   "personAccount": "Person Account",
   "companyAccount": "Company Account",

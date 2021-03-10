@@ -12,7 +12,7 @@ import { getAllAccounts } from "store/account/actions";
 import { getAllCategories } from "store/category/actions";
 import ScrollableSelectMulti from "components/common/inputs/ScrollableSelectMulti";
 import Icon from "@material-ui/core/Icon";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 interface Props {
@@ -23,7 +23,7 @@ interface Props {
 
 const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
   const { t } = useTranslation();
-  const [isPositive, setisPositive] = useState(true);
+  const [isPositive, setisPositive] = useState(false);
   const [accountIndex, setaccountIndex] = useState(0);
   const [selectedCategoryIds, setselectedCategoryIds] = useState<Array<string>>([]);
   const [amount, setamount] = useState(0);
@@ -83,7 +83,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
       <form onSubmit={handleSubmit}>
         <div className="form__group">
           <div className="flex button-group">
-            <Button outlined={!isPositive} onClick={() => setisPositive(true)} color="green">
+            <Button block outlined={!isPositive} onClick={() => setisPositive(true)} color="green">
               {isPositive && <Check className="icon icon--left" />}
               <div className="flex flex-column">
                 <span className="mb-1">{t("income")}</span>
@@ -92,7 +92,7 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
                 </small>
               </div>
             </Button>
-            <Button outlined={isPositive} onClick={() => setisPositive(false)} color="red">
+            <Button block outlined={isPositive} onClick={() => setisPositive(false)} color="red">
               {!isPositive && <Check className="icon icon--left" />}
               <div className="flex flex-column">
                 <span className="mb-1">{t("expense")}</span>
@@ -119,32 +119,28 @@ const TransactionForm = ({ data, loading, onSubmitEnd = () => {} }: Props) => {
           </label>
         </div>
         <div className="form__group">
-          {/* <ScrollableSelect
-            options={accounts}
-            selectedIndex={accountIndex}
-            loading={!accounts.length && accountsLoading}
-            renderItem={(account, index, isSelected) => (
-              <Button outlined={!isSelected} size='md' rounded>
-                <Avatar type={account.type} size='sm' className='mr-15' /> {account.name}
-              </Button>
-            )}
-            onChanged={(item, i) => setaccountIndex(i)}
-          /> */}
-          <select
-            name="account"
-            className="input"
-            onChange={({ target }) => setaccountIndex(target.selectedIndex)}
-            value={accounts[accountIndex]?._id}
-          >
-            {accounts.map((account) => (
-              <option key={account._id} value={account._id}>
-                {account.name}
-              </option>
-            ))}
-          </select>
-          <label htmlFor="account" className="label label--linear">
-            {t("selectAnAccount")}
-          </label>
+          <div style={{ display: "flex" }}>
+            <div style={{ flexGrow: 1 }}>
+              <select
+                name="account"
+                className="input"
+                onChange={({ target }) => setaccountIndex(target.selectedIndex)}
+                value={accounts[accountIndex]?._id}
+              >
+                {accounts.map((account) => (
+                  <option key={account._id} value={account._id}>
+                    {account.name}
+                  </option>
+                ))}
+              </select>
+              <label htmlFor="account" className="label label--linear">
+                {t("selectAnAccount")}
+              </label>
+            </div>
+            <Button disabled={accountsLoading} outlined size="sm" style={{ marginLeft: 5, width: 80 }}>
+              <Link to={`/me/accounts/${accounts[accountIndex]?._id}`}>{t("transactionHistory")}</Link>
+            </Button>
+          </div>
         </div>
 
         <div className="form__group">
